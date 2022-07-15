@@ -156,9 +156,7 @@
 import { getToken } from '@/utils/session-storage'
 
 export default defineComponent({
-  components: {
-    Icon
-  },
+  components: {},
   props: {
     hasAdd: {
       type: Boolean,

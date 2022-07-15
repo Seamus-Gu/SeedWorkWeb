@@ -45,9 +45,7 @@ export default defineComponent({
       required: true
     }
   },
-  components: {
-    Icon
-  },
+  components: {},
   setup() {
     return {}
   }

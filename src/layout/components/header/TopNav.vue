@@ -25,7 +25,7 @@ import MenuItem from '@/layout/components/sideBar/MenuItem.vue'
 import lodash from 'lodash'
 
 export default defineComponent({
-  components: { MenuItem, Icon },
+  components: { MenuItem },
   setup() {
     const store = useStore()
     const router = useRouter()

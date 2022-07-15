@@ -54,10 +54,7 @@
 import { Particle } from 'jparticles'
 
 export default defineComponent({
-  components: {
-    LockOutlined,
-    UserOutlined
-  },
+  components: {},
   setup() {
     const loginFormRef = ref()
     const router = useRouter()

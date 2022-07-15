@@ -19,8 +19,6 @@ const app = createApp(App)
 
 loadAllPlugins(app)
 
-loadAllProxy(app)
-
 loadAllDirective(app)
 
 app.use(store)

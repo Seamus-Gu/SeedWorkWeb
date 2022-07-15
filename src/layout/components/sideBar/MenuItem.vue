@@ -34,8 +34,7 @@ export default defineComponent({
     }
   },
   components: {
-    SubMenu,
-    Icon
+    SubMenu
   },
   setup() {
     const onlyOneChild = ref()
