@@ -1,0 +1,56 @@
+<!--
+ * @Description: 
+ * @Autor: Gu
+ * @Date: 2022-01-10 16:28:14
+-->
+<template>
+  <a-sub-menu :key="menuInfo.path">
+    <template #icon>
+      <Icon>
+        <template #component>
+          <svg class="icon sub-menu-icon" aria-hidden="true" font-size="20px">
+            <use :xlink:href="'#icon-' + menuInfo.meta.icon" />
+          </svg>
+        </template>
+      </Icon>
+    </template>
+    <template #title>
+      {{ menuInfo.meta.title }}
+    </template>
+    <template v-for="item in menuInfo.children" :key="item.path">
+      <template v-if="!item.children">
+        <a-menu-item :key="item.path" v-if="!item.hidden">
+          <Icon>
+            <template #component>
+              <svg class="icon" aria-hidden="true" font-size="20px">
+                <use :xlink:href="'#icon-' + item.meta.icon" />
+              </svg>
+            </template>
+          </Icon>
+          <span> {{ item.meta.title }}</span>
+        </a-menu-item>
+      </template>
+      <template v-else>
+        <SubMenu :menu-info="item" :key="item.key" />
+      </template>
+    </template>
+  </a-sub-menu>
+</template>
+<script>
+import Icon from '@ant-design/icons-vue'
+export default defineComponent({
+  name: 'SubMenu',
+  props: {
+    menuInfo: {
+      type: Object,
+      required: true
+    }
+  },
+  components: {
+    Icon
+  },
+  setup() {
+    return {}
+  }
+})
+</script>
