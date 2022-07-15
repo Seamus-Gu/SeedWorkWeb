@@ -7,24 +7,24 @@
 -->
 <template>
   <Panel>
-    <a-list item-layout="horizontal" :data-source="data">
+    <el-list item-layout="horizontal" :datel-source="data">
       <template #renderItem="{ item }">
-        <a-list-item>
-          <a-list-item-meta
+        <el-list-item>
+          <el-list-item-meta
             description="Ant Design, a design language for background applications, is refined by Ant UED Team"
           >
             <template #title>
               <a href="https://www.antdv.com/">{{ item.title }}</a>
             </template>
             <template #avatar>
-              <a-avatar
+              <el-avatar
                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
               />
             </template>
-          </a-list-item-meta>
-        </a-list-item>
+          </el-list-item-meta>
+        </el-list-item>
       </template>
-    </a-list>
+    </el-list>
   </Panel>
 </template>
 <script>

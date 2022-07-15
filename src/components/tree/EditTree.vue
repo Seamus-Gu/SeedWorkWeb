@@ -1,13 +1,13 @@
 <template>
   <div class="edit-tree">
-    <a-input-search
+    <el-input-search
       v-if="showSearch"
       :placeholder="searchPlaceholder"
       v-model:value="searchValue"
       :allowClear="true"
       @search="refresh()"
     />
-    <a-tree
+    <el-tree
       v-if="dataSource"
       :treeData="dataSource"
       :replaceFields="replaceFields"
@@ -21,52 +21,54 @@
       v-model:expandedKeys="expandedKeys"
     >
       <template #title="{ key: treeKey, title }">
-        <a-dropdown :trigger="['contextmenu']">
+        <el-dropdown :trigger="['contextmenu']">
           <span>{{ title }}</span>
           <template #overlay>
-            <a-menu @click="({ key: menuKey }) => rightClick(treeKey, menuKey)">
-              <a-menu-item v-if="showAdd" key="add">
+            <el-menu
+              @click="({ key: menuKey }) => rightClick(treeKey, menuKey)"
+            >
+              <el-menu-item v-if="showAdd" key="add">
                 <svg
                   class="icon"
-                  aria-hidden="true"
+                  ariel-hidden="true"
                   font-size="15px"
                   style="margin-right: 8px"
                 >
                   <use xlink:href="#icon-plus" />
                 </svg>
                 新增
-              </a-menu-item>
-              <a-menu-item v-if="showEdit" key="edit">
+              </el-menu-item>
+              <el-menu-item v-if="showEdit" key="edit">
                 <svg
                   class="icon"
-                  aria-hidden="true"
+                  ariel-hidden="true"
                   font-size="15px"
                   style="margin-right: 8px"
                 >
                   <use xlink:href="#icon-edit" />
                 </svg>
                 修改
-              </a-menu-item>
-              <a-menu-item v-if="showDel" key="del">
+              </el-menu-item>
+              <el-menu-item v-if="showDel" key="del">
                 <svg
                   class="icon"
-                  aria-hidden="true"
+                  ariel-hidden="true"
                   font-size="15px"
                   style="margin-right: 8px"
                 >
                   <use xlink:href="#icon-trash-alt" />
                 </svg>
                 删除
-              </a-menu-item>
+              </el-menu-item>
               <slot name="menuItem"></slot>
-            </a-menu>
+            </el-menu>
           </template>
-        </a-dropdown>
+        </el-dropdown>
       </template>
       <template v-if="$slots.switcherIcon" #switcherIcon>
         <slot name="switcherIcon"></slot>
       </template>
-    </a-tree>
+    </el-tree>
   </div>
 </template>
 

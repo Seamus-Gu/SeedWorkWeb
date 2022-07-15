@@ -5,7 +5,7 @@
 -->
 
 <template>
-  <a-layout-sider
+  <el-layout-sider
     v-if="size != 'small' && showSiderBar"
     class="layout-sider"
     width="210"
@@ -17,7 +17,7 @@
       v-if="layout == 'LRLayout'"
       :collapse="isCollapse"
     ></SideBarLogo>
-    <a-menu
+    <el-menu
       :theme="theme != 'deepBlack' ? theme : 'light'"
       class="side-menu"
       mode="inline"
@@ -32,9 +32,9 @@
         :item="route"
       >
       </MenuItem>
-    </a-menu>
-  </a-layout-sider>
-  <a-drawer
+    </el-menu>
+  </el-layout-sider>
+  <el-drawer
     v-else-if="showSiderBar"
     class="layout-sider-small"
     :visible="!isCollapse"
@@ -46,7 +46,7 @@
     <template #title>
       <SideBarLogo :collapse="isCollapse"></SideBarLogo>
     </template>
-    <a-menu
+    <el-menu
       class="side-menu"
       mode="inline"
       forceSubMenuRender="true"
@@ -60,8 +60,8 @@
         :item="route"
       >
       </MenuItem>
-    </a-menu>
-  </a-drawer>
+    </el-menu>
+  </el-drawer>
 </template>
 <script>
 import SideBarLogo from './SideBarLogo.vue'

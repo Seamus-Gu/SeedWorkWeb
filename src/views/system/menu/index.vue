@@ -7,8 +7,8 @@
 -->
 <template>
   <div class="orgainzation-container">
-    <a-row>
-      <a-col :span="24">
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <QueryForm
             :filters="filters"
@@ -19,10 +19,10 @@
             @reset="reset"
           ></QueryForm>
         </Panel>
-      </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="24">
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <ToolBar
             :hasExpent="true"
@@ -39,25 +39,25 @@
             :api="getMenuList"
           >
             <template #menuStatus="{ text }">
-              <a-tag :color="text === '0' ? 'green' : 'blue'">
+              <el-tag :color="text === '0' ? 'green' : 'blue'">
                 {{ text === '0' ? '正常' : '隐藏' }}
-              </a-tag>
+              </el-tag>
             </template>
             <template #action="{ record }">
               <a v-has="['system:menu:add']" @click="add(record)">新增</a>
-              <a-divider type="vertical" />
+              <el-divider type="vertical" />
               <a v-has="['system:menu:edit']" @click="edit(record.menuId)">
                 修改
               </a>
-              <a-divider type="vertical" />
+              <el-divider type="vertical" />
               <a v-has="['system:menu:remove']" @click="del(record.menuId)">
                 删除
               </a>
             </template>
           </TreeTable>
         </Panel>
-      </a-col>
-    </a-row>
+      </el-col>
+    </el-row>
     <Form
       ref="formRef"
       :visible="formVisible"
@@ -69,21 +69,21 @@
       @cancel="cancel"
     >
       <template #icon>
-        <a-col :span="12">
-          <a-form-item
+        <el-col :span="12">
+          <el-form-item
             label="菜单图标"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
             name="icon"
           >
             <IconSelect @changeIcon="changeIcon">
-              <a-input
+              <el-input
                 v-model:value="formState.icon"
                 placeholder="请选择图标"
-              ></a-input>
+              ></el-input>
             </IconSelect>
-          </a-form-item>
-        </a-col>
+          </el-form-item>
+        </el-col>
       </template>
     </Form>
   </div>

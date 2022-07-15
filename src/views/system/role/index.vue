@@ -7,8 +7,8 @@
 -->
 <template>
   <div class="role-container">
-    <a-row>
-      <a-col :span="24">
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <QueryForm
             :filters="filters"
@@ -19,10 +19,10 @@
             @reset="reset"
           ></QueryForm>
         </Panel>
-      </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="24">
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <ToolBar
             :hasExport="true"
@@ -40,23 +40,23 @@
             ref="tableRef"
           >
             <template #roleStatus="{ text }">
-              <a-tag :color="text === '0' ? 'green' : 'red'">{{
+              <el-tag :color="text === '0' ? 'green' : 'red'">{{
                 text === '0' ? '正常' : '停用'
-              }}</a-tag>
+              }}</el-tag>
             </template>
             <template #action="{ record }">
               <a v-has="['system:role:edit']" @click="edit(record.roleId)"
                 >修改</a
               >
-              <a-divider type="vertical" />
+              <el-divider type="vertical" />
               <a v-has="['system:role:remove']" @click="del(record.roleId)">
                 删除
               </a>
             </template>
           </Table>
         </Panel>
-      </a-col>
-    </a-row>
+      </el-col>
+    </el-row>
     <Form
       ref="formRef"
       :visible="formVisible"
@@ -69,22 +69,24 @@
       @cancel="cancel"
     >
       <template #menuIds>
-        <a-col :span="24">
-          <a-form-item
+        <el-col :span="24">
+          <el-form-item
             label="菜单权限"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
             name="menuIds"
           >
-            <a-row style="margin-bottom: 8px; margin-top: 5px">
-              <a-checkbox v-model:checked="menuExpend" @change="onMenuExpend">
+            <el-row style="margin-bottom: 8px; margin-top: 5px">
+              <el-checkbox v-model:checked="menuExpend" @change="onMenuExpend">
                 展开/折叠
-              </a-checkbox>
-              <a-checkbox v-model:checked="menuCheck" @change="onMenuCheck">
+              </el-checkbox>
+              <el-checkbox v-model:checked="menuCheck" @change="onMenuCheck">
                 全选/全不选
-              </a-checkbox>
-              <a-checkbox v-model:checked="menuLinkage"> 父子联动 </a-checkbox>
-            </a-row>
+              </el-checkbox>
+              <el-checkbox v-model:checked="menuLinkage">
+                父子联动
+              </el-checkbox>
+            </el-row>
             <Panel height="300px" :scrollY="true">
               <Tree
                 ref="menuSelectRef"
@@ -96,8 +98,8 @@
               >
               </Tree>
             </Panel>
-          </a-form-item>
-        </a-col>
+          </el-form-item>
+        </el-col>
       </template>
     </Form>
   </div>

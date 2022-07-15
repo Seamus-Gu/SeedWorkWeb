@@ -8,45 +8,45 @@
 <template>
   <div class="login-container">
     <div id="jparticle"></div>
-    <a-form
+    <el-form
       class="login-form"
       ref="loginFormRef"
       :model="loginForm"
       :rules="loginRules"
     >
       <div class="login-title">登录</div>
-      <a-form-item ref="username" name="username" class="username">
-        <a-input
+      <el-form-item ref="username" name="username" class="username">
+        <el-input
           size="large"
           v-model:value="loginForm.username"
           placeholder="请输入用户名"
           @pressEnter="pressEnter"
         >
-          <template #prefix> <UserOutlined /> </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item ref="password" name="password" class="password">
-        <a-input
+          <template #prefix></template>
+        </el-input>
+      </el-form-item>
+      <el-form-item ref="password" name="password" class="password">
+        <el-input
           size="large"
           type="password"
           v-model:value="loginForm.password"
           placeholder="请输入密码"
           @pressEnter="pressEnter"
         >
-          <template #prefix> <LockOutlined /> </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-button
+          <template #prefix> </template>
+        </el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
           size="large"
           class="login-button"
           type="primary"
           :loading="loading"
           @click="handleLogin"
-          >登录</a-button
+          >登录</el-button
         >
-      </a-form-item>
-    </a-form>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -147,7 +147,7 @@ export default defineComponent({
 
 .login-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   //背景渐变
   background: linear-gradient(
     -45deg,

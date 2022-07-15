@@ -7,8 +7,8 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <a-upload-dragger class="upload-container" :action="url" :headers="headers">
-    <svg class="icon" aria-hidden="true" font-size="50px">
+  <el-upload-dragger class="upload-container" :action="url" :headers="headers">
+    <svg class="icon" ariel-hidden="true" font-size="50px">
       <use xlink:href="#icon-inbox-out" />
     </svg>
     <p class="ant-upload-text">
@@ -23,7 +23,7 @@
         仅允许导入xls、xlsx格式文件。
        </div>
     </p>
-  </a-upload-dragger>
+  </el-upload-dragger>
 </template>
 <script>
 import { getToken } from '@/utils/session-storage'

@@ -1,12 +1,12 @@
 <template>
-  <a-form-item
+  <el-form-item
     v-show="show"
     :label="formItem.title"
     :labelCol="{ style: { width: '80px' } }"
     :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
     :name="formItem.dataIndex"
   >
-    <a-input
+    <el-input
       v-if="formItem.component == 'input'"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
       v-model:value="formState[formItem.dataIndex]"
@@ -16,7 +16,7 @@
       :addonAfter="componentProps.addonAfter"
       :disabled="componentProps.disabled || allDisabled"
     />
-    <a-input-number
+    <el-input-number
       v-else-if="formItem.component == 'inputNumber'"
       v-model:value="formState[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
@@ -25,16 +25,16 @@
       :min="componentProps.min || 0"
       :precision="componentProps.precision || 0"
       :disabled="componentProps.disabled || allDisabled"
-    ></a-input-number>
-    <a-select
+    ></el-input-number>
+    <el-select
       v-else-if="formItem.component == 'select'"
       v-model:value="formState[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
       :options="componentProps.options || requestData"
       :disabled="componentProps.disabled || allDisabled"
     >
-    </a-select>
-    <a-select
+    </el-select>
+    <el-select
       v-else-if="formItem.component == 'multiple'"
       v-model:value="formState[formItem.dataIndex]"
       mode="multiple"
@@ -42,33 +42,33 @@
       :options="componentProps.options || requestData"
       :disabled="componentProps.disabled || allDisabled"
     >
-    </a-select>
-    <a-tree-select
+    </el-select>
+    <el-tree-select
       v-else-if="formItem.component == 'treeSelect'"
       v-model:value="formState[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
       :treeData="requestData"
       :disabled="componentProps.disabled || allDisabled"
-    ></a-tree-select>
-    <a-checkbox
+    ></el-tree-select>
+    <el-checkbox
       v-else-if="formItem.component == 'checkbox'"
       v-model:checked="formState[formItem.dataIndex]"
       :disabled="componentProps.disabled || allDisabled"
-    ></a-checkbox>
-    <a-radio-group
+    ></el-checkbox>
+    <el-radio-group
       v-else-if="formItem.component == 'radio'"
       v-model:value="formState[formItem.dataIndex]"
       :disabled="componentProps.disabled || allDisabled"
     >
-      <a-radio
+      <el-radio
         v-for="radio in componentProps.radios"
         :key="radio.value"
         :value="radio.value"
       >
         {{ radio.title }}
-      </a-radio>
-    </a-radio-group>
-    <a-date-picker
+      </el-radio>
+    </el-radio-group>
+    <el-date-picker
       v-else-if="formItem.component == 'datePicker'"
       v-model:value="formState[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择日期'"
@@ -79,8 +79,8 @@
       :showTime="componentProps.showTime"
       :showToday="componentProps.showToday"
       :disabledTime="componentProps.disabledTime"
-    ></a-date-picker>
-    <a-range-picker
+    ></el-date-picker>
+    <el-range-picker
       v-else-if="formItem.component == 'rangePicker'"
       v-model:value="formState[formItem.dataIndex]"
       :picker="componentProps.picker || 'date'"
@@ -90,8 +90,8 @@
       :showTime="componentProps.showTime"
       :showToday="componentProps.showToday"
       :disabledTime="componentProps.disabledTime"
-    ></a-range-picker>
-  </a-form-item>
+    ></el-range-picker>
+  </el-form-item>
 </template>
 
 <script>

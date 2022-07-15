@@ -1,16 +1,16 @@
 <template>
   <div class="comment">
-    <a-comment>
+    <el-comment>
       <template #avatar>
-        <a-avatar @click="clickAvatar" :src="avatar" :alt="avatarAlt" />
+        <el-avatar @click="clickAvatar" :src="avatar" :alt="avatarAlt" />
       </template>
       <template #author>
         <span>{{ author }}</span>
       </template>
       <template #datetime>
-        <a-tooltip :title="dayjs(datetime, 'YYYY-MM-DD HH:mm:ss')">
+        <el-tooltip :title="dayjs(datetime, 'YYYY-MM-DD HH:mm:ss')">
           <span>{{ dayjs(datetime).fromNow() }}</span>
-        </a-tooltip>
+        </el-tooltip>
       </template>
       <template #content>
         <p>
@@ -19,27 +19,27 @@
       </template>
       <template #actions>
         <span key="comment-basic-like">
-          <a-tooltip title="点赞">
+          <el-tooltip title="点赞">
             <template v-if="action === 'liked'">
               <LikeFilled @click="like" />
             </template>
             <template v-else>
               <LikeOutlined @click="like" />
             </template>
-          </a-tooltip>
+          </el-tooltip>
           <span style="padding-left: 8px; cursor: auto">
             {{ likes }}
           </span>
         </span>
         <span key="comment-basic-dislike">
-          <a-tooltip title="差评">
+          <el-tooltip title="差评">
             <template v-if="action === 'disliked'">
               <DislikeFilled @click="dislike" />
             </template>
             <template v-else>
               <DislikeOutlined @click="dislike" />
             </template>
-          </a-tooltip>
+          </el-tooltip>
           <span style="padding-left: 8px; cursor: auto">
             {{ dislikes }}
           </span>
@@ -47,7 +47,7 @@
         <span v-if="hasReply">回复</span>
       </template>
       <slot></slot>
-    </a-comment>
+    </el-comment>
   </div>
 </template>
 <script>

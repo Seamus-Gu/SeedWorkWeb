@@ -5,19 +5,19 @@
 -->
 <template>
   <div class="avatar">
-    <a-dropdown :trigger="['click']">
-      <a-avatar :size="35" :src="avatar"> {{ nickNameAvatar }} </a-avatar>
+    <el-dropdown :trigger="['click']">
+      <el-avatar :size="35" :src="avatar"> {{ nickNameAvatar }} </el-avatar>
       <template #overlay>
-        <a-menu>
-          <a-menu-item key="0" @click="linkProfie">
+        <el-menu>
+          <el-menu-item key="0" @click="linkProfie">
             <span>个人中心</span>
-          </a-menu-item>
-          <a-menu-item key="1" @click="showSetting">主题配置</a-menu-item>
-          <a-menu-divider />
-          <a-menu-item key="2" @click="logout">退出登录</a-menu-item>
-        </a-menu>
+          </el-menu-item>
+          <el-menu-item key="1" @click="showSetting">主题配置</el-menu-item>
+          <el-menu-divider />
+          <el-menu-item key="2" @click="logout">退出登录</el-menu-item>
+        </el-menu>
       </template>
-    </a-dropdown>
+    </el-dropdown>
     <Setting> </Setting>
   </div>
 </template>

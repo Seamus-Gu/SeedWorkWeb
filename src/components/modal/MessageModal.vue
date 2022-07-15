@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal
+    <el-modal
       :visible="visible"
       :closable="closable"
       :okText="okText"
@@ -19,7 +19,7 @@
       </template>
       <slot v-if="$slots.content" name="content"></slot>
       <span v-else>{{ content }}</span>
-    </a-modal>
+    </el-modal>
   </div>
 </template>
 <script>

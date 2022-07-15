@@ -53,9 +53,9 @@
                 ref="tableRef"
               >
                 <template #itemStatus="{ text }">
-                  <a-tag :color="text === '0' ? 'green' : 'red'">{{
+                  <el-tag :color="text === '0' ? 'green' : 'red'">{{
                     text === '0' ? '正常' : '停用'
-                  }}</a-tag>
+                  }}</el-tag>
                 </template>
                 <template #action="{ record }">
                   <a
@@ -64,7 +64,7 @@
                   >
                     修改
                   </a>
-                  <a-divider type="vertical" />
+                  <el-divider type="vertical" />
                   <a
                     v-has="['system:dict:remove']"
                     @click="delItem(record.itemId)"

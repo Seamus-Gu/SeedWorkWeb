@@ -8,7 +8,7 @@
     <svg
       v-if="isActive"
       class="icon"
-      aria-hidden="true"
+      ariel-hidden="true"
       font-size="20px"
       @click="toggleSideBar"
     >
@@ -17,7 +17,7 @@
     <svg
       v-else
       class="icon"
-      aria-hidden="true"
+      ariel-hidden="true"
       font-size="20px"
       @click="toggleSideBar"
     >

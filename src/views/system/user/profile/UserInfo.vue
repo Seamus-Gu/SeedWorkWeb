@@ -6,59 +6,59 @@
 -->
 <template>
   <div>
-    <a-form ref="baseFormRef" :model="userInfoData">
-      <a-row>
-        <a-col span="24">
-          <a-form-item
+    <el-form ref="baseFormRef" :model="userInfoData">
+      <el-row>
+        <el-col span="24">
+          <el-form-item
             name="nickName"
             label="用户昵称"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
           >
-            <a-input
+            <el-input
               style="width: 100%"
               v-model:value="userInfoData.nickName"
               placeholder="请输入用户昵称"
             >
-            </a-input>
-          </a-form-item>
-        </a-col>
-        <!-- <a-col span="24">
-          <a-form-item
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <!-- <el-col span="24">
+          <el-form-item
             name="phoneNumber"
             label="手机号码"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
           >
-            <a-input
+            <el-input
               v-model:value="userInfoData.phoneNumber"
               placeholder="请输入手机号码"
             >
-            </a-input>
-          </a-form-item>
-        </a-col>
-        <a-col span="24">
-          <a-form-item
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col span="24">
+          <el-form-item
             name="email"
             label="邮箱"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
           >
-            <a-input
+            <el-input
               v-model:value="userInfoData.email"
               placeholder="请输入邮箱"
             >
-            </a-input>
-          </a-form-item>
-        </a-col> -->
-      </a-row>
-    </a-form>
-    <a-row justify="center">
-      <a-space>
-        <a-button type="primary" @click="save">保存</a-button>
-        <a-button @click="reset">重置</a-button>
-      </a-space>
-    </a-row>
+            </el-input>
+          </el-form-item>
+        </el-col> -->
+      </el-row>
+    </el-form>
+    <el-row justify="center">
+      <el-space>
+        <el-button type="primary" @click="save">保存</el-button>
+        <el-button @click="reset">重置</el-button>
+      </el-space>
+    </el-row>
   </div>
 </template>
 <script>

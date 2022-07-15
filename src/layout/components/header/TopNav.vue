@@ -5,7 +5,7 @@
 -->
 <template>
   <div class="top-nav">
-    <a-menu
+    <el-menu
       :theme="theme != 'deepBlack' ? theme : 'light'"
       style="margin-left: 12px"
       mode="horizontal"
@@ -17,7 +17,7 @@
         :key="index"
       >
       </MenuItem>
-    </a-menu>
+    </el-menu>
   </div>
 </template>
 <script>

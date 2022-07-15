@@ -7,111 +7,111 @@
 -->
 <template>
   <div>
-    <a-row :gutter="8">
-      <a-col :span="8">
+    <el-row :gutter="8">
+      <el-col :span="8">
         <Panel title="个人信息">
-          <a-row justify="center" style="margin-bottom: 18px">
+          <el-row justify="center" style="margin-bottom: 18px">
             <UserAvatar></UserAvatar>
-          </a-row>
-          <a-row justify="center" style="font-weight: 500; font-size: 20px">
+          </el-row>
+          <el-row justify="center" style="font-weight: 500; font-size: 20px">
             {{ userInfoData.nickName }}
-          </a-row>
-          <a-divider />
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">
-              <svg class="icon" aria-hidden="true" font-size="16px">
+          </el-row>
+          <el-divider />
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">
+              <svg class="icon" ariel-hidden="true" font-size="16px">
                 <use xlink:href="#icon-yonghu" />
               </svg>
-              用户名</a-col
+              用户名</el-col
             >
-            <a-col span="8" style="text-align: end">
+            <el-col span="8" style="text-align: end">
               {{ userInfoData.username }}
-            </a-col>
-          </a-row>
-          <a-divider />
+            </el-col>
+          </el-row>
+          <el-divider />
 
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">
-              <svg class="icon" aria-hidden="true" font-size="16px">
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">
+              <svg class="icon" ariel-hidden="true" font-size="16px">
                 <use xlink:href="#icon-shouji" />
               </svg>
               手机号码
-            </a-col>
-            <a-col span="8" style="text-align: end">{{
+            </el-col>
+            <el-col span="8" style="text-align: end">{{
               userInfoData.phoneNumber
-            }}</a-col>
-          </a-row>
-          <a-divider />
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">
-              <svg class="icon" aria-hidden="true" font-size="16px">
+            }}</el-col>
+          </el-row>
+          <el-divider />
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">
+              <svg class="icon" ariel-hidden="true" font-size="16px">
                 <use xlink:href="#icon-24gl-mailboxFull" />
               </svg>
               用户邮箱
-            </a-col>
-            <a-col span="12" style="text-align: end">
+            </el-col>
+            <el-col span="12" style="text-align: end">
               {{ userInfoData.email }}
-            </a-col>
-          </a-row>
-          <a-divider />
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">
-              <svg class="icon" aria-hidden="true" font-size="16px">
+            </el-col>
+          </el-row>
+          <el-divider />
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">
+              <svg class="icon" ariel-hidden="true" font-size="16px">
                 <use xlink:href="#icon-gongsi" />
               </svg>
               所属组织
-            </a-col>
-            <a-col span="12" style="text-align: end">
+            </el-col>
+            <el-col span="12" style="text-align: end">
               {{ userInfoData.organization }}
-            </a-col>
-          </a-row>
-          <a-divider />
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">
-              <svg class="icon" aria-hidden="true" font-size="16px">
+            </el-col>
+          </el-row>
+          <el-divider />
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">
+              <svg class="icon" ariel-hidden="true" font-size="16px">
                 <use xlink:href="#icon-jiaoseguanli" />
               </svg>
               所属角色
-            </a-col>
+            </el-col>
             <template v-for="(item, index) in 8" :key="index">
-              <a-space>
-                <a-col span="4" style="text-align: end">
-                  <a-tag color="pink"> 2323 </a-tag>
-                </a-col>
-              </a-space>
+              <el-space>
+                <el-col span="4" style="text-align: end">
+                  <el-tag color="pink"> 2323 </el-tag>
+                </el-col>
+              </el-space>
             </template>
 
-            <!-- <a-col span="12" style="text-align: end">
+            <!-- <el-col span="12" style="text-align: end">
               <template
                 v-for="(item, index) in userInfoData.roles"
                 :key="index"
               >
-                <a-tag v-if="index < 4" color="pink">
+                <el-tag v-if="index < 4" color="pink">
                   {{ item.roleName }}
-                </a-tag>
+                </el-tag>
               </template>
-            </a-col> -->
-          </a-row>
-          <a-divider />
-          <a-row class="user-info" justify="space-between">
-            <a-col span="8">用户昵称</a-col>
-            <a-col span="8" style="text-align: end"></a-col>
-          </a-row>
+            </el-col> -->
+          </el-row>
+          <el-divider />
+          <el-row class="user-info" justify="space-between">
+            <el-col span="8">用户昵称</el-col>
+            <el-col span="8" style="text-align: end"></el-col>
+          </el-row>
         </Panel>
-      </a-col>
-      <a-col :span="16">
+      </el-col>
+      <el-col :span="16">
         <Panel>
-          <a-tabs>
-            <a-tab-pane key="1" tab="基本资料">
+          <el-tabs>
+            <el-tab-pane key="1" tab="基本资料">
               <UserInfo></UserInfo>
-            </a-tab-pane>
-            <a-tab-pane key="2" tab="修改密码" force-render>
+            </el-tab-pane>
+            <el-tab-pane key="2" tab="修改密码" force-render>
               <ResetPwd></ResetPwd>
-            </a-tab-pane>
-          </a-tabs>
+            </el-tab-pane>
+          </el-tabs>
         </Panel>
-      </a-col>
-    </a-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

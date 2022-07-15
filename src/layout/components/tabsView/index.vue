@@ -1,8 +1,8 @@
 <template>
-  <a-dropdown :trigger="['contextmenu']">
+  <el-dropdown :trigger="['contextmenu']">
     <div class="tabs-view">
       <Panel>
-        <a-tabs
+        <el-tabs
           type="editable-card"
           :hideAdd="true"
           :tabBarGutter="5"
@@ -10,39 +10,39 @@
           @tabClick="handleTabClick"
           @edit="handleTabRemove"
         >
-          <a-tab-pane
+          <el-tab-pane
             v-for="item in visitedViews"
             :key="item.path"
             :tab="item.meta.title"
             :closable="!item.meta.affix"
           >
-          </a-tab-pane>
-        </a-tabs>
+          </el-tab-pane>
+        </el-tabs>
       </Panel>
     </div>
     <template #overlay>
-      <a-menu>
-        <a-menu-item key="1" @click="handleTabRemove(tabActive)">
-          <svg class="icon" aria-hidden="true" font-size="15px">
+      <el-menu>
+        <el-menu-item key="1" @click="handleTabRemove(tabActive)">
+          <svg class="icon" ariel-hidden="true" font-size="15px">
             <use xlink:href="#icon-close" />
           </svg>
           关闭当前
-        </a-menu-item>
-        <a-menu-item key="2" @click="closeOtherTab">
-          <svg class="icon" aria-hidden="true" font-size="15px">
+        </el-menu-item>
+        <el-menu-item key="2" @click="closeOtherTab">
+          <svg class="icon" ariel-hidden="true" font-size="15px">
             <use xlink:href="#icon-close-circle" />
           </svg>
           关闭其他
-        </a-menu-item>
-        <a-menu-item key="3" @click="closeAllTab">
-          <svg class="icon" aria-hidden="true" font-size="15px">
+        </el-menu-item>
+        <el-menu-item key="3" @click="closeAllTab">
+          <svg class="icon" ariel-hidden="true" font-size="15px">
             <use xlink:href="#icon-close-circle" />
           </svg>
           全部关闭
-        </a-menu-item>
-      </a-menu>
+        </el-menu-item>
+      </el-menu>
     </template>
-  </a-dropdown>
+  </el-dropdown>
 </template>
 <script>
 import { Panel } from '@/components'

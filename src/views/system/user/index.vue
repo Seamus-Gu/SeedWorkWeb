@@ -50,9 +50,11 @@
               >
                 <template #bodyCell="{ column, record }">
                   <template v-if="column.dataIndex === 'userStatus'">
-                    <a-tag :color="record.userStatus === '0' ? 'green' : 'red'">
+                    <el-tag
+                      :color="record.userStatus === '0' ? 'green' : 'red'"
+                    >
                       {{ record.userStatus === '0' ? '正常' : '停用' }}
-                    </a-tag>
+                    </el-tag>
                   </template>
                   <template v-else-if="column.dataIndex === 'action'">
                     <a
@@ -61,14 +63,14 @@
                     >
                       修改
                     </a>
-                    <a-divider type="vertical" />
+                    <el-divider type="vertical" />
                     <a
                       v-has="['system:user:remove']"
                       @click="handleDelete(record.userId)"
                     >
                       删除
                     </a>
-                    <a-divider type="vertical" />
+                    <el-divider type="vertical" />
                     <a
                       v-has="['system:user:resetPwd']"
                       @click="resetPwd(record)"
@@ -95,20 +97,20 @@
       @cancel="cancel"
     >
       <template v-if="showPassword" #password>
-        <a-col :span="12">
-          <a-form-item
+        <el-col :span="12">
+          <el-form-item
             label="用户密码"
             :labelCol="{ style: { width: '80px' } }"
             :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
             name="password"
           >
-            <a-input-password
+            <el-input-password
               v-model:value="formState.password"
               placeholder="请输入密码"
               autocomplete="off"
-            ></a-input-password>
-          </a-form-item>
-        </a-col>
+            ></el-input-password>
+          </el-form-item>
+        </el-col>
       </template>
     </Form>
   </div>

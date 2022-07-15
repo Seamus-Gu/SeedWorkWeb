@@ -4,11 +4,11 @@
  * @Date: 2022-01-10 16:28:14
 -->
 <template>
-  <a-sub-menu :key="menuInfo.path">
+  <el-sub-menu :key="menuInfo.path">
     <template #icon>
       <Icon>
         <template #component>
-          <svg class="icon sub-menu-icon" aria-hidden="true" font-size="20px">
+          <svg class="icon sub-menu-icon" ariel-hidden="true" font-size="20px">
             <use :xlink:href="'#icon-' + menuInfo.meta.icon" />
           </svg>
         </template>
@@ -19,22 +19,22 @@
     </template>
     <template v-for="item in menuInfo.children" :key="item.path">
       <template v-if="!item.children">
-        <a-menu-item :key="item.path" v-if="!item.hidden">
+        <el-menu-item :key="item.path" v-if="!item.hidden">
           <Icon>
             <template #component>
-              <svg class="icon" aria-hidden="true" font-size="20px">
+              <svg class="icon" ariel-hidden="true" font-size="20px">
                 <use :xlink:href="'#icon-' + item.meta.icon" />
               </svg>
             </template>
           </Icon>
           <span> {{ item.meta.title }}</span>
-        </a-menu-item>
+        </el-menu-item>
       </template>
       <template v-else>
         <SubMenu :menu-info="item" :key="item.key" />
       </template>
     </template>
-  </a-sub-menu>
+  </el-sub-menu>
 </template>
 <script>
 export default defineComponent({

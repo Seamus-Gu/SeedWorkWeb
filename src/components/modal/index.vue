@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <a-modal
+    <el-modal
       :centered="centered"
       :bodyStyle="{
         overflowX: 'hidden',
@@ -27,7 +27,7 @@
         <slot name="footer"></slot>
       </template>
       <slot></slot>
-    </a-modal>
+    </el-modal>
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div class="user-avatar" @click="editCropper()">
-    <a-avatar :src="avatar" :size="128"> 上传头像</a-avatar>
+    <el-avatar :src="avatar" :size="128"> 上传头像</el-avatar>
     <Modal
       :visible="visible"
       title="修改头像"
@@ -8,8 +8,8 @@
       @cancel="cancel"
       @ok="updateAvatar"
     >
-      <a-row :gutter="8">
-        <a-col :xs="24" :md="14">
+      <el-row :gutter="8">
+        <el-col :xs="24" :md="14">
           <Panel>
             <vueCropper
               style="height: 400px"
@@ -25,36 +25,36 @@
             />
           </Panel>
           <Panel>
-            <a-space>
+            <el-space>
               <UploadBtn width="80px" @upload="upload" accept="image/*">
-                <svg class="icon" aria-hidden="true" font-size="20px">
+                <svg class="icon" ariel-hidden="true" font-size="20px">
                   <use xlink:href="#icon-cloud-upload" />
                 </svg>
               </UploadBtn>
-              <a-button style="width: 60px" @click="changeScale(1)">
-                <svg class="icon" aria-hidden="true" font-size="20px">
+              <el-button style="width: 60px" @click="changeScale(1)">
+                <svg class="icon" ariel-hidden="true" font-size="20px">
                   <use xlink:href="#icon-plus" />
                 </svg>
-              </a-button>
-              <a-button style="width: 60px" @click="changeScale(-1)">
-                <svg class="icon" aria-hidden="true" font-size="20px">
+              </el-button>
+              <el-button style="width: 60px" @click="changeScale(-1)">
+                <svg class="icon" ariel-hidden="true" font-size="20px">
                   <use xlink:href="#icon-minus" />
                 </svg>
-              </a-button>
-              <a-button style="width: 60px" @click="turnLeft">
-                <svg class="icon" aria-hidden="true" font-size="20px">
+              </el-button>
+              <el-button style="width: 60px" @click="turnLeft">
+                <svg class="icon" ariel-hidden="true" font-size="20px">
                   <use xlink:href="#icon-rotation-left" />
                 </svg>
-              </a-button>
-              <a-button style="width: 60px" @click="turnRight">
-                <svg class="icon" aria-hidden="true" font-size="20px">
+              </el-button>
+              <el-button style="width: 60px" @click="turnRight">
+                <svg class="icon" ariel-hidden="true" font-size="20px">
                   <use xlink:href="#icon-rotation-right" />
                 </svg>
-              </a-button>
-            </a-space>
+              </el-button>
+            </el-space>
           </Panel>
-        </a-col>
-        <a-col :xs="24" :md="10">
+        </el-col>
+        <el-col :xs="24" :md="10">
           <Panel height="50%">
             <div class="avatar-upload-preview">
               <img :src="options.previews.url" :style="options.previews.img" />
@@ -65,8 +65,8 @@
               <img :src="options.previews.url" :style="options.previews.img" />
             </div>
           </Panel>
-        </a-col>
-      </a-row>
+        </el-col>
+      </el-row>
     </Modal>
   </div>
 </template>

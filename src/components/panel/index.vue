@@ -6,7 +6,7 @@
  * @Description: file content
 -->
 <template>
-  <a-card
+  <el-card
     :activeTabKey="activeTabKey"
     :bodyStyle="bodyStyle"
     :bordered="bordered"
@@ -50,7 +50,7 @@
       <slot name="tabBarExtraContent"></slot>
     </template>
     <slot></slot>
-  </a-card>
+  </el-card>
 </template>
 
 <script>

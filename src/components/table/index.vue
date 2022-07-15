@@ -4,7 +4,7 @@
  * @Date: 2022-01-06 09:53:45
 -->
 <template>
-  <a-table
+  <el-table
     :bordered="bordered"
     :columns="columns.filter(t => t.visible != false)"
     :customHeaderRow="customHeaderRow"
@@ -83,7 +83,7 @@
     <template v-if="$slots.title" #title>
       <slot name="title"></slot>
     </template>
-  </a-table>
+  </el-table>
 </template>
 <script>
 export default defineComponent({

@@ -4,7 +4,7 @@
  * @Date: 2022-01-06 09:53:45
 -->
 <template>
-  <a-table
+  <el-table
     class="tree-table"
     :dataSource="dataSource"
     :columns="columns.filter(t => t.visible != false)"
@@ -48,7 +48,7 @@
       <slot name="footer"> </slot>
     </template>
     <slot> </slot>
-  </a-table>
+  </el-table>
 </template>
 <script>
 export default defineComponent({

@@ -7,7 +7,6 @@
  */
 
 @import './themes/default.scss';
-@import './antdv.scss';
 
 html {
   height: 100%;
@@ -17,11 +16,17 @@ html {
 
 body {
   color: var(--theme-text-1) !important;
+  margin: 0 !important;
 }
 
 #app {
-  width: 100%;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   height: 100%;
+  width: 100%;
+  display: flex;
+  color: var(--el-text-color-primary);
 }
 
 // icon

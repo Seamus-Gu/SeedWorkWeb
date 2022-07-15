@@ -7,13 +7,13 @@
 -->
 <template>
   <div class="form">
-    <a-form ref="aFormRef" :rules="rules" :model="formState">
-      <a-row :gutter="16" style="margin-top: 16px">
+    <el-form ref="aFormRef" :rules="rules" :model="formState">
+      <el-row :gutter="16" style="margin-top: 16px">
         <template
           v-for="item in schema.filter(t => t.visible != false)"
           :key="item.dataIndex"
         >
-          <a-col v-if="item.component" :span="item.span || 12">
+          <el-col v-if="item.component" :span="item.span || 12">
             <FormItem
               :formState="formState"
               :formItem="item"
@@ -21,12 +21,12 @@
               :componentProps="item.componentProps"
             >
             </FormItem>
-          </a-col>
+          </el-col>
           <slot v-else :name="item.dataIndex"></slot>
         </template>
         <slot></slot>
-      </a-row>
-    </a-form>
+      </el-row>
+    </el-form>
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div class="upload-btn-container">
-    <a-button
+    <el-button
       class="upload-btn"
       :style="{ width: width, height: height }"
       :block="block"
@@ -24,7 +24,7 @@
         <slot name="icon"></slot>
       </template>
       <slot></slot>
-    </a-button>
+    </el-button>
   </div>
 </template>
 <script>

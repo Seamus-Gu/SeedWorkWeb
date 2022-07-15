@@ -7,16 +7,16 @@
 <template>
   <template v-if="!item.hidden">
     <template v-if="isMenuItem(item)">
-      <a-menu-item :key="onlyOneChild.path">
+      <el-menu-item :key="onlyOneChild.path">
         <Icon>
           <template #component>
-            <svg class="icon" aria-hidden="true" font-size="20px">
+            <svg class="icon" ariel-hidden="true" font-size="20px">
               <use :xlink:href="'#icon-' + onlyOneChild.meta.icon" />
             </svg>
           </template>
         </Icon>
         <span>{{ onlyOneChild.meta.title }}</span>
-      </a-menu-item>
+      </el-menu-item>
     </template>
     <template v-else>
       <SubMenu :menu-info="item" :key="item.path" />

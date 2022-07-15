@@ -8,12 +8,12 @@
 
 <template>
   <div class="layout-title" @click="returnHome">
-    <a-row align="middle" justify="center" style="height: 100%">
+    <el-row align="middle" justify="center" style="height: 100%">
       <img class="logo" src="~@/assets/images/Vue.png" alt="" />
       <div class="content" v-show="!collapse">
         <span style="color: #57caeb">Vue</span>管理系统
       </div>
-    </a-row>
+    </el-row>
   </div>
 </template>
 

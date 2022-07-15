@@ -1,5 +1,5 @@
 <template>
-  <a-drawer
+  <el-drawer
     class="theme-drawer-container"
     title="主题配置"
     :visible="visible"
@@ -8,16 +8,16 @@
     @close="onClose"
     :contentWrapperStyle="{ width: '256px' }"
   >
-    <a-form>
-      <a-row style="margin: 0">
+    <el-form>
+      <el-row style="margin: 0">
         <h3>主题风格设置</h3>
-      </a-row>
-      <a-row>
+      </el-row>
+      <el-row>
         <span>布局选择</span>
-      </a-row>
-      <a-row :gutter="25">
-        <a-col :span="8">
-          <a-tooltip title="侧边">
+      </el-row>
+      <el-row :gutter="25">
+        <el-col :span="8">
+          <el-tooltip title="侧边">
             <img
               class="layout-select-content"
               src="@/assets/icons/side.svg"
@@ -27,10 +27,10 @@
                 boxShadow: layout == 'LRLayout' ? '0px 0 6px 1px #2db7f5' : ''
               }"
             />
-          </a-tooltip>
-        </a-col>
-        <a-col :span="8">
-          <a-tooltip title="综合">
+          </el-tooltip>
+        </el-col>
+        <el-col :span="8">
+          <el-tooltip title="综合">
             <img
               class="layout-select-content"
               src="@/assets/icons/default.svg"
@@ -39,10 +39,10 @@
               :style="{
                 boxShadow: layout == 'TLayout' ? '0px 0 6px 1px #2db7f5' : ''
               }"
-          /></a-tooltip>
-        </a-col>
-        <a-col :span="8">
-          <a-tooltip title="顶栏">
+          /></el-tooltip>
+        </el-col>
+        <el-col :span="8">
+          <el-tooltip title="顶栏">
             <img
               class="layout-select-content"
               src="@/assets/icons/header.svg"
@@ -51,50 +51,50 @@
               :style="{
                 boxShadow: layout == 'UDLayout' ? '0px 0 6px 1px #2db7f5' : ''
               }"
-          /></a-tooltip>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="8" class="theme-color">
+          /></el-tooltip>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8" class="theme-color">
           <span>主题配置</span>
-        </a-col>
-        <a-col :offset="6" :span="2">
-          <a-dropdown>
+        </el-col>
+        <el-col :offset="6" :span="2">
+          <el-dropdown>
             <ThemeColorSelect :type="theme"> </ThemeColorSelect>
             <template #overlay>
-              <a-card>
-                <a-row :gutter="8" style="padding: 0 4px 0 4px">
-                  <a-tooltip title="日间">
-                    <a-col :span="8">
+              <el-card>
+                <el-row :gutter="8" style="padding: 0 4px 0 4px">
+                  <el-tooltip title="日间">
+                    <el-col :span="8">
                       <ThemeColorSelect
                         type="light"
                         @click="changeTheme('light')"
                       >
                       </ThemeColorSelect>
-                    </a-col>
-                  </a-tooltip>
-                  <a-tooltip title="夜间">
-                    <a-col :span="8">
+                    </el-col>
+                  </el-tooltip>
+                  <el-tooltip title="夜间">
+                    <el-col :span="8">
                       <ThemeColorSelect
                         type="dark"
                         @click="changeTheme('dark')"
                       ></ThemeColorSelect>
-                    </a-col>
-                  </a-tooltip>
-                  <a-tooltip title="暗黑">
-                    <a-col :span="8">
+                    </el-col>
+                  </el-tooltip>
+                  <el-tooltip title="暗黑">
+                    <el-col :span="8">
                       <ThemeColorSelect
                         type="deepBlack"
                         @click="changeTheme('deepBlack')"
                       ></ThemeColorSelect>
-                    </a-col>
-                  </a-tooltip>
-                </a-row>
-              </a-card>
+                    </el-col>
+                  </el-tooltip>
+                </el-row>
+              </el-card>
             </template>
-          </a-dropdown>
-        </a-col>
-        <a-col :offset="4" :span="2" id="theme-color-picker">
+          </el-dropdown>
+        </el-col>
+        <el-col :offset="4" :span="2" id="theme-color-picker">
           <div class="theme-color-selsct" @click="showColorPicker">
             <div
               class="theme-color-content"
@@ -111,83 +111,83 @@
               </ColorSelect>
             </div>
           </div>
-        </a-col>
-      </a-row>
-      <a-divider class="drawer-divider" />
-      <a-row>
+        </el-col>
+      </el-row>
+      <el-divider class="drawer-divider" />
+      <el-row>
         <h3>系统布局设置</h3>
-      </a-row>
-      <a-row>
-        <a-col :span="8">
+      </el-row>
+      <el-row>
+        <el-col :span="8">
           <span>标签</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="showTabView" />
-        </a-col>
-      </a-row>
-      <a-row v-if="layout != 'UDLayout'">
-        <a-col :span="8">
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="showTabView" />
+        </el-col>
+      </el-row>
+      <el-row v-if="layout != 'UDLayout'">
+        <el-col :span="8">
           <span>菜单</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="showSideBar" />
-        </a-col>
-      </a-row>
-      <a-row v-if="layout != 'UDLayout'">
-        <a-col :span="8">
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="showSideBar" />
+        </el-col>
+      </el-row>
+      <el-row v-if="layout != 'UDLayout'">
+        <el-col :span="8">
           <span>头部固定</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="affixHeader" />
-        </a-col>
-      </a-row>
-      <a-divider class="drawer-divider" />
-      <a-row>
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="affixHeader" />
+        </el-col>
+      </el-row>
+      <el-divider class="drawer-divider" />
+      <el-row>
         <h3>顶部按钮</h3>
-      </a-row>
-      <a-row>
-        <a-col :span="8">
+      </el-row>
+      <el-row>
+        <el-col :span="8">
           <span>搜索</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="searchSwitch" />
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="8">
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="searchSwitch" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8">
           <span>主题</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="themeSwitch" />
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="8">
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="themeSwitch" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8">
           <span>通知</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="messageSwitch" />
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="8">
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="messageSwitch" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8">
           <span>全屏</span>
-        </a-col>
-        <a-col :offset="10" :span="4">
-          <a-switch v-model:checked="screenFullSwitch" />
-        </a-col>
-      </a-row>
-      <a-divider />
-      <a-row>
-        <a-col :span="8">
-          <a-button type="primary" @click="savaSettings">保存配置</a-button>
-        </a-col>
-        <a-col :offset="6" :span="4">
-          <a-button type="primary" @click="resetSettings">重置配置</a-button>
-        </a-col>
-      </a-row>
-    </a-form>
-  </a-drawer>
+        </el-col>
+        <el-col :offset="10" :span="4">
+          <el-switch v-model:checked="screenFullSwitch" />
+        </el-col>
+      </el-row>
+      <el-divider />
+      <el-row>
+        <el-col :span="8">
+          <el-button type="primary" @click="savaSettings">保存配置</el-button>
+        </el-col>
+        <el-col :offset="6" :span="4">
+          <el-button type="primary" @click="resetSettings">重置配置</el-button>
+        </el-col>
+      </el-row>
+    </el-form>
+  </el-drawer>
 </template>
 <script>
 import { ColorSelect } from '@/components'

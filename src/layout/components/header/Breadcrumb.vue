@@ -5,16 +5,16 @@
 -->
 <template>
   <div>
-    <a-breadcrumb class="breadcrumb" separator="/">
+    <el-breadcrumb class="breadcrumb" separator="/">
       <template v-for="(item, index) in breadcrumbList" :key="index">
-        <a-breadcrumb-item>
+        <el-breadcrumb-item>
           <router-link v-if="index == 0" :to="item.path">
             {{ item.meta.title }}
           </router-link>
           <span v-else>{{ item.meta.title }}</span>
-        </a-breadcrumb-item>
+        </el-breadcrumb-item>
       </template>
-    </a-breadcrumb>
+    </el-breadcrumb>
   </div>
 </template>
 <script>

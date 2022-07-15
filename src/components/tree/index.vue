@@ -1,13 +1,13 @@
 <template>
   <div class="tree">
-    <a-input-search
+    <el-input-search
       v-if="showSearch"
       :placeholder="searchPlaceholder"
       v-model:value="searchValue"
       :allowClear="true"
       @search="refresh()"
     />
-    <a-tree
+    <el-tree
       :blockNode="blockNode"
       :checkable="checkable"
       v-model:checkedKeys="checkedData"
@@ -59,7 +59,7 @@
           :key="key"
         ></slot>
       </template>
-    </a-tree>
+    </el-tree>
   </div>
 </template>
 

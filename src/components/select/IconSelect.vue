@@ -6,14 +6,14 @@
  * @Description: file content
 -->
 <template>
-  <a-popover
+  <el-popover
     class="icon-select-container"
     :trigger="trigger"
     :placement="placement"
     v-model:visible="visible"
   >
     <template #title>
-      <a-input-search
+      <el-input-search
         v-model:value="search"
         placeholder="输入关键字进行搜索"
         @search="filterIcon"
@@ -21,7 +21,7 @@
     </template>
     <template #content>
       <template v-if="iconList.length != 0">
-        <a-row style="margin-bottom: 8px">
+        <el-row style="margin-bottom: 8px">
           <div class="icon-panel" :style="{ width: width }">
             <div
               class="icon-box"
@@ -29,27 +29,27 @@
               :key="index"
               @click="changeIcon(item), close()"
             >
-              <a-button size="large">
+              <el-button size="large">
                 <template #icon>
-                  <svg class="icon" aria-hidden="true" font-size="24px">
+                  <svg class="icon" ariel-hidden="true" font-size="24px">
                     <use :xlink:href="'#' + item" />
                   </svg>
                 </template>
-              </a-button>
+              </el-button>
             </div>
           </div>
-        </a-row>
-        <a-row align="center">
-          <a-pagination
+        </el-row>
+        <el-row align="center">
+          <el-pagination
             :total="listTotal"
             :pageSize="pageSize"
             size="small"
             @change="changeCurrent"
           />
-        </a-row>
+        </el-row>
       </template>
       <template v-else>
-        <a-empty
+        <el-empty
           description="没有该图标"
           :image-style="{
             width: width
@@ -58,7 +58,7 @@
       </template>
     </template>
     <slot></slot>
-  </a-popover>
+  </el-popover>
 </template>
 <script>
 import iconList from '@/assets/json/icon-list.json'

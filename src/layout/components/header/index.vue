@@ -4,11 +4,11 @@
  * @Date: 2021-12-29 10:27:18
 -->
 <template>
-  <a-layout-header class="layout-header">
-    <a-row align="middle" justify="space-between">
+  <el-layout-header class="layout-header">
+    <el-row align="middle" justify="space-between">
       <div class="header-main-left">
-        <a-row>
-          <a-space>
+        <el-row>
+          <el-space>
             <template v-if="layout == 'LRLayout' || size == 'small'">
               <Hamburger
                 class="header-item"
@@ -23,24 +23,24 @@
             <template v-if="layout == 'LRLayout' && size != 'small'">
               <Breadcrumb></Breadcrumb>
             </template>
-          </a-space>
-        </a-row>
+          </el-space>
+        </el-row>
       </div>
       <div class="header-main-right">
-        <a-row>
-          <a-space>
+        <el-row>
+          <el-space>
             <div class="header-item" v-if="searchSwitch">
-              <svg class="icon" aria-hidden="true" font-size="20px">
+              <svg class="icon" ariel-hidden="true" font-size="20px">
                 <use xlink:href="#icon-search-1" />
               </svg>
             </div>
             <div class="header-item" v-if="themeSwitch" @click="showSetting">
-              <svg class="icon" aria-hidden="true" font-size="20px">
+              <svg class="icon" ariel-hidden="true" font-size="20px">
                 <use xlink:href="#icon-setting-config" />
               </svg>
             </div>
             <div class="header-item" v-if="messageSwitch">
-              <svg class="icon" aria-hidden="true" font-size="20px">
+              <svg class="icon" ariel-hidden="true" font-size="20px">
                 <use xlink:href="#icon-remind" />
               </svg>
             </div>
@@ -49,11 +49,11 @@
               class="header-item"
             ></ScreenFull>
             <Avatar></Avatar>
-          </a-space>
-        </a-row>
+          </el-space>
+        </el-row>
       </div>
-    </a-row>
-  </a-layout-header>
+    </el-row>
+  </el-layout-header>
 </template>
 
 <script>

@@ -7,8 +7,8 @@
 -->
 <template>
   <div class="orgainzation-container">
-    <a-row>
-      <a-col :span="24">
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <QueryForm
             :filters="queryParams"
@@ -19,10 +19,10 @@
             @reset="resetQuery"
           />
         </Panel>
-      </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="24">
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
         <Panel>
           <ToolBar
             :hasExpent="true"
@@ -39,9 +39,9 @@
             :api="getOrganizationTree"
           >
             <template #organizationStatus="{ text }">
-              <a-tag :color="text === '0' ? 'green' : 'red'">
+              <el-tag :color="text === '0' ? 'green' : 'red'">
                 {{ text === '0' ? '正常' : '停用' }}
-              </a-tag>
+              </el-tag>
             </template>
             <template #action="{ record }">
               <span>
@@ -51,13 +51,13 @@
                 >
                   新增
                 </a>
-                <a-divider type="vertical" />
+                <el-divider type="vertical" />
                 <a
                   v-has="['system:organization:edit']"
                   @click="handleEdit(record.organizationId)"
                   >修改</a
                 >
-                <a-divider type="vertical" />
+                <el-divider type="vertical" />
                 <a
                   v-has="['system:organization:remove']"
                   @click="handleDelete(record.organizationId)"
@@ -68,8 +68,8 @@
             </template>
           </TreeTable>
         </Panel>
-      </a-col>
-    </a-row>
+      </el-col>
+    </el-row>
     <Form
       ref="formRef"
       :visible="formVisible"

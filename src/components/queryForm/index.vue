@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a-form name="queryForm">
-      <a-row :gutter="16">
+    <el-form name="queryForm">
+      <el-row :gutter="16">
         <template
           v-for="(item, index) in schema.filter(t => t.queryVisible != false)"
           :key="item.dataIndex"
         >
-          <a-col v-if="item.component" :span="item.span || 8">
+          <el-col v-if="item.component" :span="item.span || 8">
             <FormItem
               :show="(index > 2 && !isExpend) || index < 3"
               :formState="filters"
@@ -14,20 +14,20 @@
               :componentProps="item.componentProps"
             >
             </FormItem>
-          </a-col>
+          </el-col>
           <slot v-else :name="item.dataIndex"></slot>
         </template>
         <slot></slot>
-      </a-row>
+      </el-row>
 
-      <a-row justify="end">
-        <a-button type="primary" @click="query" :loading="queryLoad"
-          >查询</a-button
+      <el-row justify="end">
+        <el-button type="primary" @click="query" :loading="queryLoad"
+          >查询</el-button
         >
-        <a-button style="margin-left: 10px" @click="reset" :loading="resetLoad"
-          >重置</a-button
+        <el-button style="margin-left: 10px" @click="reset" :loading="resetLoad"
+          >重置</el-button
         >
-        <a-button
+        <el-button
           v-if="schemaData.length > 3"
           style="margin-left: 10px; padding: 4px 6px 4px 14px"
           @click="expend"
@@ -35,16 +35,16 @@
           {{ expendName }}
           <svg
             class="icon expend-icon"
-            aria-hidden="true"
+            ariel-hidden="true"
             font-size="15px"
             style="margin-left: 2px"
             @click="toggleSideBar"
           >
             <use xlink:href="#icon-angle-down" />
           </svg>
-        </a-button>
-      </a-row>
-    </a-form>
+        </el-button>
+      </el-row>
+    </el-form>
   </div>
 </template>
 <script>
