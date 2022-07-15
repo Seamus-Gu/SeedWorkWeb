@@ -7,10 +7,9 @@
  */
 import axios from 'axios'
 import { getToken } from '@/utils/session-storage'
-import { message } from 'ant-design-vue'
 import errorCode from '@/utils/error-code'
 import { tansParams } from '@/utils/tools'
-
+import { ElMessage } from 'element-plus'
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
@@ -55,17 +54,19 @@ service.interceptors.response.use(
     }
 
     if (code == 200) {
-      config.method != 'get' && !config.headers.HideMsg && message.success(msg)
+      config.method != 'get' &&
+        !config.headers.HideMsg &&
+        ElMessage.success(msg)
       return data
     } else {
-      message.error(msg || errorCode[code])
+      ElMessage.error(msg || errorCode[code])
       return Promise.reject(response)
     }
   },
   error => {
     const { response } = error
     const { status } = response
-    message.error(errorCode[status])
+    ElMessage.error(errorCode[status])
     return Promise.reject(error)
   }
 )

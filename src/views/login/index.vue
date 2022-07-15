@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { LockOutlined, UserOutlined } from '@ant-design/icons-vue'
 import { Particle } from 'jparticles'
 
 export default defineComponent({

@@ -6,13 +6,13 @@
  * @Description: App.vue
 -->
 <template>
-  <a-config-provider :locale="locale">
+  <el-config-provider :locale="locale">
     <router-view />
-  </a-config-provider>
+  </el-config-provider>
 </template>
 
 <script>
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import { useWindowSize } from '@vueuse/core'
 
 export default {
@@ -34,7 +34,7 @@ export default {
     })
 
     return {
-      locale: zhCN
+      locale: zhCn
     }
   }
 }

@@ -37,7 +37,6 @@
   </a-sub-menu>
 </template>
 <script>
-import Icon from '@ant-design/icons-vue'
 export default defineComponent({
   name: 'SubMenu',
   props: {

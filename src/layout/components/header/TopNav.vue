@@ -22,7 +22,6 @@
 </template>
 <script>
 import MenuItem from '@/layout/components/sideBar/MenuItem.vue'
-import Icon from '@ant-design/icons-vue'
 import lodash from 'lodash'
 
 export default defineComponent({

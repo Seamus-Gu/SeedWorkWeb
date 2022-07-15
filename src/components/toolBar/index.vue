@@ -153,7 +153,6 @@
   </div>
 </template>
 <script>
-import Icon from '@ant-design/icons-vue'
 import { getToken } from '@/utils/session-storage'
 
 export default defineComponent({

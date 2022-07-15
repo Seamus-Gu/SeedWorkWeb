@@ -26,7 +26,6 @@
 
 <script>
 import SubMenu from './SubMenu.vue'
-import Icon from '@ant-design/icons-vue'
 export default defineComponent({
   props: {
     item: {
