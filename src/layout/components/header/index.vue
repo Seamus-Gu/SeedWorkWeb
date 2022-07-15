@@ -4,7 +4,7 @@
  * @Date: 2021-12-29 10:27:18
 -->
 <template>
-  <el-layout-header class="layout-header">
+  <el-header class="layout-header">
     <el-row align="middle" justify="space-between">
       <div class="header-main-left">
         <el-row>
@@ -39,7 +39,7 @@
                 <use xlink:href="#icon-setting-config" />
               </svg>
             </div>
-            <div class="header-item" v-if="messageSwitch">
+            <div class="header-item" v-if="messageSwitch" @click="toggleDark">
               <svg class="icon" ariel-hidden="true" font-size="20px">
                 <use xlink:href="#icon-remind" />
               </svg>
@@ -53,7 +53,7 @@
         </el-row>
       </div>
     </el-row>
-  </el-layout-header>
+  </el-header>
 </template>
 
 <script>
@@ -64,6 +64,7 @@ import TopNav from './TopNav.vue'
 import Avatar from './Avatar.vue'
 
 import { ScreenFull } from '@/components'
+import { useDark, useToggle } from '@vueuse/core'
 
 export default defineComponent({
   components: {
@@ -76,6 +77,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const isDark = useDark()
 
     const headerData = reactive({
       isActive: computed(() => store.state.app.sidebarOpened),
@@ -91,6 +93,7 @@ export default defineComponent({
     )
 
     const methods = reactive({
+      toggleDark: useToggle(isDark),
       toggleSideBar: () => {
         store.dispatch('app/toggleSideBar')
       },

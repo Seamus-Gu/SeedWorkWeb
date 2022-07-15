@@ -4,7 +4,7 @@
  * @Date: 2022-01-04 14:32:03
 -->
 <template>
-  <el-layout-content
+  <el-main
     class="layout-content"
     :style="{
       overflow: affixHeader ? 'auto' : '',
@@ -19,7 +19,7 @@
         </keep-alive>
       </transition>
     </router-view>
-  </el-layout-content>
+  </el-main>
 </template>
 
 <script>

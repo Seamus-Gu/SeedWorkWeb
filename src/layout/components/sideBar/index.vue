@@ -5,7 +5,7 @@
 -->
 
 <template>
-  <el-layout-sider
+  <el-aside
     v-if="size != 'small' && showSiderBar"
     class="layout-sider"
     width="210"
@@ -33,7 +33,7 @@
       >
       </MenuItem>
     </el-menu>
-  </el-layout-sider>
+  </el-aside>
   <el-drawer
     v-else-if="showSiderBar"
     class="layout-sider-small"

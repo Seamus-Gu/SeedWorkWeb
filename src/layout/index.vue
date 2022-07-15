@@ -7,22 +7,22 @@
 -->
 
 <template>
-  <el-layout class="layout-wrapper">
+  <el-container class="layout-wrapper">
     <template v-if="layout == 'TLayout'">
       <Header style="z-index: 999"></Header>
-      <el-layout class="layout-container">
+      <el-container class="layout-container">
         <Sidebar></Sidebar>
         <AppMain></AppMain>
-      </el-layout>
+      </el-container>
     </template>
     <template v-else>
       <Sidebar v-if="layout == 'LRLayout'" style="z-index: 999"></Sidebar>
-      <el-layout class="layout-container">
+      <el-container class="layout-container">
         <Header></Header>
         <AppMain></AppMain>
-      </el-layout>
+      </el-container>
     </template>
-  </el-layout>
+  </el-container>
 </template>
 <script>
 import { Sidebar, Header, AppMain } from './components'
