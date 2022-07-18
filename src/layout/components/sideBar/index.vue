@@ -5,72 +5,29 @@
 -->
 
 <template>
-  <el-aside
-    v-if="size != 'small' && showSiderBar"
-    class="layout-sider"
-    width="210px"
-    :trigger="null"
-    collapsedWidth="60"
-  >
+  <el-aside v-if="size != 'small'" class="layout-sider" :width="sideBarWidth">
     <SideBarLogo
       v-if="layout == 'LRLayout'"
       :collapse="isCollapse"
     ></SideBarLogo>
-    <el-menu
-      :collapsed="isCollapse"
-      :theme="theme != 'deepBlack' ? theme : 'light'"
-      class="side-menu"
-      mode="inline"
-      :forceSubMenuRender="true"
-      :selectedKeys="[routePath]"
-      v-model:openKeys="openMenu"
-      @click="routerPush"
-    >
-      <MenuItem
+    <el-menu class="side-menu" :collapse="isCollapse">
+      <SubMenu
         v-for="(route, index) in sideBarRouters"
         :key="route.path + index"
-        :item="route"
+        :data="route"
       >
-      </MenuItem>
+      </SubMenu>
     </el-menu>
   </el-aside>
-  <el-drawer
-    v-else-if="showSiderBar"
-    class="layout-sider-small"
-    :visible="!isCollapse"
-    placement="left"
-    :closable="true"
-    :contentWrapperStyle="{ width: '256px' }"
-    @close="closeSideBar"
-  >
-    <template #title>
-      <SideBarLogo :collapse="isCollapse"></SideBarLogo>
-    </template>
-    <el-menu
-      class="side-menu"
-      mode="inline"
-      forceSubMenuRender="true"
-      :selectedKeys="[routePath]"
-      v-model:openKeys="openMenu"
-      @click="routerPush"
-    >
-      <MenuItem
-        v-for="(route, index) in sideBarRouters"
-        :key="route.path + index"
-        :item="route"
-      >
-      </MenuItem>
-    </el-menu>
-  </el-drawer>
 </template>
 <script>
 import SideBarLogo from './SideBarLogo.vue'
-import MenuItem from './MenuItem.vue'
+import SubMenu from './SubMenu.vue'
 
 export default defineComponent({
   components: {
     SideBarLogo,
-    MenuItem
+    SubMenu
   },
   setup() {
     const route = useRoute()
@@ -80,11 +37,11 @@ export default defineComponent({
     const layout = computed(() => store.state.settings.layout)
     const sideBarRouters = computed(() => store.state.permission.sideBarRouters)
     const sideMenus = computed(() => store.getters.sideMenus)
-    const showSiderBar = computed(() => store.state.settings.showSideBar)
     const theme = computed(() => store.state.settings.theme)
 
     const sideBarData = reactive({
       isCollapse: computed(() => !store.state.app.sidebarOpened),
+      sideBarWidth: computed(() => store.state.app.sideBarWidth),
       size: computed(() => store.state.app.size),
       routePath: computed(() => store.state.app.routePath),
       openMenu: computed({
@@ -124,7 +81,6 @@ export default defineComponent({
     return {
       layout,
       sideBarRouters,
-      showSiderBar,
       theme,
       ...toRefs(sideBarData),
       ...toRefs(methods)

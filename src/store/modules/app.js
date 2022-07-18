@@ -8,6 +8,7 @@
 
 const state = {
   sidebarOpened: true,
+  sideBarWidth: '210px',
   size: 'large',
   routePath: '/index',
   openMenu: ['/index']
@@ -22,6 +23,9 @@ const mutations = {
   },
   CLOSE_SIDEBAR: state => {
     state.sidebarOpened = false
+  },
+  SET_SIDEBAR_WIDTH: (state, sideBarWidth) => {
+    state.sideBarWidth = sideBarWidth
   },
   SET_SIZE: (state, size) => {
     state.size = size
@@ -43,6 +47,9 @@ const actions = {
   },
   closeSideBar({ commit }) {
     commit('CLOSE_SIDEBAR')
+  },
+  setSideBarWidth({ commit }, sideBarWidth) {
+    commit('SET_SIDEBAR_WIDTH', sideBarWidth)
   },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)

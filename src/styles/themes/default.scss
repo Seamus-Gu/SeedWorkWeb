@@ -10,18 +10,17 @@
 .layout-wrapper {
   height: 100vh;
   overflow: hidden;
-  //   .layout-title {
-  //     overflow: hidden;
-  //     position: relative;
-  //     cursor: pointer;
-  //     background: var(--theme-sider);
-  //     .content {
-  //       display: inline-block;
-  //       font-weight: 600;
-  //       color: #435ebe;
-  //       font-size: 24px;
-  //     }
-  //   }
+  .layout-title {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    .content {
+      display: inline-block;
+      font-weight: 600;
+      color: #435ebe;
+      font-size: 24px;
+    }
+  }
   //   .layout-header {
   //     height: 50px;
   //     overflow: hidden;
@@ -54,25 +53,28 @@
   //       fill: currentColor;
   //     }
   //   }
-  //   .layout-sider {
-  //     box-shadow: 0 0 10px 0 $shadow;
-  //     height: 100%;
-  //     .layout-title {
-  //       height: 80px;
-  //       box-shadow: 0 15px 10px -15px $shadow;
-  //     }
-  //     .icon {
-  //       fill: currentColor;
-  //     }
-  //     .side-menu {
-  //       overflow: auto;
-  //       overflow-y: auto;
-  //       height: calc(100% - 80px);
-  //     }
-  //     .side-menu::-webkit-scrollbar {
-  //       width: 0;
-  //     }
-  //   }
+  .layout-sider {
+    box-shadow: var(--el-box-shadow);
+    height: 100%;
+    .layout-title {
+      height: 80px;
+      box-shadow: 0 15px 10px -15px $shadow;
+    }
+    .el-menu {
+      position: inherit;
+    }
+    //     .icon {
+    //       fill: currentColor;
+    //     }
+    //     .side-menu {
+    //       overflow: auto;
+    //       overflow-y: auto;
+    //       height: calc(100% - 80px);
+    //     }
+    //     .side-menu::-webkit-scrollbar {
+    //       width: 0;
+    //     }
+  }
   //   .layout-content {
   //     padding-left: 16px;
   //     padding-right: 11px;
