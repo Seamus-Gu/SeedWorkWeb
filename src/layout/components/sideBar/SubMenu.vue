@@ -6,13 +6,11 @@
 <template>
   <el-sub-menu :key="menuInfo.path">
     <template #icon>
-      <Icon>
-        <template #component>
-          <svg class="icon sub-menu-icon" ariel-hidden="true" font-size="20px">
-            <use :xlink:href="'#icon-' + menuInfo.meta.icon" />
-          </svg>
-        </template>
-      </Icon>
+      <el-icon>
+        <svg class="icon sub-menu-icon" ariel-hidden="true" font-size="20px">
+          <use :xlink:href="'#icon-' + menuInfo.meta.icon" />
+        </svg>
+      </el-icon>
     </template>
     <template #title>
       {{ menuInfo.meta.title }}

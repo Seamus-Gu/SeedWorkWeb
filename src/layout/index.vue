@@ -9,15 +9,15 @@
 <template>
   <el-container class="layout-wrapper">
     <template v-if="layout == 'TLayout'">
-      <Header style="z-index: 999"></Header>
+      <Header></Header>
       <el-container class="layout-container">
         <Sidebar></Sidebar>
         <AppMain></AppMain>
       </el-container>
     </template>
     <template v-else>
-      <Sidebar v-if="layout == 'LRLayout'" style="z-index: 999"></Sidebar>
-      <el-container class="layout-container">
+      <Sidebar v-if="layout == 'LRLayout'"></Sidebar>
+      <el-container direction="vertical" class="layout-container">
         <Header></Header>
         <AppMain></AppMain>
       </el-container>

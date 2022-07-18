@@ -8,8 +8,7 @@
   <el-aside
     v-if="size != 'small' && showSiderBar"
     class="layout-sider"
-    width="210"
-    :collapsed="isCollapse"
+    width="210px"
     :trigger="null"
     collapsedWidth="60"
   >
@@ -18,6 +17,7 @@
       :collapse="isCollapse"
     ></SideBarLogo>
     <el-menu
+      :collapsed="isCollapse"
       :theme="theme != 'deepBlack' ? theme : 'light'"
       class="side-menu"
       mode="inline"

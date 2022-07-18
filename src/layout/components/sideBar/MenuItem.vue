@@ -8,13 +8,13 @@
   <template v-if="!item.hidden">
     <template v-if="isMenuItem(item)">
       <el-menu-item :key="onlyOneChild.path">
-        <Icon>
+        <el-icon>
           <template #component>
             <svg class="icon" ariel-hidden="true" font-size="20px">
               <use :xlink:href="'#icon-' + onlyOneChild.meta.icon" />
             </svg>
           </template>
-        </Icon>
+        </el-icon>
         <span>{{ onlyOneChild.meta.title }}</span>
       </el-menu-item>
     </template>
