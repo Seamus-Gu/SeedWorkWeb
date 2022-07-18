@@ -5,24 +5,26 @@
 -->
 
 <template>
-  <el-aside v-if="size != 'small'" class="layout-sider" :width="sideBarWidth">
+  <div v-if="size != 'small'" class="layout-sider">
     <SideBarLogo
       v-if="layout == 'LRLayout'"
       :collapse="isCollapse"
     ></SideBarLogo>
-    <el-menu
-      class="side-menu"
-      :collapse="isCollapse"
-      :default-active="routePath"
-    >
-      <SubMenu
-        v-for="(route, index) in sideBarRouters"
-        :key="route.path + index"
-        :data="route"
+    <el-scrollbar>
+      <el-menu
+        class="side-menu"
+        :collapse="isCollapse"
+        :default-active="routePath"
       >
-      </SubMenu>
-    </el-menu>
-  </el-aside>
+        <SubMenu
+          v-for="(route, index) in sideBarRouters"
+          :key="route.path + index"
+          :data="route"
+        >
+        </SubMenu>
+      </el-menu>
+    </el-scrollbar>
+  </div>
 </template>
 <script>
 import SideBarLogo from './SideBarLogo.vue'
@@ -39,21 +41,12 @@ export default defineComponent({
 
     const layout = computed(() => store.state.settings.layout)
     const sideBarRouters = computed(() => store.state.permission.sideBarRouters)
-    // const sideMenus = computed(() => store.getters.sideMenus)
-    // const theme = computed(() => store.state.settings.theme)
 
     const sideBarData = reactive({
+      size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
       sideBarWidth: computed(() => store.state.app.sideBarWidth),
       routePath: computed(() => store.state.app.routePath)
-
-      // size: computed(() => store.state.app.size),
-      // openMenu: computed({
-      //   get: () => store.state.app.openMenu,
-      //   set: openKeys => {
-      //     store.dispatch('app/setOpenMenu', openKeys)
-      //   }
-      // })
     })
 
     const methods = reactive({
@@ -62,20 +55,10 @@ export default defineComponent({
           'app/setOpenMenu',
           route.matched.filter(t => t.path).map(t => t.path)
         )
-      },
-      initSideBar: () => {
-        // store.dispatch('setSiderBarRoutes', sideMenus.value)
-      },
-      closeSideBar: () => {
-        // store.dispatch('app/closeSideBar')
       }
     })
 
     !sideBarData.isCollapse && methods.initMenu()
-
-    if (layout.value == 'TLayout') {
-      methods.initSideBar()
-    }
 
     return {
       layout,
@@ -86,3 +69,5 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped></style>

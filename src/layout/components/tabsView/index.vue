@@ -59,13 +59,8 @@ export default defineComponent({
     const tabActive = ref()
 
     const methods = reactive({
-      addTabs: route => {
-        const { name, children, path } = route
-        if (name && !children) {
-          store.dispatch('tagsView/addView', route)
-        }
-        store.dispatch('app/setRoutePath', path)
-        tabActive.value = path
+      addTabs: () => {
+        tabActive.value = computed(() => store.state.app.routePath)
       },
       initTags: routes => {
         routes.forEach(route => {
@@ -104,7 +99,7 @@ export default defineComponent({
 
     onMounted(() => {
       methods.initTags(routes.value)
-      methods.addTabs(route)
+      methods.addTabs()
     })
 
     watch(route, () => {

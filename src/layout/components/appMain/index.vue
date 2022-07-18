@@ -12,7 +12,7 @@
     }"
   >
     <router-view v-slot="{ Component }">
-      <TabsView v-if="showTabView"></TabsView>
+      <!-- <TabsView v-if="showTabView"></TabsView> -->
       <transition mode="out-in" name="fade-transform">
         <keep-alive :include="cachedViews">
           <component :is="Component" />

@@ -26,8 +26,8 @@
 </template>
 <script>
 import { Sidebar, Header, AppMain } from './components'
-import { getSettings } from '@/utils/local-storage'
-import { setTheme, setThemeColor } from '@/utils/theme'
+// import { getSettings } from '@/utils/local-storage'
+// import { setTheme, setThemeColor } from '@/utils/theme'
 
 export default defineComponent({
   components: {
@@ -36,23 +36,32 @@ export default defineComponent({
     AppMain
   },
   setup() {
+    const route = useRoute()
     const store = useStore()
     const layout = computed(() => store.state.settings.layout)
-    const theme = computed(() => store.state.settings.theme)
-    const themeColor = computed(() => store.state.settings.themeColor)
-    const setting = JSON.parse(getSettings())
+
+    // const theme = computed(() => store.state.settings.theme)
+    // const themeColor = computed(() => store.state.settings.themeColor)
+    // const setting = JSON.parse(getSettings())
 
     const methods = reactive({
+      init: () => {
+        const { name, children, path } = route
+
+        store.dispatch('app/setRoutePath', path)
+
+        //  if (name && !children) {
+        //   store.dispatch('tagsView/addView', route)
+        // }
+      },
       initSetting: async () => {
-        await store.dispatch('settings/initSetting', setting ? setting : {})
-        setTheme(theme.value, layout.value)
-        setThemeColor(theme.value, themeColor.value)
+        // await store.dispatch('settings/initSetting', setting ? setting : {})
+        // setTheme(theme.value, layout.value)
+        // setThemeColor(theme.value, themeColor.value)
       }
     })
 
-    if (setting) {
-      methods.initSetting()
-    }
+    methods.init()
 
     return {
       layout
