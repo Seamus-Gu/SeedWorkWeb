@@ -7,13 +7,24 @@
 -->
 
 <template>
-  <div class="layout-title" @click="returnHome">
-    <el-row align="middle" justify="center" style="height: 100%">
-      <img class="logo" src="~@/assets/images/Vue.png" alt="" />
-      <div class="content" v-show="!collapse">
-        <span style="color: #57caeb">Vue</span>管理系统
-      </div>
-    </el-row>
+  <div class="layout-title" :class="{ 'layout-title-collapse': collapse }">
+    <transition name="slide">
+      <el-row align="middle" justify="center" style="height: 100%">
+        <div v-if="!collapse">
+          <el-row align="middle" justify="center" style="height: 100%">
+            <img class="logo" src="~@/assets/images/Vue.png" alt="" />
+            <div class="content">
+              <span style="color: #57caeb">Vue</span>管理系统
+            </div>
+          </el-row>
+        </div>
+        <div v-else>
+          <el-row align="middle" justify="center" style="height: 100%">
+            <img class="logo" src="~@/assets/images/Vue.png" alt="" />
+          </el-row>
+        </div>
+      </el-row>
+    </transition>
   </div>
 </template>
 
@@ -39,4 +50,17 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout-title {
+  width: 210px;
+  transform: all 3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s, color 0.1s,
+    font-size 2s;
+  .horizontal-collapse-transition {
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+      0s padding-right ease-in-out;
+  }
+  &-collapse {
+    width: 64px;
+  }
+}
+</style>
