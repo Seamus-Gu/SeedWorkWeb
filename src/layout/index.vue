@@ -17,10 +17,10 @@
     </template>
     <template v-else>
       <Sidebar v-if="layout == 'LRLayout'"></Sidebar>
-      <!-- <el-container direction="vertical" class="layout-container">
+      <el-container direction="vertical" class="layout-container">
         <Header></Header>
         <AppMain></AppMain>
-      </el-container> -->
+      </el-container>
     </template>
   </el-container>
 </template>

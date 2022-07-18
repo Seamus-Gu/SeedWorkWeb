@@ -4,8 +4,7 @@
  * @Date: 2021-12-29 10:27:18
 -->
 <template>
-  <div></div>
-  <!-- <el-header class="layout-header">
+  <el-header class="layout-header">
     <el-row align="middle" justify="space-between">
       <div class="header-main-left">
         <el-row>
@@ -54,7 +53,7 @@
         </el-row>
       </div>
     </el-row>
-  </el-header> -->
+  </el-header>
 </template>
 
 <script>

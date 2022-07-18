@@ -13,12 +13,12 @@
             <span>个人中心</span>
           </el-menu-item>
           <el-menu-item key="1" @click="showSetting">主题配置</el-menu-item>
-          <el-menu-divider />
+          <el-divider />
           <el-menu-item key="2" @click="logout">退出登录</el-menu-item>
         </el-menu>
       </template>
     </el-dropdown>
-    <Setting> </Setting>
+    <!-- <Setting> </Setting> -->
   </div>
 </template>
 <script>
