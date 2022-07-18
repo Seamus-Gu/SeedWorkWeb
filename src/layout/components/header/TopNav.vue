@@ -7,25 +7,24 @@
   <div class="top-nav">
     <el-menu
       :theme="theme != 'deepBlack' ? theme : 'light'"
-      style="margin-left: 12px"
       mode="horizontal"
       @click="routerPush"
     >
-      <MenuItem
+      <SubMenu
         v-for="(route, index) in headerRouters"
         :item="route"
         :key="index"
       >
-      </MenuItem>
+      </SubMenu>
     </el-menu>
   </div>
 </template>
 <script>
-import MenuItem from '@/layout/components/sideBar/MenuItem.vue'
+import SubMenu from '@/layout/components/sideBar/SubMenu.vue'
 import lodash from 'lodash'
 
 export default defineComponent({
-  components: { MenuItem },
+  components: { SubMenu },
   setup() {
     const store = useStore()
     const router = useRouter()
