@@ -39,20 +39,21 @@ export default defineComponent({
 
     const layout = computed(() => store.state.settings.layout)
     const sideBarRouters = computed(() => store.state.permission.sideBarRouters)
-    const sideMenus = computed(() => store.getters.sideMenus)
-    const theme = computed(() => store.state.settings.theme)
+    // const sideMenus = computed(() => store.getters.sideMenus)
+    // const theme = computed(() => store.state.settings.theme)
 
     const sideBarData = reactive({
       isCollapse: computed(() => !store.state.app.sidebarOpened),
       sideBarWidth: computed(() => store.state.app.sideBarWidth),
-      size: computed(() => store.state.app.size),
-      routePath: computed(() => store.state.app.routePath),
-      openMenu: computed({
-        get: () => store.state.app.openMenu,
-        set: openKeys => {
-          store.dispatch('app/setOpenMenu', openKeys)
-        }
-      })
+      routePath: computed(() => store.state.app.routePath)
+
+      // size: computed(() => store.state.app.size),
+      // openMenu: computed({
+      //   get: () => store.state.app.openMenu,
+      //   set: openKeys => {
+      //     store.dispatch('app/setOpenMenu', openKeys)
+      //   }
+      // })
     })
 
     const methods = reactive({
@@ -63,10 +64,10 @@ export default defineComponent({
         )
       },
       initSideBar: () => {
-        store.dispatch('setSiderBarRoutes', sideMenus.value)
+        // store.dispatch('setSiderBarRoutes', sideMenus.value)
       },
       closeSideBar: () => {
-        store.dispatch('app/closeSideBar')
+        // store.dispatch('app/closeSideBar')
       }
     })
 
@@ -79,7 +80,6 @@ export default defineComponent({
     return {
       layout,
       sideBarRouters,
-      theme,
       ...toRefs(sideBarData),
       ...toRefs(methods)
     }
