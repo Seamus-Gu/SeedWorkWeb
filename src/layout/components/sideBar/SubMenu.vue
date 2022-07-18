@@ -10,26 +10,26 @@
       :index="data.path"
     >
       <template #title>
-        <svg class="icon menu-icon" ariel-hidden="true" font-size="20px">
+        <svg class="icon menu-icon" ariel-hidden="true">
           <use :xlink:href="'#icon-' + data.meta.icon" />
         </svg>
         <span>{{ data.meta.title }}</span>
       </template>
       <sub-menu v-for="item in data.children" :key="item.id" :data="item" />
     </el-sub-menu>
-    <el-menu-item v-else-if="data.meta" :index="data.path">
+    <el-menu-item v-else-if="data.meta" :index="data.path" @click="routerPush">
+      <svg class="icon menu-icon" ariel-hidden="true">
+        <use :xlink:href="'#icon-' + data.meta.icon" />
+      </svg>
       <template #title>
-        <svg class="icon menu-icon" ariel-hidden="true" font-size="20px">
-          <use :xlink:href="'#icon-' + data.meta.icon" />
-        </svg>
         <span>{{ data.meta.title }}</span>
       </template>
     </el-menu-item>
-    <el-menu-item v-else :index="data.children[0].path">
+    <el-menu-item v-else :index="data.children[0].path" @click="routerPush">
+      <svg class="icon menu-icon" ariel-hidden="true">
+        <use :xlink:href="'#icon-' + data.children[0].meta.icon" />
+      </svg>
       <template #title>
-        <svg class="icon menu-icon" ariel-hidden="true" font-size="20px">
-          <use :xlink:href="'#icon-' + data.children[0].meta.icon" />
-        </svg>
         <span>{{ data.children[0].meta.title }}</span>
       </template>
     </el-menu-item>
@@ -46,7 +46,17 @@ export default defineComponent({
   },
   components: {},
   setup() {
-    return {}
+    const router = useRouter()
+
+    const methods = reactive({
+      routerPush(e) {
+        router.push({ path: e.index })
+      }
+    })
+
+    return {
+      ...toRefs(methods)
+    }
   }
 })
 </script>

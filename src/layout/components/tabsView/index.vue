@@ -1,5 +1,6 @@
 <template>
-  <el-dropdown :trigger="['contextmenu']">
+  <div></div>
+  <!-- <el-dropdown :trigger="['contextmenu']">
     <div class="tabs-view">
       <Panel>
         <el-tabs
@@ -42,7 +43,7 @@
         </el-menu-item>
       </el-menu>
     </template>
-  </el-dropdown>
+  </el-dropdown> -->
 </template>
 <script>
 import { Panel } from '@/components'

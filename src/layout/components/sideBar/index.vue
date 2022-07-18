@@ -10,7 +10,11 @@
       v-if="layout == 'LRLayout'"
       :collapse="isCollapse"
     ></SideBarLogo>
-    <el-menu class="side-menu" :collapse="isCollapse">
+    <el-menu
+      class="side-menu"
+      :collapse="isCollapse"
+      :default-active="routePath"
+    >
       <SubMenu
         v-for="(route, index) in sideBarRouters"
         :key="route.path + index"
@@ -31,7 +35,6 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute()
-    const router = useRouter()
     const store = useStore()
 
     const layout = computed(() => store.state.settings.layout)
@@ -64,11 +67,6 @@ export default defineComponent({
       },
       closeSideBar: () => {
         store.dispatch('app/closeSideBar')
-      },
-      routerPush(e) {
-        router.push({ path: e.key })
-        store.dispatch('app/setOpenMenu', e.keyPath)
-        store.dispatch('app/setRoutePath', e.key)
       }
     })
 
