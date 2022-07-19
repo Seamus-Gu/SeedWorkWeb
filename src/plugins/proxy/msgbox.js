@@ -7,6 +7,7 @@
  */
 
 import { ElMessageBox } from 'element-plus'
+import { createVNode, h } from 'vue'
 
 export default {
   info: data => {
@@ -65,17 +66,33 @@ export default {
     //   }
     // })
   },
-  confirm: data => {
-    debugger
-    return ElMessageBox.confirm(
-      data && data.content,
-      (data && data.title) || '提示',
-      {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
+  confirm: msgbox => {
+    const handleOk = () => {
+      const res = new Promise(async (resolve, reject) => {
+        return msgbox.onOk(resolve)
+      })
+      return res
+    }
+    return ElMessageBox({
+      title: msgbox.title || '提示',
+      message: h('div', { style: 'font-size:18px' }, [
+        h('span', msgbox.content)
+      ]),
+      type: 'warning',
+      showCancelButton: true,
+      beforeClose: (action, instance, done) => {
+        if (action === 'confirm') {
+          instance.confirmButtonLoading = true
+          instance.confirmButtonText = 'Loading...'
+          handleOk().then(() => {
+            instance.confirmButtonLoading = false
+            done()
+          })
+        } else {
+          done()
+        }
       }
-    )
+    })
   },
   del: data => {
     // Modal.confirm({

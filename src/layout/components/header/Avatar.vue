@@ -52,8 +52,13 @@ export default defineComponent({
         store.dispatch('settings/setVisible', true)
       },
       logout: () => {
-        proxy.$dialog.confirm({
-          content: '确定注销并退出系统吗？'
+        proxy.$msgbox.confirm({
+          content: '确定注销并退出系统吗？',
+          onOk: resolve => {
+            setTimeout(() => {
+              resolve()
+            }, 3000)
+          }
         })
       }
     })
