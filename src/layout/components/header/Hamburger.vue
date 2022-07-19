@@ -5,10 +5,10 @@
 -->
 <template>
   <div class="humburger">
-    <svg v-if="isActive" class="icon" ariel-hidden="true">
+    <svg v-if="isActive" class="icon" ariel-hidden="true" font-size="16px">
       <use xlink:href="#icon-shrink" />
     </svg>
-    <svg v-else class="icon" ariel-hidden="true">
+    <svg v-else class="icon" ariel-hidden="true" font-size="16px">
       <use xlink:href="#icon-expend" />
     </svg>
   </div>

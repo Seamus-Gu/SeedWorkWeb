@@ -5,20 +5,23 @@
 -->
 <template>
   <div class="avatar">
-    <el-dropdown :trigger="['click']">
+    <el-dropdown trigger="click">
       <el-avatar :size="35" :src="avatar"> {{ nickNameAvatar }} </el-avatar>
-      <template #overlay>
-        <el-menu>
-          <el-menu-item key="0" @click="linkProfie">
-            <span>个人中心</span>
-          </el-menu-item>
-          <el-menu-item key="1" @click="showSetting">主题配置</el-menu-item>
-          <el-divider />
-          <el-menu-item key="2" @click="logout">退出登录</el-menu-item>
-        </el-menu>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item key="0" @click="linkProfie">
+            个人中心
+          </el-dropdown-item>
+          <el-dropdown-item key="1" @click="showSetting">
+            主题配置
+          </el-dropdown-item>
+          <el-dropdown-item key="2" @click="logout" divided>
+            退出登录
+          </el-dropdown-item>
+        </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <!-- <Setting> </Setting> -->
+    <Setting> </Setting>
   </div>
 </template>
 <script>
@@ -45,20 +48,13 @@ export default defineComponent({
       linkProfie: () => {
         router.push({ path: '/user/profile' })
       },
-      logout: () => {
-        proxy.$modal.confirm({
-          content: '确定注销并退出系统吗？',
-          onOk: resolve => {
-            store.dispatch('LogOut').then(() => {
-              resolve()
-              proxy.$msg.success('成功注销')
-              router.push({ path: '/login' })
-            })
-          }
-        })
-      },
       showSetting: () => {
         store.dispatch('settings/setVisible', true)
+      },
+      logout: () => {
+        proxy.$dialog.confirm({
+          content: '确定注销并退出系统吗？'
+        })
       }
     })
     return {

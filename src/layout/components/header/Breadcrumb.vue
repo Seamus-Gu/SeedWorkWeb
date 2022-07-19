@@ -4,8 +4,8 @@
  * @Date: 2022-01-04 14:16:02
 -->
 <template>
-  <div>
-    <el-breadcrumb class="breadcrumb" separator="/">
+  <div class="breadcrumb">
+    <el-breadcrumb separator="/">
       <template v-for="(item, index) in breadcrumbList" :key="index">
         <el-breadcrumb-item>
           <router-link v-if="index == 0" :to="item.path">

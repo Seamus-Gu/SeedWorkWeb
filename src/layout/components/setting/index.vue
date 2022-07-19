@@ -2,11 +2,10 @@
   <el-drawer
     class="theme-drawer-container"
     title="主题配置"
-    :visible="visible"
-    placement="right"
-    :closable="true"
+    :model-value="visible"
+    :show-close="false"
     @close="onClose"
-    :contentWrapperStyle="{ width: '256px' }"
+    :size="256"
   >
     <el-form>
       <el-row style="margin: 0">

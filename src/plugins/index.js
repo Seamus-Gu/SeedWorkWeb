@@ -14,15 +14,15 @@ export function loadAllPlugins(app) {
   })
 }
 
-// import modal from './proxy/modal'
+import dialog from './proxy/dialog'
 // import msg from './proxy/msg'
 // import notify from './proxy/notify'
 
-// export function loadAllProxy(app) {
-//   app.config.globalProperties.$modal = modal
-//   app.config.globalProperties.$msg = msg
-//   app.config.globalProperties.$notify = notify
-// }
+export function loadAllProxy(app) {
+  app.config.globalProperties.$dialog = dialog
+  // app.config.globalProperties.$msg = msg
+  // app.config.globalProperties.$notify = notify
+}
 
 import has from './directive/v-has'
 

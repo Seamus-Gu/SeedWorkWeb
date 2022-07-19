@@ -6,7 +6,7 @@
 
 <template>
   <div class="screen-full">
-    <svg class="icon" ariel-hidden="true" font-size="20px" @click="toggle">
+    <svg class="icon" ariel-hidden="true" font-size="16px" @click="toggle">
       <use xlink:href="#icon-full-screen" />
     </svg>
   </div>

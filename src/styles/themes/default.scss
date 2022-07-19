@@ -21,38 +21,22 @@
       font-size: 24px;
     }
   }
-  //   .layout-header {
-  //     height: 50px;
-  //     overflow: hidden;
-  //     position: relative;
-  //     padding: 0 12px 0 16px;
-  //     background: #fff;
-  //     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.26);
-  //     .layout-title {
-  //       background: var(--theme-header);
-  //     }
-  //     .header-item {
-  //       align-items: center;
-  //       height: 40px;
-  //       cursor: pointer;
-  //       transition: all 0.3s;
-  //     }
-  //     .header-main-left {
-  //       .breadcrumb {
-  //         align-items: center;
-  //         height: 15px;
-  //         transition: all 0.3s;
-  //       }
-  //     }
-  //     .header-main-right {
-  //       .avatar {
-  //         cursor: pointer;
-  //       }
-  //     }
-  //     .icon {
-  //       fill: currentColor;
-  //     }
-  //   }
+  .layout-header {
+    height: 50px;
+    overflow: hidden;
+    padding: 0 8px 0 16px;
+    box-shadow: var(--el-box-shadow-light);
+    .header-item {
+      height: 8px;
+      cursor: pointer;
+    }
+    .breadcrumb {
+      padding-top: 8px;
+    }
+    .avatar {
+      cursor: pointer;
+    }
+  }
   .layout-sider {
     box-shadow: var(--el-box-shadow);
     height: 100%;

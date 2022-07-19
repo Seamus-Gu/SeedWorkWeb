@@ -5,52 +5,45 @@
 -->
 <template>
   <el-header class="layout-header">
-    <el-row align="middle" justify="space-between">
+    <el-row align="middle" justify="space-between" style="height: 100%">
       <div class="header-main-left">
-        <el-row>
-          <el-space>
-            <template v-if="layout == 'LRLayout' || size == 'small'">
-              <Hamburger
-                class="header-item"
-                :is-active="isActive"
-                @click="toggleSideBar"
-              ></Hamburger>
-            </template>
-            <template v-if="layout != 'LRLayout' && size != 'small'">
-              <HeaderTitle></HeaderTitle>
-              <TopNav></TopNav>
-            </template>
-            <template v-if="layout == 'LRLayout' && size != 'small'">
-              <Breadcrumb></Breadcrumb>
-            </template>
-          </el-space>
-        </el-row>
+        <el-space>
+          <template v-if="layout == 'LRLayout' || size == 'small'">
+            <Hamburger
+              class="header-item"
+              :is-active="isActive"
+              @click="toggleSideBar"
+            ></Hamburger>
+          </template>
+          <template v-if="layout != 'LRLayout' && size != 'small'">
+            <HeaderTitle></HeaderTitle>
+            <TopNav></TopNav>
+          </template>
+          <template v-if="layout == 'LRLayout' && size != 'small'">
+            <Breadcrumb></Breadcrumb>
+          </template>
+        </el-space>
       </div>
       <div class="header-main-right">
-        <el-row>
-          <el-space>
-            <div class="header-item" v-if="searchSwitch">
-              <svg class="icon" ariel-hidden="true" font-size="20px">
-                <use xlink:href="#icon-search-1" />
-              </svg>
-            </div>
-            <div class="header-item" v-if="themeSwitch" @click="showSetting">
-              <svg class="icon" ariel-hidden="true" font-size="20px">
-                <use xlink:href="#icon-setting-config" />
-              </svg>
-            </div>
-            <div class="header-item" v-if="messageSwitch" @click="toggleDark">
-              <svg class="icon" ariel-hidden="true" font-size="20px">
-                <use xlink:href="#icon-remind" />
-              </svg>
-            </div>
-            <ScreenFull
-              v-if="screenFullSwitch"
-              class="header-item"
-            ></ScreenFull>
-            <Avatar></Avatar>
-          </el-space>
-        </el-row>
+        <el-space>
+          <div class="header-item" v-if="searchSwitch">
+            <svg class="icon" ariel-hidden="true" font-size="16px">
+              <use xlink:href="#icon-search-1" />
+            </svg>
+          </div>
+          <div class="header-item" v-if="themeSwitch" @click="showSetting">
+            <svg class="icon" ariel-hidden="true" font-size="16px">
+              <use xlink:href="#icon-setting-config" />
+            </svg>
+          </div>
+          <div class="header-item" v-if="messageSwitch" @click="toggleDark">
+            <svg class="icon" ariel-hidden="true" font-size="16px">
+              <use xlink:href="#icon-remind" />
+            </svg>
+          </div>
+          <ScreenFull v-if="screenFullSwitch" class="header-item"></ScreenFull>
+          <Avatar></Avatar>
+        </el-space>
       </div>
     </el-row>
   </el-header>
@@ -112,5 +105,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped></style>
