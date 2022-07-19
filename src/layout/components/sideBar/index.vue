@@ -25,6 +25,33 @@
       </el-menu>
     </el-scrollbar>
   </div>
+  <el-drawer
+    v-else
+    :model-value="!isCollapse"
+    modal-class="layout-sider-small"
+    direction="ltr"
+    :show-close="false"
+    :size="210"
+    @close="closeSideBar"
+  >
+    <template #header>
+      <SideBarLogo :collapse="isCollapse"></SideBarLogo>
+    </template>
+    <el-scrollbar>
+      <el-menu
+        class="side-small-menu"
+        :collapse="isCollapse"
+        :default-active="routePath"
+      >
+        <SubMenu
+          v-for="(route, index) in sideBarRouters"
+          :key="route.path + index"
+          :data="route"
+        >
+        </SubMenu>
+      </el-menu>
+    </el-scrollbar>
+  </el-drawer>
 </template>
 <script>
 import SideBarLogo from './SideBarLogo.vue'
@@ -36,7 +63,6 @@ export default defineComponent({
     SubMenu
   },
   setup() {
-    const route = useRoute()
     const store = useStore()
 
     const layout = computed(() => store.state.settings.layout)
@@ -50,15 +76,10 @@ export default defineComponent({
     })
 
     const methods = reactive({
-      initMenu: () => {
-        store.dispatch(
-          'app/setOpenMenu',
-          route.matched.filter(t => t.path).map(t => t.path)
-        )
+      closeSideBar: () => {
+        store.dispatch('app/closeSideBar')
       }
     })
-
-    !sideBarData.isCollapse && methods.initMenu()
 
     return {
       layout,
