@@ -59,12 +59,20 @@
     .layout-title {
       height: 80px;
       box-shadow: 0 15px 10px -15px $shadow;
+      transition: width 0.4s;
+      width: 210px;
+      &-collapse {
+        width: 64px;
+      }
     }
     .el-scrollbar {
       position: initial;
     }
     .el-menu {
       position: inherit;
+    }
+    .el-menu:not(.el-menu--collapse) {
+      width: 210px;
     }
     //     .icon {
     //       fill: currentColor;

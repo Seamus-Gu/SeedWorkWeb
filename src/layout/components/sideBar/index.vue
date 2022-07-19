@@ -69,11 +69,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.layout-sider {
-  -webkit-transition: width 0.28s;
-  transition: 0s width ease-in-out, 0s padding-left ease-in-out,
-    0s padding-right ease-in-out;
-}
-</style>
