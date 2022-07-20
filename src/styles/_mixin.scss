@@ -6,22 +6,22 @@
  * @Description: 混合样式
  */
 
-@mixin important-text {
-  color: red;
-  font-size: 25px;
-  font-weight: bold;
-  border: 1px solid blue;
-}
+// @mixin important-text {
+//   color: red;
+//   font-size: 25px;
+//   font-weight: bold;
+//   border: 1px solid blue;
+// }
 
-.danger {
-  @include important-text;
-  background-color: green;
-}
+// .danger {
+//   @include important-text;
+//   background-color: green;
+// }
 
-.danger {
-  color: red;
-  font-size: 25px;
-  font-weight: bold;
-  border: 1px solid blue;
-  background-color: green;
-}
+// .danger {
+//   color: red;
+//   font-size: 25px;
+//   font-weight: bold;
+//   border: 1px solid blue;
+//   background-color: green;
+// }

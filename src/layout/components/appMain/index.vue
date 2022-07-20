@@ -4,15 +4,9 @@
  * @Date: 2022-01-04 14:32:03
 -->
 <template>
-  <el-main
-    class="layout-content"
-    :style="{
-      overflow: affixHeader ? 'auto' : '',
-      marginTop: showTabView ? '8px' : '16px'
-    }"
-  >
+  <el-main class="layout-content">
+    <TabsView v-if="showTabView"></TabsView>
     <router-view v-slot="{ Component }">
-      <!-- <TabsView v-if="showTabView"></TabsView> -->
       <transition mode="out-in" name="fade-transform">
         <keep-alive :include="cachedViews">
           <component :is="Component" />
@@ -42,3 +36,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+.layout-content {
+  background-color: var(--el-fill-color);
+}
+</style>

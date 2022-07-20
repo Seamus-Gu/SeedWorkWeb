@@ -1,9 +1,16 @@
 <template>
-  <el-dropdown :trigger="['contextmenu']">
-    <div class="tabs-view">
-      <Panel>
-        <el-tabs
-          type="editable-card"
+  <div class="tabs-container">
+    <el-row @contextmenu.prevent="rightClick">
+      <el-col :span="24">
+        <el-dropdown
+          ref="tabDropdownRef"
+          class="tabs-dropdown"
+          :trigger="['contextmenu']"
+        >
+          <el-card style="width: 100%"> asd</el-card>
+
+          <!-- <el-tabs
+          type="card"
           :hideAdd="true"
           :tabBarGutter="5"
           v-model:activeKey="tabActive"
@@ -13,45 +20,47 @@
           <el-tab-pane
             v-for="item in visitedViews"
             :key="item.path"
-            :tab="item.meta.title"
+            :label="item.meta.title"
             :closable="!item.meta.affix"
           >
           </el-tab-pane>
-        </el-tabs>
-      </Panel>
-    </div>
-    <template #overlay>
-      <el-menu>
-        <el-menu-item key="1" @click="handleTabRemove(tabActive)">
-          <svg class="icon" ariel-hidden="true" font-size="15px">
-            <use xlink:href="#icon-close" />
-          </svg>
-          关闭当前
-        </el-menu-item>
-        <el-menu-item key="2" @click="closeOtherTab">
-          <svg class="icon" ariel-hidden="true" font-size="15px">
-            <use xlink:href="#icon-close-circle" />
-          </svg>
-          关闭其他
-        </el-menu-item>
-        <el-menu-item key="3" @click="closeAllTab">
-          <svg class="icon" ariel-hidden="true" font-size="15px">
-            <use xlink:href="#icon-close-circle" />
-          </svg>
-          全部关闭
-        </el-menu-item>
-      </el-menu>
-    </template>
-  </el-dropdown>
+        </el-tabs> -->
+          <template #dropdown>
+            <el-menu>
+              <el-menu-item key="1" @click="handleTabRemove(tabActive)">
+                <svg class="icon" ariel-hidden="true" font-size="15px">
+                  <use xlink:href="#icon-close" />
+                </svg>
+                关闭当前
+              </el-menu-item>
+              <el-menu-item key="2" @click="closeOtherTab">
+                <svg class="icon" ariel-hidden="true" font-size="15px">
+                  <use xlink:href="#icon-close-circle" />
+                </svg>
+                关闭其他
+              </el-menu-item>
+              <el-menu-item key="3" @click="closeAllTab">
+                <svg class="icon" ariel-hidden="true" font-size="15px">
+                  <use xlink:href="#icon-close-circle" />
+                </svg>
+                全部关闭
+              </el-menu-item>
+            </el-menu>
+          </template>
+        </el-dropdown>
+      </el-col>
+    </el-row>
+  </div>
 </template>
+
 <script>
-import { Panel } from '@/components'
 export default defineComponent({
-  components: { Panel },
   setup() {
     const store = useStore()
     const route = useRoute()
     const router = useRouter()
+
+    const tabDropdownRef = ref()
 
     const routes = computed(() => store.state.permission.routes)
     const visitedViews = computed(() => store.state.tagsView.visitedViews)
@@ -94,6 +103,9 @@ export default defineComponent({
       closeAllTab: () => {
         store.dispatch('tagsView/delAllViews', route)
         methods.toLastTab()
+      },
+      rightClick: () => {
+        tabDropdownRef.value.handleOpen()
       }
     })
 
@@ -107,6 +119,7 @@ export default defineComponent({
     })
 
     return {
+      tabDropdownRef,
       tabActive,
       visitedViews,
       ...toRefs(methods)
@@ -114,3 +127,10 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+.tabs-container {
+  .tabs-dropdown {
+    width: 100%;
+  }
+}
+</style>
