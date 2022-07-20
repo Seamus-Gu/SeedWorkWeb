@@ -1,55 +1,49 @@
 <template>
   <div class="tabs-container">
-    <el-row @contextmenu.prevent="rightClick">
-      <el-col :span="24">
-        <el-dropdown
-          ref="tabDropdownRef"
-          class="tabs-dropdown"
-          :trigger="['contextmenu']"
+    <a-dropdown
+      ref="tabDropdownRef"
+      class="tabs-dropdown"
+      :trigger="['contextmenu']"
+    >
+      <el-tabs
+        type="card"
+        :closable="true"
+        v-model="tabActive"
+        @tabClick="handleTabClick"
+        @edit="handleTabRemove"
+      >
+        <el-tab-pane
+          v-for="item in visitedViews"
+          :key="item.path"
+          :name="item.path"
+          :label="item.meta.title"
+          :closable="!item.meta.affix"
         >
-          <el-card style="width: 100%"> asd</el-card>
-
-          <!-- <el-tabs
-          type="card"
-          :hideAdd="true"
-          :tabBarGutter="5"
-          v-model:activeKey="tabActive"
-          @tabClick="handleTabClick"
-          @edit="handleTabRemove"
-        >
-          <el-tab-pane
-            v-for="item in visitedViews"
-            :key="item.path"
-            :label="item.meta.title"
-            :closable="!item.meta.affix"
-          >
-          </el-tab-pane>
-        </el-tabs> -->
-          <template #dropdown>
-            <el-menu>
-              <el-menu-item key="1" @click="handleTabRemove(tabActive)">
-                <svg class="icon" ariel-hidden="true" font-size="15px">
-                  <use xlink:href="#icon-close" />
-                </svg>
-                关闭当前
-              </el-menu-item>
-              <el-menu-item key="2" @click="closeOtherTab">
-                <svg class="icon" ariel-hidden="true" font-size="15px">
-                  <use xlink:href="#icon-close-circle" />
-                </svg>
-                关闭其他
-              </el-menu-item>
-              <el-menu-item key="3" @click="closeAllTab">
-                <svg class="icon" ariel-hidden="true" font-size="15px">
-                  <use xlink:href="#icon-close-circle" />
-                </svg>
-                全部关闭
-              </el-menu-item>
-            </el-menu>
-          </template>
-        </el-dropdown>
-      </el-col>
-    </el-row>
+        </el-tab-pane>
+      </el-tabs>
+      <template #overlay>
+        <el-menu>
+          <el-menu-item key="1" @click="handleTabRemove(tabActive)">
+            <svg class="icon" ariel-hidden="true" font-size="15px">
+              <use xlink:href="#icon-close" />
+            </svg>
+            关闭当前
+          </el-menu-item>
+          <el-menu-item key="2" @click="closeOtherTab">
+            <svg class="icon" ariel-hidden="true" font-size="15px">
+              <use xlink:href="#icon-close-circle" />
+            </svg>
+            关闭其他
+          </el-menu-item>
+          <el-menu-item key="3" @click="closeAllTab">
+            <svg class="icon" ariel-hidden="true" font-size="15px">
+              <use xlink:href="#icon-close-circle" />
+            </svg>
+            全部关闭
+          </el-menu-item>
+        </el-menu>
+      </template>
+    </a-dropdown>
   </div>
 </template>
 
@@ -63,12 +57,47 @@ export default defineComponent({
     const tabDropdownRef = ref()
 
     const routes = computed(() => store.state.permission.routes)
-    const visitedViews = computed(() => store.state.tagsView.visitedViews)
+    // const visitedViews = computed(() => store.state.tagsView.visitedViews)
+    const visitedViews = [
+      { path: '/index', meta: { title: '首页' } },
+      { path: '2', meta: { title: 'asd' } },
+      { path: '3', meta: { title: 'asd' } },
+      { path: '4', meta: { title: 'asd' } },
+      { path: '5', meta: { title: 'asd' } },
 
+      { path: '6', meta: { title: 'asd' } },
+      { path: '7', meta: { title: 'asd' } },
+
+      { path: '8', meta: { title: 'asd' } },
+      { path: '9', meta: { title: 'asd' } },
+      { path: '10', meta: { title: 'asd' } },
+      { path: '11', meta: { title: 'asd' } },
+      { path: '12', meta: { title: 'asd' } },
+      { path: '13', meta: { title: 'asd' } },
+      { path: '8', meta: { title: 'asd' } },
+      { path: '9', meta: { title: 'asd' } },
+      { path: '10', meta: { title: 'asd' } },
+      { path: '11', meta: { title: 'asd' } },
+      { path: '12', meta: { title: 'asd' } },
+      { path: '13', meta: { title: 'asd' } },
+      { path: '8', meta: { title: 'asd' } },
+      { path: '9', meta: { title: 'asd' } },
+      { path: '10', meta: { title: 'asd' } },
+      { path: '11', meta: { title: 'asd' } },
+      { path: '12', meta: { title: 'asd' } },
+      { path: '13', meta: { title: 'asd' } },
+      { path: '8', meta: { title: 'asd' } },
+      { path: '9', meta: { title: 'asd' } },
+      { path: '10', meta: { title: 'asd' } },
+      { path: '11', meta: { title: 'asd' } },
+      { path: '12', meta: { title: 'asd' } },
+      { path: '13', meta: { title: 'asd' } }
+    ]
     const tabActive = ref()
 
     const methods = reactive({
       addTabs: () => {
+        debugger
         tabActive.value = computed(() => store.state.app.routePath)
       },
       initTags: routes => {
@@ -129,8 +158,38 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .tabs-container {
-  .tabs-dropdown {
-    width: 100%;
+  background: var(--el-bg-color-overlay);
+  box-shadow: var(--el-box-shadow-light);
+  border: 1px solid var(--el-border-color-light);
+  overflow: hidden;
+  margin-bottom: 8px;
+  .el-tabs {
+    --el-tabs-header-height: 32px;
+  }
+  ::v-deep(.el-tabs__header) {
+    border-bottom: 0;
+    padding: 8px 8px 0 8px;
+    margin: 0 0 8px 0;
+    .el-tabs__item {
+      border: 1px solid var(--el-border-color-light);
+      margin-right: 8px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .el-tabs__item:first-child {
+      border-left: 1px solid var(--el-border-color-light);
+    }
+    .el-tabs__nav {
+      border: 0;
+    }
+    .el-tabs__nav-next,
+    .el-tabs__nav-prev {
+      line-height: 32px;
+    }
+    .is-active {
+      background: var(--el-color-primary-light-9);
+      border: 1px solid var(--el-color-primary) !important;
+    }
   }
 }
 </style>
