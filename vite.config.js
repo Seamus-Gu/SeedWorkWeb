@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "./src/styles/variables.scss";`
+          additionalData: `@import "./src/styles/_variables.scss";`
         }
       }
     }, // vite 相关配置

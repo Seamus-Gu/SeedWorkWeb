@@ -26,22 +26,29 @@
       </div>
       <div class="header-main-right">
         <el-space>
-          <div class="header-item" v-if="searchSwitch">
+          <div class="header-item cursor-pointer" v-if="searchSwitch">
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-search-1" />
             </svg>
           </div>
-          <div class="header-item" v-if="themeSwitch" @click="showSetting">
+          <div
+            class="header-item cursor-pointer"
+            v-if="themeSwitch"
+            @click="showSetting"
+          >
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-setting-config" />
             </svg>
           </div>
-          <div class="header-item" v-if="messageSwitch" @click="toggleDark">
+          <div class="header-item cursor-pointer" v-if="messageSwitch">
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-remind" />
             </svg>
           </div>
-          <ScreenFull v-if="screenFullSwitch" class="header-item"></ScreenFull>
+          <ScreenFull
+            v-if="screenFullSwitch"
+            class="header-item cursor-pointer"
+          ></ScreenFull>
           <Avatar></Avatar>
         </el-space>
       </div>
@@ -57,7 +64,6 @@ import TopNav from './TopNav.vue'
 import Avatar from './Avatar.vue'
 
 import { ScreenFull } from '@/components'
-import { useDark, useToggle } from '@vueuse/core'
 
 export default defineComponent({
   components: {
@@ -70,7 +76,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    const isDark = useDark()
 
     const headerData = reactive({
       isActive: computed(() => store.state.app.sidebarOpened),
@@ -86,7 +91,6 @@ export default defineComponent({
     )
 
     const methods = reactive({
-      toggleDark: useToggle(isDark),
       toggleSideBar: () => {
         store.dispatch('app/toggleSideBar')
       },

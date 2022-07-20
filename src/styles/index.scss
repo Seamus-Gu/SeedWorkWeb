@@ -6,8 +6,9 @@
  * @Description: 全局样式
  */
 
-@import './themes/default.scss';
-@import './element-plus.scss';
+@import '_layout.scss';
+@import '_element.scss';
+@import '_global.scss';
 
 html {
   height: 100%;

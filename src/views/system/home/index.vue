@@ -1,77 +1,24 @@
 <template>
-  <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" />
+  <div class="toggle">
+    <span @click.stop="toggleDark()">暗黑模式</span>
+    <el-switch v-model="isDark" />
+  </div>
 </template>
 
-<script lang="ts" setup>
-interface Tree {
-  label: string
-  children?: Tree[]
-}
+<script>
+import { useDark, useToggle } from '@vueuse/core'
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
-const handleNodeClick = (data: Tree) => {
-  console.log(data)
-}
+export default defineComponent({
+  setup() {
+    const isDark = useDark()
 
-const data: Tree[] = [
-  {
-    label: 'Level one 1',
-    children: [
-      {
-        label: 'Level two 1-1',
-        children: [
-          {
-            label: 'Level three 1-1-1'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: 'Level one 2',
-    children: [
-      {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1'
-          }
-        ]
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1'
-          }
-        ]
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1'
-          }
-        ]
-      }
-    ]
+    const methods = reactive({})
+    return {
+      isDark,
+      ...toRefs(methods)
+    }
   }
-]
-
-const defaultProps = {
-  children: 'children',
-  label: 'label'
-}
+})
 </script>

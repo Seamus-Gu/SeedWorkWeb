@@ -73,6 +73,7 @@ export default {
       })
       return res
     }
+
     return ElMessageBox({
       title: msgbox.title || '提示',
       message: h('div', { style: 'font-size:18px' }, [

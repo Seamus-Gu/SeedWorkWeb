@@ -4,9 +4,9 @@
  * @Date: 2021-12-30 13:30:13
 -->
 <template>
-  <div class="avatar">
+  <div class="avatar cursor-pointer">
     <el-dropdown trigger="click">
-      <el-avatar :size="35" :src="avatar"> {{ nickNameAvatar }} </el-avatar>
+      <el-avatar :src="avatar"> {{ nickNameAvatar }} </el-avatar>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item key="0" @click="linkProfie">

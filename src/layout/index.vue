@@ -71,12 +71,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .layout-wrapper {
-  display: flex;
   height: 100vh;
   overflow: hidden;
-  .layout-container {
-    overflow: auto;
-    overflow-y: auto;
-  }
 }
 </style>

@@ -1,15 +1,13 @@
-// /*
-//  * @Author: Jianxin Gu a18602467506@163.com
-//  * @Date: 2022-05-07 21:59:30
-//  * @LastEditors: Please set LastEditors
-//  * @LastEditTime: 2022-06-28 14:55:51
-//  * @Description: 默认主题配置
-//  */
+/*
+ * @Author: Jianxin Gu a18602467506@163.com
+ * @Date: 2022-05-07 21:59:30
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-28 14:55:51
+ * @Description: 默认主题配置
+ */
 
-// //布局
+//布局
 .layout-wrapper {
-  height: 100vh;
-  overflow: hidden;
   .layout-title {
     overflow: hidden;
     position: relative;
@@ -28,13 +26,9 @@
     box-shadow: var(--el-box-shadow-light);
     .header-item {
       height: 8px;
-      cursor: pointer;
     }
     .breadcrumb {
       padding-top: 8px;
-    }
-    .avatar {
-      cursor: pointer;
     }
   }
   .layout-sider {
@@ -50,10 +44,7 @@
       }
     }
     .el-scrollbar {
-      position: initial;
-    }
-    .el-menu {
-      position: inherit;
+      padding-top: 8px;
     }
     .el-menu:not(.el-menu--collapse) {
       width: 210px;
