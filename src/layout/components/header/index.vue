@@ -109,3 +109,17 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+.layout-header {
+  height: 50px;
+  overflow: hidden;
+  padding: 0 8px 0 16px;
+  box-shadow: var(--el-box-shadow-light);
+  .header-item {
+    height: 8px;
+  }
+  .breadcrumb {
+    padding-top: 8px;
+  }
+}
+</style>

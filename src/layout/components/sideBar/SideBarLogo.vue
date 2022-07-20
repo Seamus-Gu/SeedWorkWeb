@@ -48,3 +48,16 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+.layout-title {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  .content {
+    display: inline-block;
+    font-weight: 600;
+    color: #435ebe;
+    font-size: 24px;
+  }
+}
+</style>
