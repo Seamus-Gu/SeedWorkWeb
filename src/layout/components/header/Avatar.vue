@@ -21,7 +21,7 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <!-- <Setting> </Setting> -->
+    <Setting> </Setting>
   </div>
 </template>
 <script>

@@ -1,9 +1,8 @@
 <template>
   <el-drawer
-    class="theme-drawer-container"
+    modalClass="setting-container"
     title="主题配置"
-    :model-value="visible"
-    :show-close="false"
+    :modelValue="visible"
     @close="onClose"
     :size="256"
   >
@@ -373,54 +372,4 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
-.theme-drawer-container {
-  .ant-row {
-    margin-top: 12px;
-  }
-  .layout-select-title {
-    margin-top: 4px;
-    text-align: center;
-  }
-  .layout-select-content {
-    border: 2px solid #d7d8d9;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  .theme-color {
-    padding-top: 5px;
-  }
-  .theme-color-selsct {
-    height: 32px;
-    width: 32px;
-    padding: 4px;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .theme-color-content {
-    display: block;
-    border: 1px solid #909399;
-    border-radius: 2px;
-    width: 100%;
-    height: 100%;
-  }
-  .theme-color-picker {
-    z-index: 9999;
-    position: fixed;
-    right: 45px;
-    top: 250px;
-    justify-content: space-around;
-  }
-  .drawer-divider {
-    margin: 12px 0 12px 0;
-  }
-}
-</style>
-
-<style lang="scss">
-.theme-color-select .ant-dropdown-menu-item,
-.ant-dropdown-menu-submenu-title {
-  padding: 0;
-}
-</style>
+<style lang="scss" scoped></style>

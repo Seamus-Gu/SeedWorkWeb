@@ -111,18 +111,4 @@ export default defineComponent({
     width: 210px;
   }
 }
-
-.layout-sider-small {
-  .el-drawer__header {
-    margin: 0;
-    padding: 0px 8px 0px 8px;
-  }
-  .layout-title {
-    height: 80px;
-    box-shadow: 0 15px 10px -15px $shadow;
-  }
-  .el-drawer__body {
-    padding: 8px 0 0 0;
-  }
-}
 </style>

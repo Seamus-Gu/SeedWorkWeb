@@ -1,0 +1,47 @@
+// 小窗口侧边栏
+.layout-sider-small {
+  .el-drawer__header {
+    margin: 0;
+    padding: 0px 8px 0px 8px;
+  }
+  .layout-title {
+    height: 80px;
+    box-shadow: 0 15px 10px -15px $shadow;
+  }
+  .el-drawer__body {
+    padding: 8px 0 0 0;
+  }
+}
+
+// 侧边菜单
+.layout-sider,
+.layout-sider-small {
+  .el-menu {
+    border-right: 0 !important;
+  }
+  .el-menu-item:hover {
+    background-color: transparent !important;
+    color: var(--el-color-primary);
+  }
+  .el-sub-menu__title:hover {
+    background-color: transparent !important;
+    color: var(--el-color-primary);
+  }
+  .el-menu-item.is-active {
+    background-color: var(--el-menu-hover-bg-color);
+    border-right: 2px solid var(--el-color-primary);
+  }
+  .el-menu-item.is-active:hover {
+    background-color: var(--el-menu-hover-bg-color) !important;
+  }
+}
+
+// 设置
+.setting-container {
+  .el-drawer__header {
+    margin-bottom: 8px;
+  }
+  .el-drawer__body {
+    padding: 8px 20px 20px 20px;
+  }
+}
