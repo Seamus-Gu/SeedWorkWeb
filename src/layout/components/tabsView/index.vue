@@ -78,6 +78,10 @@ export default defineComponent({
       handleTabClick: pane => {
         router.push({ path: pane.paneName })
       },
+      toLastTab: () => {
+        const latestView = visitedViews.value.slice(-1)[0]
+        router.push({ path: latestView.path })
+      },
       handleTabRemove: path => {
         const view = visitedViews.value.find(
           item => item.path === path && item.meta.affix != true
@@ -86,10 +90,6 @@ export default defineComponent({
         if (tabActive.value === path) {
           methods.toLastTab()
         }
-      },
-      toLastTab: () => {
-        const latestView = visitedViews.value.slice(-1)[0]
-        router.push({ path: latestView.path })
       },
       closeOtherTab: () => {
         store.dispatch('tagsView/delOthersViews', route)

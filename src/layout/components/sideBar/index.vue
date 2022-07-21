@@ -14,7 +14,7 @@
       <el-menu
         class="side-menu"
         :collapse="isCollapse"
-        :defaultActive="routePath"
+        :defaultActive="activePath"
         :uniqueOpened="true"
       >
         <SubMenu
@@ -42,7 +42,7 @@
       <el-menu
         class="side-small-menu"
         :collapse="isCollapse"
-        :defaultActive="routePath"
+        :defaultActive="activePath"
         :uniqueOpened="true"
       >
         <SubMenu
@@ -69,10 +69,11 @@ export default defineComponent({
 
     const layout = computed(() => store.state.settings.layout)
     const siderRoutes = computed(() => store.getters.siderRoutes)
+
     const sideBarData = reactive({
       size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
-      routePath: computed(() => store.state.app.routePath)
+      activePath: computed(() => store.state.app.routePath)
     })
 
     const methods = reactive({
