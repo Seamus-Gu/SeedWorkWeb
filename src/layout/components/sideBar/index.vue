@@ -18,7 +18,7 @@
         :uniqueOpened="true"
       >
         <SubMenu
-          v-for="(route, index) in sideBarRouters"
+          v-for="(route, index) in siderRoutes"
           :key="route.path + index"
           :data="route"
         >
@@ -46,7 +46,7 @@
         :uniqueOpened="true"
       >
         <SubMenu
-          v-for="(route, index) in sideBarRouters"
+          v-for="(route, index) in siderRoutes"
           :key="route.path + index"
           :data="route"
         >
@@ -68,8 +68,7 @@ export default defineComponent({
     const store = useStore()
 
     const layout = computed(() => store.state.settings.layout)
-    const sideBarRouters = computed(() => store.state.permission.sideBarRouters)
-
+    const siderRoutes = computed(() => store.getters.siderRoutes)
     const sideBarData = reactive({
       size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
@@ -84,7 +83,7 @@ export default defineComponent({
 
     return {
       layout,
-      sideBarRouters,
+      siderRoutes,
       ...toRefs(sideBarData),
       ...toRefs(methods)
     }

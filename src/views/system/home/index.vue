@@ -26,12 +26,13 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 export default defineComponent({
+  name: 'Index',
   components: {
     Panel
   },
   setup() {
     const isDark = useDark()
-
+    console.log(1)
     const methods = reactive({})
     return {
       isDark,

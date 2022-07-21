@@ -11,6 +11,10 @@ const getters = {
   roles: state => state.user.roles,
   permissions: state => state.user.permissions,
   routes: state => state.permission.routes,
+  siderRoutes: state => {
+    let data = state.permission.sideBarRouters
+    return data.filter(t => !t.hidden)
+  },
   headerRoutes: state => {
     let data = lodash.cloneDeep(state.permission.routes)
     let layout = state.settings.layout
