@@ -34,23 +34,8 @@ export default defineComponent({
     AppMain
   },
   setup() {
-    const route = useRoute()
     const store = useStore()
     const layout = computed(() => store.state.settings.layout)
-
-    const methods = reactive({
-      init: () => {
-        const { name, children, path } = route
-
-        store.dispatch('app/setRoutePath', path)
-
-        if (name && !children) {
-          store.dispatch('tagsView/addView', route)
-        }
-      }
-    })
-
-    methods.init()
 
     return {
       layout

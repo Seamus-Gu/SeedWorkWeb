@@ -1,17 +1,7 @@
 <template>
   <div class="tabs-container">
-    <a-dropdown
-      ref="tabDropdownRef"
-      class="tabs-dropdown"
-      :trigger="['contextmenu']"
-    >
-      <el-tabs
-        type="card"
-        :closable="true"
-        v-model="tabActive"
-        @tabClick="handleTabClick"
-        @edit="handleTabRemove"
-      >
+    <a-dropdown class="tabs-dropdown" :trigger="['contextmenu']">
+      <el-tabs type="card" v-model="tabActive" @tabClick="handleTabClick">
         <el-tab-pane
           v-for="item in visitedViews"
           :key="item.path"
@@ -54,64 +44,39 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
 
-    const tabDropdownRef = ref()
-
     const routes = computed(() => store.state.permission.routes)
-    // const visitedViews = computed(() => store.state.tagsView.visitedViews)
-    const visitedViews = [
-      { path: '/index', meta: { title: '首页' } },
-      { path: '2', meta: { title: 'asd' } },
-      { path: '3', meta: { title: 'asd' } },
-      { path: '4', meta: { title: 'asd' } },
-      { path: '5', meta: { title: 'asd' } },
+    const visitedViews = computed(() => store.state.tagsView.visitedViews)
 
-      { path: '6', meta: { title: 'asd' } },
-      { path: '7', meta: { title: 'asd' } },
-
-      { path: '8', meta: { title: 'asd' } },
-      { path: '9', meta: { title: 'asd' } },
-      { path: '10', meta: { title: 'asd' } },
-      { path: '11', meta: { title: 'asd' } },
-      { path: '12', meta: { title: 'asd' } },
-      { path: '13', meta: { title: 'asd' } },
-      { path: '8', meta: { title: 'asd' } },
-      { path: '9', meta: { title: 'asd' } },
-      { path: '10', meta: { title: 'asd' } },
-      { path: '11', meta: { title: 'asd' } },
-      { path: '12', meta: { title: 'asd' } },
-      { path: '13', meta: { title: 'asd' } },
-      { path: '8', meta: { title: 'asd' } },
-      { path: '9', meta: { title: 'asd' } },
-      { path: '10', meta: { title: 'asd' } },
-      { path: '11', meta: { title: 'asd' } },
-      { path: '12', meta: { title: 'asd' } },
-      { path: '13', meta: { title: 'asd' } },
-      { path: '8', meta: { title: 'asd' } },
-      { path: '9', meta: { title: 'asd' } },
-      { path: '10', meta: { title: 'asd' } },
-      { path: '11', meta: { title: 'asd' } },
-      { path: '12', meta: { title: 'asd' } },
-      { path: '13', meta: { title: 'asd' } }
-    ]
-    const tabActive = ref()
+    const tabActive = computed({
+      get: () => store.state.app.routePath,
+      set: tab => {
+        store.dispatch('app/setRoutePath', tab)
+      }
+    })
 
     const methods = reactive({
-      addTabs: () => {
-        debugger
-        tabActive.value = computed(() => store.state.app.routePath)
-      },
       initTags: routes => {
-        routes.forEach(route => {
-          if (route.meta && route.meta.affix) {
-            methods.addTabs(route)
-          }
-          if (route.children) {
-            methods.initTags(route.children)
-          }
-        })
+        routes
+          .filter(t => !t.hidden)
+          .forEach(route => {
+            if (route.meta && route.meta.affix) {
+              store.dispatch('tagsView/addView', route)
+            }
+            if (route.children) {
+              methods.initTags(route.children)
+            }
+          })
+        store.dispatch('tagsView/addView', route)
+        store.dispatch('app/setRoutePath', route.path)
       },
-      handleTabClick: path => {
-        router.push({ path: path })
+      addTabs: routePath => {
+        const { path } = routePath
+        store.dispatch('tagsView/addView', routePath)
+        store.dispatch('app/setRoutePath', path)
+        tabActive.value = path
+      },
+      handleTabClick: pane => {
+        router.push({ path: pane.paneName })
       },
       handleTabRemove: path => {
         const view = visitedViews.value.find(
@@ -132,23 +97,16 @@ export default defineComponent({
       closeAllTab: () => {
         store.dispatch('tagsView/delAllViews', route)
         methods.toLastTab()
-      },
-      rightClick: () => {
-        tabDropdownRef.value.handleOpen()
       }
     })
 
-    onMounted(() => {
-      methods.initTags(routes.value)
-      methods.addTabs()
-    })
+    methods.initTags(routes.value)
 
     watch(route, () => {
       methods.addTabs(route)
     })
 
     return {
-      tabDropdownRef,
       tabActive,
       visitedViews,
       ...toRefs(methods)

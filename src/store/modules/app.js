@@ -24,7 +24,6 @@ const mutations = {
   CLOSE_SIDEBAR: state => {
     state.sidebarOpened = false
   },
-
   SET_SIZE: (state, size) => {
     state.size = size
   },
