@@ -11,7 +11,7 @@
           <template v-if="layout == 'LRLayout' || size == 'small'">
             <Hamburger
               class="header-item"
-              :is-active="isActive"
+              :isActive="isActive"
               @click="toggleSideBar"
             ></Hamburger>
           </template>
@@ -26,21 +26,21 @@
       </div>
       <div class="header-main-right">
         <el-space>
-          <div class="header-item cursor-pointer" v-if="searchSwitch">
+          <div v-if="searchSwitch" class="header-item cursor-pointer">
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-search-1" />
             </svg>
           </div>
           <div
-            class="header-item cursor-pointer"
             v-if="themeSwitch"
+            class="header-item cursor-pointer"
             @click="showSetting"
           >
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-setting-config" />
             </svg>
           </div>
-          <div class="header-item cursor-pointer" v-if="messageSwitch">
+          <div v-if="messageSwitch" class="header-item cursor-pointer">
             <svg class="icon" ariel-hidden="true" font-size="16px">
               <use xlink:href="#icon-remind" />
             </svg>

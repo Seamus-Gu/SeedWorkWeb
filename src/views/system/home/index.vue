@@ -32,7 +32,6 @@ export default defineComponent({
   },
   setup() {
     const isDark = useDark()
-    console.log(1)
     const methods = reactive({})
     return {
       isDark,
