@@ -16,7 +16,12 @@
       <el-row justify="space-between" style="margin-top: 8px">
         <el-col :span="7">
           <el-tooltip content="侧边">
-            <div class="layout-select-content">
+            <div
+              class="layout-select-content"
+              :style="{
+                boxShadow: layout == 'LRLayout' ? '0px 0 6px 1px #2db7f5' : ''
+              }"
+            >
               <svg class="icon" ariel-hidden="true" font-size="48px">
                 <use xlink:href="#icon-side" />
               </svg>
@@ -25,27 +30,31 @@
         </el-col>
         <el-col :span="7">
           <el-tooltip content="综合">
-            <img
+            <div
               class="layout-select-content"
-              src="@/assets/icons/default.svg"
-              alt="synthesize"
-              @click="setTLayout"
               :style="{
                 boxShadow: layout == 'TLayout' ? '0px 0 6px 1px #2db7f5' : ''
               }"
-          /></el-tooltip>
+            >
+              <svg class="icon" ariel-hidden="true" font-size="48px">
+                <use xlink:href="#icon-synthesize" />
+              </svg>
+            </div>
+          </el-tooltip>
         </el-col>
         <el-col :span="7">
           <el-tooltip content="顶栏">
-            <img
+            <div
               class="layout-select-content"
-              src="@/assets/icons/header.svg"
-              alt="header"
-              @click="setUDLayout"
               :style="{
                 boxShadow: layout == 'UDLayout' ? '0px 0 6px 1px #2db7f5' : ''
               }"
-          /></el-tooltip>
+            >
+              <svg class="icon" ariel-hidden="true" font-size="48px">
+                <use xlink:href="#icon-header" />
+              </svg>
+            </div>
+          </el-tooltip>
         </el-col>
       </el-row>
       <el-row align="middle" style="margin-top: 8px">

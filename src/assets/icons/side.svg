@@ -12,8 +12,8 @@
         </filter>
         <rect id="path" x="0" y="0" width="256" height="256" rx="36"></rect>
     </defs>
-    <g  width="48" height="48" transform="translate(-1190, -136)">
-        <g width="48" height="48" transform="translate(1167, 0)">
+    <g  width="256" height="256" transform="translate(-1190, -136)">
+        <g width="256" height="256" transform="translate(1167, 0)">
             <g  filter="url(#filter)" transform="translate(25, 137)">
                 <mask id="mask" fill="white">
                     <use xlink:href="#path"></use>
