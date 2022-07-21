@@ -8,10 +8,8 @@
 
 const state = {
   sidebarOpened: true,
-  sideBarWidth: '210px',
   size: 'large',
-  routePath: '/index',
-  openMenu: ['/index']
+  routePath: '/index'
 }
 
 const mutations = {
@@ -29,9 +27,6 @@ const mutations = {
   },
   SET_ROUTE_PATH: (state, routePath) => {
     state.routePath = routePath
-  },
-  SET_OPEN_MENU: (state, openMenu) => {
-    state.openMenu = openMenu
   }
 }
 
@@ -50,9 +45,6 @@ const actions = {
   },
   setRoutePath({ commit }, routePath) {
     commit('SET_ROUTE_PATH', routePath)
-  },
-  setOpenMenu({ commit }, openMenu) {
-    commit('SET_OPEN_MENU', openMenu)
   }
 }
 

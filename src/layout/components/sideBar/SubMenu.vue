@@ -53,7 +53,6 @@ export default defineComponent({
   components: {},
   setup() {
     const router = useRouter()
-    const store = useStore()
 
     const methods = reactive({
       routerPush(e) {

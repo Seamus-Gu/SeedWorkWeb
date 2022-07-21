@@ -14,7 +14,8 @@
       <el-menu
         class="side-menu"
         :collapse="isCollapse"
-        :default-active="routePath"
+        :defaultActive="routePath"
+        :uniqueOpened="true"
       >
         <SubMenu
           v-for="(route, index) in sideBarRouters"
@@ -27,10 +28,10 @@
   </div>
   <el-drawer
     v-else
-    :model-value="!isCollapse"
-    modal-class="layout-sider-small"
+    :modelValue="!isCollapse"
+    modalClass="layout-sider-small"
     direction="ltr"
-    :show-close="false"
+    :showClose="false"
     :size="210"
     @close="closeSideBar"
   >
@@ -41,7 +42,8 @@
       <el-menu
         class="side-small-menu"
         :collapse="isCollapse"
-        :default-active="routePath"
+        :defaultActive="routePath"
+        :uniqueOpened="true"
       >
         <SubMenu
           v-for="(route, index) in sideBarRouters"
@@ -71,7 +73,6 @@ export default defineComponent({
     const sideBarData = reactive({
       size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
-      sideBarWidth: computed(() => store.state.app.sideBarWidth),
       routePath: computed(() => store.state.app.routePath)
     })
 
