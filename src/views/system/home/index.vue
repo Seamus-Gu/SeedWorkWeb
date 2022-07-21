@@ -3,7 +3,6 @@
     <el-row :gutter="8">
       <el-col :span="24">
         <el-card>
-          <span @click.stop="toggleDark()">暗黑模式</span>
           <el-switch v-model="isDark" />
         </el-card>
       </el-col>
