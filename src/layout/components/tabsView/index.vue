@@ -1,7 +1,12 @@
 <template>
   <div class="tabs-container">
     <a-dropdown class="tabs-dropdown" :trigger="['contextmenu']">
-      <el-tabs type="card" v-model="tabActive" @tabClick="handleTabClick">
+      <el-tabs
+        type="card"
+        v-model="tabActive"
+        @tabClick="handleTabClick"
+        @tabRemove="handleTabRemove"
+      >
         <el-tab-pane
           v-for="item in visitedViews"
           :key="item.path"

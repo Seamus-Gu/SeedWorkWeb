@@ -1,3 +1,24 @@
+//layout
+
+.el-menu {
+  border-right: 0 !important;
+}
+.el-menu-item:hover {
+  background-color: transparent !important;
+  color: var(--el-color-primary);
+}
+.el-sub-menu__title:hover {
+  background-color: transparent !important;
+  color: var(--el-color-primary);
+}
+.el-menu-item.is-active {
+  background-color: var(--el-menu-hover-bg-color);
+  border-right: 2px solid var(--el-color-primary);
+}
+.el-menu-item.is-active:hover {
+  background-color: var(--el-menu-hover-bg-color) !important;
+}
+
 // container
 .el-main {
   padding: 16px !important;
@@ -8,4 +29,8 @@
   padding: 36px !important;
   border-top: 2px solid var(--el-color-info-light-7);
   border-bottom: 2px solid var(--el-color-info-light-7);
+}
+
+:root {
+  --el-menu-item-height: 48px !important;
 }
