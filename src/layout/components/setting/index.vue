@@ -7,28 +7,24 @@
     :size="256"
   >
     <el-form>
-      <el-row style="margin: 0">
+      <el-row>
         <h3>主题风格设置</h3>
       </el-row>
       <el-row>
-        <span>布局选择</span>
+        <span class="setting-contont">布局选择</span>
       </el-row>
-      <el-row :gutter="25">
-        <el-col :span="8">
-          <el-tooltip title="侧边">
-            <img
-              class="layout-select-content"
-              src="@/assets/icons/side.svg"
-              alt="side"
-              @click="setLRLayout"
-              :style="{
-                boxShadow: layout == 'LRLayout' ? '0px 0 6px 1px #2db7f5' : ''
-              }"
-            />
+      <el-row justify="space-between" style="margin-top: 8px">
+        <el-col :span="7">
+          <el-tooltip content="侧边">
+            <div class="layout-select-content">
+              <svg class="icon" ariel-hidden="true" font-size="48px">
+                <use xlink:href="#icon-side" />
+              </svg>
+            </div>
           </el-tooltip>
         </el-col>
-        <el-col :span="8">
-          <el-tooltip title="综合">
+        <el-col :span="7">
+          <el-tooltip content="综合">
             <img
               class="layout-select-content"
               src="@/assets/icons/default.svg"
@@ -39,8 +35,8 @@
               }"
           /></el-tooltip>
         </el-col>
-        <el-col :span="8">
-          <el-tooltip title="顶栏">
+        <el-col :span="7">
+          <el-tooltip content="顶栏">
             <img
               class="layout-select-content"
               src="@/assets/icons/header.svg"
@@ -52,8 +48,8 @@
           /></el-tooltip>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="8" class="theme-color">
+      <el-row align="middle" style="margin-top: 8px">
+        <el-col :span="8">
           <span>主题配置</span>
         </el-col>
         <el-col :offset="6" :span="2">
@@ -372,4 +368,3 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped></style>

@@ -44,4 +44,39 @@
   .el-drawer__body {
     padding: 8px 20px 20px 20px;
   }
+  .setting-contont {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  .layout-select-content {
+    border: 2px solid var(--el-border-color-light);
+    border-radius: 8px;
+    cursor: pointer;
+    margin: auto;
+    padding: 1px 1px 2px 1px;
+    display: table-cell;
+  }
+
+  // .theme-color-selsct {
+  //   height: 32px;
+  //   width: 32px;
+  //   padding: 4px;
+  //   border: 1px solid #e6e6e6;
+  //   border-radius: 4px;
+  //   cursor: pointer;
+  // }
+  // .theme-color-content {
+  //   display: block;
+  //   border: 2px solid #909399;
+  //   border-radius: 2px;
+  //   width: 100%;
+  //   height: 100%;
+  // }
+  // .theme-color-picker {
+  //   z-index: 9999;
+  //   position: fixed;
+  //   right: 45px;
+  //   top: 250px;
+  //   justify-content: space-around;
+  // }
 }
