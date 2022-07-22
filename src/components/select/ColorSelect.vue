@@ -1,18 +1,25 @@
 <template>
   <div class="color-select-container">
-    <div class="color-select-row" v-for="row in rowNum" :key="row">
-      <div
-        class="color-select-grid"
-        v-for="item in colorList.slice((row - 1) * 8, row * 8)"
-        :key="item"
-      >
-        <div
-          class="color"
-          :style="{ background: item }"
-          @click="changeColor(item)"
-        ></div>
-      </div>
-    </div>
+    <template v-for="row in rowNum" :key="row">
+      <el-row>
+        <el-col :span="24">
+          <template
+            v-for="item in colorList.slice((row - 1) * 8, row * 8)"
+            :key="item"
+          >
+            <el-space>
+              <div class="color-select-grid">
+                <div
+                  class="color"
+                  :style="{ background: item }"
+                  @click="changeColor(item)"
+                ></div>
+              </div>
+            </el-space>
+          </template>
+        </el-col>
+      </el-row>
+    </template>
   </div>
 </template>
 
@@ -46,34 +53,17 @@ export default {
 
 <style lang="scss" scoped>
 .color-select-container {
-  position: relative;
-  box-sizing: border-box;
-  border-radius: 3px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.26);
-  background-color: #fff;
-  width: 248px;
-  z-index: 9999;
-  padding: 16px;
-  line-height: 1;
-  .color-select-row {
-    position: relative;
+  .color-select-grid {
+    padding: 2px;
+    border: solid 1px #d0d0d0;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .color {
     width: 100%;
-    margin: 0;
-    height: 27px;
-    display: flex;
-    .color-select-grid {
-      padding: 2.5px;
-      border: solid 1px #d0d0d0;
-      position: relative;
-      width: 27px;
-      height: 27px;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    .color {
-      width: 100%;
-      height: 100%;
-    }
+    height: 100%;
   }
 }
 </style>

@@ -63,12 +63,12 @@
             <span>主题配置</span>
           </el-col>
           <el-col :offset="6" :span="2">
-            <el-dropdown>
+            <el-dropdown trigger="click">
               <ThemeColorSelect :type="theme"> </ThemeColorSelect>
               <template #dropdown>
                 <el-card>
                   <el-row :gutter="8" justify="space-between">
-                    <el-tooltip title="日间">
+                    <el-tooltip content="日间">
                       <el-col :span="8">
                         <ThemeColorSelect
                           type="light"
@@ -77,7 +77,7 @@
                         </ThemeColorSelect>
                       </el-col>
                     </el-tooltip>
-                    <el-tooltip title="夜间">
+                    <el-tooltip content="夜间">
                       <el-col :span="8">
                         <ThemeColorSelect
                           type="dark"
@@ -85,7 +85,7 @@
                         ></ThemeColorSelect>
                       </el-col>
                     </el-tooltip>
-                    <el-tooltip title="暗黑">
+                    <el-tooltip content="暗黑">
                       <el-col :span="8">
                         <ThemeColorSelect
                           type="deepBlack"
@@ -99,22 +99,22 @@
             </el-dropdown>
           </el-col>
           <el-col :offset="4" :span="2" id="theme-color-picker">
-            <div class="theme-color-selsct" @click="showColorPicker">
-              <div
-                class="theme-color-content"
-                :style="{ background: themeColor }"
-              ></div>
-              <div class="theme-color-picker">
+            <el-dropdown trigger="click">
+              <div class="theme-color-selsct" @click="showColorPicker">
+                <div
+                  class="theme-color-content"
+                  :style="{ background: themeColor }"
+                ></div>
+              </div>
+              <template #dropdown>
                 <ColorSelect
-                  v-if="colorPicker"
                   :colorList="colorList"
                   :color="themeColor"
                   @changeColor="changeThemeColor"
-                  style="background-color: rgb(255 255 255 / 66%)"
                 >
                 </ColorSelect>
-              </div>
-            </div>
+              </template>
+            </el-dropdown>
           </el-col>
         </el-row>
         <el-divider class="drawer-divider" />
