@@ -5,6 +5,20 @@
  * @LastEditTime: 2022-06-29 10:43:23
  * @Description: 主题配置
  */
+import {
+  presetPrimaryColors,
+  presetPalettes,
+  presetDarkPalettes,
+  grey,
+  yellow,
+  orange,
+  red,
+  magenta,
+  purple,
+  blue,
+  cyan,
+  green
+} from '@ant-design/colors'
 
 const themeStyle = {
   light: '#ffffff',

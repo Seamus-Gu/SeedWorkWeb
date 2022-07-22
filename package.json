@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/colors": "^6.0.0",
     "@tinymce/tinymce-vue": "4.0.0",
     "@vueuse/core": "^7.5.3",
     "ant-design-vue": "^3.2.10",

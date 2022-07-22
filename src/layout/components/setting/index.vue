@@ -197,12 +197,12 @@
   </div>
 </template>
 <script>
-import { ColorSelect } from '@/components'
+import ColorSelect from './ColorSelect.vue'
 import ThemeColorSelect from './ThemeColorSelect.vue'
 
 import { setSettings } from '@/utils/local-storage'
 import { setTheme, setThemeColor } from '@/utils/theme'
-import { onClickOutside, useDark, useToggle } from '@vueuse/core'
+import { onClickOutside, useDark } from '@vueuse/core'
 
 export default defineComponent({
   components: {
