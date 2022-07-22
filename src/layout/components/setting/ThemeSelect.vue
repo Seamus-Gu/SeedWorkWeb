@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     type: {
       type: String
@@ -39,7 +39,7 @@ export default defineComponent({
   setup() {
     return {}
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .box-container {

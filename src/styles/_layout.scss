@@ -44,31 +44,4 @@
   .el-drawer__body {
     padding: 8px 20px 20px 20px;
   }
-  .setting-contont {
-    font-size: 16px;
-    margin: 8px 0;
-  }
-  .layout-select-content {
-    border: 2px solid var(--el-border-color-light);
-    border-radius: 8px;
-    cursor: pointer;
-    margin: auto;
-    padding: 1px 1px 2px 1px;
-    display: table-cell;
-  }
-  .theme-color-selsct {
-    height: 26px;
-    width: 26px;
-    padding: 2px;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .theme-color-content {
-    display: block;
-    border: 1px solid #909399;
-    border-radius: 2px;
-    width: 24px;
-    height: 24px;
-  }
 }

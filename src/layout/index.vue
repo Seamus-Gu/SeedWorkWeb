@@ -26,6 +26,8 @@
 </template>
 <script>
 import { Sidebar, Header, AppMain } from './components'
+import { getSettings } from '@/utils/local-storage'
+import { setTheme, setThemeColor } from '@/utils/theme'
 
 export default defineComponent({
   components: {
@@ -37,8 +39,18 @@ export default defineComponent({
     const store = useStore()
     const layout = computed(() => store.state.settings.layout)
 
+    const methods = reactive({
+      initSetting: async () => {
+        let setting = JSON.parse(getSettings())
+        // await store.dispatch('settings/initSetting', setting ? setting : {})
+        // setTheme(theme.value, layout.value)
+        // setThemeColor(theme.value, themeColor.value)
+      }
+    })
+
     return {
-      layout
+      layout,
+      ...toRefs(methods)
     }
   }
 })
