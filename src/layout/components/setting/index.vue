@@ -71,8 +71,7 @@
             </el-col>
             <el-col :offset="6" :span="2">
               <el-dropdown trigger="click">
-                123
-                <!-- <ThemeSelect :type="theme"> </ThemeSelect> -->
+                <ThemeSelect> </ThemeSelect>
                 <template #dropdown>
                   <el-card>
                     <el-row :gutter="8" justify="space-between">
@@ -285,7 +284,7 @@ export default {
         // setTheme(themeData.theme, themeData.layout)
         // store.dispatch('settings/showSideBar')
         // store.dispatch('setSiderBarRoutes', routes)
-      }
+      },
       // setLRLayout: () => {
       //   store.dispatch('settings/setLayout', 'LRLayout')
       //   setTheme(themeData.theme, themeData.layout)
@@ -303,24 +302,24 @@ export default {
       //   setTheme(themeData.theme, themeData.layout)
       //   store.dispatch('settings/closeSideBar')
       // },
-      // changeTheme: val => {
-      //   switch (val) {
-      //     case 'light':
-      //       isDark.value = false
-      //       store.dispatch('settings/setTheme', val)
-      //       break
-      //     case 'dark':
-      //       store.dispatch('settings/setTheme', val)
-      //       break
-      //     case 'deepBlack':
-      //       const isDark = useDark()
-      //       isDark.value = true
-      //       store.dispatch('settings/setTheme', val)
-      //       break
-      //   }
-      //   setTheme(val, themeData.layout)
-      //   setThemeColor(val, themeData.themeColor)
-      // },
+      changeTheme: val => {
+        switch (val) {
+          case 'light':
+            document.querySelector('html').classList.remove('dark')
+            store.dispatch('settings/setTheme', val)
+            break
+          case 'dark':
+            document.querySelector('html').classList.remove('dark')
+            store.dispatch('settings/setTheme', val)
+            break
+          case 'deepBlack':
+            document.querySelector('html').classList.add('dark')
+            store.dispatch('settings/setTheme', val)
+            break
+        }
+        setTheme(val, themeData.layout)
+        setThemeColor(val, themeData.themeColor)
+      }
       // showColorPicker: () => {
       //   colorPicker.value = true
       // },

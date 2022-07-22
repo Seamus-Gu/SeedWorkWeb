@@ -7,8 +7,17 @@
 -->
 
 <template>
+  <el-container v-if="layout == 'LRLayout'" class="layout-wrapper">
+    <SideBar></SideBar>
+    <el-container direction="vertical" class="layout-container">
+      <Header></Header>
+      <AppMain></AppMain>
+    </el-container>
+  </el-container>
+
   <el-container
-    :direction="layout == 'TLayout' ? 'vertical' : 'horizontal'"
+    v-else-if="layout == 'TLayout'"
+    direction="vertical"
     class="layout-wrapper"
   >
     <template v-if="layout == 'TLayout'">
@@ -18,19 +27,19 @@
         <AppMain></AppMain>
       </el-container>
     </template>
-    <template v-else>
-      <SideBar v-if="layout == 'LRLayout'"></SideBar>
-      <el-container direction="vertical" class="layout-container">
-        <Header></Header>
-        <AppMain></AppMain>
-      </el-container>
-    </template>
+  </el-container>
+
+  <el-container v-else class="layout-wrapper">
+    <el-container direction="vertical" class="layout-container">
+      <Header></Header>
+      <AppMain></AppMain>
+    </el-container>
   </el-container>
 </template>
 <script>
 import { SideBar, Header, AppMain } from './components'
 import { getSettings } from '@/utils/local-storage'
-import { setTheme, setThemeColor } from '@/utils/theme'
+import { setTheme, setThemeColor } from '@/utils/setting'
 
 export default {
   components: {
