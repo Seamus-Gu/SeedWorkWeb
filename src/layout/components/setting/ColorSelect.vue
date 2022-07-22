@@ -1,41 +1,36 @@
 <template>
   <div class="color-select-container">
-    <template v-for="row in rowNum" :key="row">
-      <el-row>
-        <el-col :span="24">
-          <template
-            v-for="item in colorList.slice((row - 1) * 8, row * 8)"
-            :key="item"
-          >
-            <el-space>
-              <div class="color-select-grid">
-                <div
-                  class="color"
-                  :style="{ background: item }"
-                  @click="changeColor(item)"
-                ></div>
-              </div>
-            </el-space>
-          </template>
-        </el-col>
-      </el-row>
-    </template>
+    <el-row>
+      <el-col :span="24">
+        <template v-for="item in colorList" :key="item">
+          <el-space>
+            <div class="color-select-grid">
+              <div
+                class="color"
+                :style="{ background: item }"
+                @click="changeColor(item)"
+              ></div>
+            </div>
+          </el-space>
+        </template>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    color: {
-      type: String
-    },
-    colorList: {
-      type: Object,
-      required: true
-    }
-  },
   setup(props, context) {
-    const rowNum = Math.ceil(props.colorList.length / 8)
+    const colorList = [
+      '#F5222D',
+      '#FA541C',
+      '#FADB14',
+      '#52C41A',
+      '#13C2C2',
+      '#1890FF',
+      '#722ED1',
+      '#EB2F96'
+    ]
 
     const methods = reactive({
       changeColor: val => {
@@ -44,7 +39,7 @@ export default {
     })
 
     return {
-      rowNum,
+      colorList,
       ...toRefs(methods)
     }
   }

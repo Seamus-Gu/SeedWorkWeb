@@ -64,33 +64,30 @@
           </el-col>
           <el-col :offset="6" :span="2">
             <el-dropdown trigger="click">
-              <ThemeColorSelect :type="theme"> </ThemeColorSelect>
+              <ThemeSelect :type="theme"> </ThemeSelect>
               <template #dropdown>
                 <el-card>
                   <el-row :gutter="8" justify="space-between">
                     <el-tooltip content="日间">
                       <el-col :span="8">
-                        <ThemeColorSelect
-                          type="light"
-                          @click="changeTheme('light')"
-                        >
-                        </ThemeColorSelect>
+                        <ThemeSelect type="light" @click="changeTheme('light')">
+                        </ThemeSelect>
                       </el-col>
                     </el-tooltip>
                     <el-tooltip content="夜间">
                       <el-col :span="8">
-                        <ThemeColorSelect
+                        <ThemeSelect
                           type="dark"
                           @click="changeTheme('dark')"
-                        ></ThemeColorSelect>
+                        ></ThemeSelect>
                       </el-col>
                     </el-tooltip>
                     <el-tooltip content="暗黑">
                       <el-col :span="8">
-                        <ThemeColorSelect
+                        <ThemeSelect
                           type="deepBlack"
                           @click="changeTheme('deepBlack')"
-                        ></ThemeColorSelect>
+                        ></ThemeSelect>
                       </el-col>
                     </el-tooltip>
                   </el-row>
@@ -108,8 +105,6 @@
               </div>
               <template #dropdown>
                 <ColorSelect
-                  :colorList="colorList"
-                  :color="themeColor"
                   @changeColor="changeThemeColor"
                 >
                 </ColorSelect>
@@ -198,7 +193,7 @@
 </template>
 <script>
 import ColorSelect from './ColorSelect.vue'
-import ThemeColorSelect from './ThemeColorSelect.vue'
+import ThemeSelect from './ThemeSelect.vue'
 
 import { setSettings } from '@/utils/local-storage'
 import { setTheme, setThemeColor } from '@/utils/theme'
@@ -207,7 +202,7 @@ import { onClickOutside, useDark } from '@vueuse/core'
 export default defineComponent({
   components: {
     ColorSelect,
-    ThemeColorSelect
+    ThemeSelect
   },
   props: {
     onClose: {
@@ -228,16 +223,6 @@ export default defineComponent({
     })
 
     const colorPicker = ref(false)
-    const colorList = ref([
-      '#FAAD14',
-      '#FA541C',
-      '#F5222D',
-      '#F1627E',
-      '#722ED1',
-      '#1890FF',
-      '#13C2C2',
-      '#52C41A'
-    ])
 
     const switchData = reactive({
       showTabView: computed({
@@ -376,7 +361,6 @@ export default defineComponent({
 
     return {
       colorPicker,
-      colorList,
       ...toRefs(switchData),
       ...toRefs(settingData),
       ...toRefs(methods)
