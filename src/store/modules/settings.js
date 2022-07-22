@@ -10,17 +10,17 @@ import { getTableSize, setTableSize } from '@/utils/local-storage'
 
 const state = {
   visible: false,
-  layout: 'LRLayout'
-  // theme: 'light',
-  // themeColor: '#1890FF',
-  // showTabView: true,
-  // showSideBar: true,
-  // affixHeader: true,
-  // searchSwitch: true,
-  // themeSwitch: true,
-  // messageSwitch: true,
-  // screenFullSwitch: true,
-  // tableSize: getTableSize() ? getTableSize() : 'default'
+  layout: 'LRLayout',
+  theme: 'light',
+  themeColor: '#1890FF',
+  showTabView: true,
+  showSideBar: true,
+  affixHeader: true,
+  searchSwitch: true,
+  themeSwitch: true,
+  messageSwitch: true,
+  screenFullSwitch: true,
+  tableSize: getTableSize() ? getTableSize() : 'default'
 }
 
 const mutations = {

@@ -72,7 +72,6 @@ export default {
             }
           })
         store.dispatch('tagsView/addView', route)
-        store.dispatch('app/setRoutePath', route.path)
       },
       addTabs: routePath => {
         const { path } = routePath

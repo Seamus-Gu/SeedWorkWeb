@@ -48,17 +48,26 @@ export default {
     AppMain
   },
   setup() {
+    const route = useRoute()
     const store = useStore()
+
     const layout = computed(() => store.state.settings.layout)
 
     const methods = reactive({
-      initSetting: async () => {
+      init: async () => {
         let setting = JSON.parse(getSettings())
-        // await store.dispatch('settings/initSetting', setting ? setting : {})
+        setting = Object.assign({ layout: 'LRLayout' }, setting)
+
+        store.dispatch('app/setRoutePath', route.path)
+
+        await store.dispatch('settings/initSetting', setting ? setting : {})
+        setLayout(setting.layout)
         // setTheme(theme.value, layout.value)
         // setThemeColor(theme.value, themeColor.value)
       }
     })
+
+    methods.init()
 
     return {
       layout,
