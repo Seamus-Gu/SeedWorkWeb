@@ -69,7 +69,6 @@ export default {
 
     const layout = computed(() => store.state.settings.layout)
     const siderRoutes = computed(() => store.getters.siderRoutes)
-    console.log(siderRoutes.value)
     const sideBarData = reactive({
       size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
@@ -103,10 +102,9 @@ export default {
     &-collapse {
       width: 64px;
     }
+    margin-bottom: 8px;
   }
-  .el-scrollbar {
-    padding-top: 8px;
-  }
+
   .el-menu:not(.el-menu--collapse) {
     width: 210px;
   }

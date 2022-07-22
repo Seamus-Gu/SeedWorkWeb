@@ -115,6 +115,7 @@ export default {
   overflow: hidden;
   padding: 0 8px 0 16px;
   box-shadow: var(--el-box-shadow-light);
+  border-bottom: 1px solid var(--el-border-color);
   .header-item {
     height: 8px;
   }

@@ -208,7 +208,6 @@ import ColorSelect from './ColorSelect.vue'
 import ThemeSelect from './ThemeSelect.vue'
 
 import { setSettings } from '@/utils/local-storage'
-import { setTheme, setThemeColor } from '@/utils/theme'
 import { onClickOutside, useDark } from '@vueuse/core'
 
 export default {
@@ -317,8 +316,6 @@ export default {
             store.dispatch('settings/setTheme', val)
             break
         }
-        setTheme(val, themeData.layout)
-        setThemeColor(val, themeData.themeColor)
       }
       // showColorPicker: () => {
       //   colorPicker.value = true

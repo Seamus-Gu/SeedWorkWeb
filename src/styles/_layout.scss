@@ -34,6 +34,9 @@
   .el-menu-item.is-active:hover {
     background-color: var(--el-menu-hover-bg-color) !important;
   }
+  .el-sub-menu.is-active > .el-sub-menu__title {
+    color: var(--el-color-primary);
+  }
 }
 
 // 设置

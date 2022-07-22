@@ -207,28 +207,28 @@ const themePrimaryActive = {
 }
 
 export function setTheme(theme, layout) {
-  let root = document.querySelector(':root')
-  root.style.setProperty('--theme', themeStyle[theme])
-  root.style.setProperty('--theme-sider', themeSideBar[layout][theme])
-  root.style.setProperty('--theme-header', themeHeader[layout][theme])
-  root.style.setProperty('--theme-sider-text', themeSiderText[layout][theme])
-  root.style.setProperty('--theme-header-text', themeHeaderText[layout][theme])
-  root.style.setProperty(
-    '--theme-background-border',
-    themeBackgroundBorder[theme]
-  )
-  root.style.setProperty('--theme-background-1', themeBackground[theme])
-  root.style.setProperty('--theme-background-2', themeBackground2[theme])
-  root.style.setProperty('--theme-text-1', themeText[theme])
-  root.style.setProperty('--theme-text-2', themeText2[theme])
-  root.style.setProperty('--theme-border-1', themeBorder1[theme])
-  root.style.setProperty('--theme-border-2', themeBorder2[theme])
+  // let root = document.querySelector(':root')
+  // root.style.setProperty('--theme', themeStyle[theme])
+  // root.style.setProperty('--theme-sider', themeSideBar[layout][theme])
+  // root.style.setProperty('--theme-header', themeHeader[layout][theme])
+  // root.style.setProperty('--theme-sider-text', themeSiderText[layout][theme])
+  // root.style.setProperty('--theme-header-text', themeHeaderText[layout][theme])
+  // root.style.setProperty(
+  //   '--theme-background-border',
+  //   themeBackgroundBorder[theme]
+  // )
+  // root.style.setProperty('--theme-background-1', themeBackground[theme])
+  // root.style.setProperty('--theme-background-2', themeBackground2[theme])
+  // root.style.setProperty('--theme-text-1', themeText[theme])
+  // root.style.setProperty('--theme-text-2', themeText2[theme])
+  // root.style.setProperty('--theme-border-1', themeBorder1[theme])
+  // root.style.setProperty('--theme-border-2', themeBorder2[theme])
 }
 
 export function setThemeColor(theme, color) {
-  let root = document.querySelector(':root')
-  root.style.setProperty('--theme-color-primary', color)
-  root.style.setProperty('--theme-menu-selsct', themeMenuSelect[color][theme])
-  root.style.setProperty('--theme-primary-hover', themePrimaryHover[color])
-  root.style.setProperty('--theme-primary-active', themePrimaryActive[color])
+  // let root = document.querySelector(':root')
+  // root.style.setProperty('--theme-color-primary', color)
+  // root.style.setProperty('--theme-menu-selsct', themeMenuSelect[color][theme])
+  // root.style.setProperty('--theme-primary-hover', themePrimaryHover[color])
+  // root.style.setProperty('--theme-primary-active', themePrimaryActive[color])
 }
