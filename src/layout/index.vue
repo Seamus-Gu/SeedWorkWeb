@@ -7,7 +7,10 @@
 -->
 
 <template>
-  <el-container class="layout-wrapper">
+  <el-container
+    :direction="layout == 'TLayout' ? 'vertical' : 'horizontal'"
+    class="layout-wrapper"
+  >
     <template v-if="layout == 'TLayout'">
       <Header></Header>
       <el-container class="layout-container">

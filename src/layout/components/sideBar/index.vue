@@ -59,7 +59,7 @@
 import SideBarLogo from './SideBarLogo.vue'
 import SubMenu from './SubMenu.vue'
 
-export default ({
+export default {
   components: {
     SideBarLogo,
     SubMenu
@@ -69,7 +69,7 @@ export default ({
 
     const layout = computed(() => store.state.settings.layout)
     const siderRoutes = computed(() => store.getters.siderRoutes)
-
+    console.log(siderRoutes.value)
     const sideBarData = reactive({
       size: computed(() => store.state.app.size),
       isCollapse: computed(() => !store.state.app.sidebarOpened),
@@ -89,7 +89,7 @@ export default ({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .layout-sider {

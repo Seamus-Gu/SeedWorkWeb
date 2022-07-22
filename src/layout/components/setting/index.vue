@@ -71,7 +71,8 @@
             </el-col>
             <el-col :offset="6" :span="2">
               <el-dropdown trigger="click">
-                <ThemeSelect :type="theme"> </ThemeSelect>
+                123
+                <!-- <ThemeSelect :type="theme"> </ThemeSelect> -->
                 <template #dropdown>
                   <el-card>
                     <el-row :gutter="8" justify="space-between">
@@ -106,7 +107,7 @@
               </el-dropdown>
             </el-col>
             <el-col :offset="4" :span="2" id="theme-color-picker">
-              <el-dropdown trigger="click">
+              <!-- <el-dropdown trigger="click">
                 <div class="theme-color-selsct" @click="showColorPicker">
                   <div
                     class="theme-color-content"
@@ -116,12 +117,12 @@
                 <template #dropdown>
                   <ColorSelect @changeColor="changeThemeColor"> </ColorSelect>
                 </template>
-              </el-dropdown>
+              </el-dropdown> -->
             </el-col>
           </el-row>
         </div>
         <el-divider class="drawer-divider" />
-        <div>
+        <!-- <div>
           <el-row>
             <h3>系统布局设置</h3>
           </el-row>
@@ -198,7 +199,7 @@
               >重置配置</el-button
             >
           </el-col>
-        </el-row>
+        </el-row> -->
       </el-form>
     </el-drawer>
   </div>

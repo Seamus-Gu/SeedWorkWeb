@@ -17,7 +17,7 @@
           </template>
           <template v-if="layout != 'LRLayout' && size != 'small'">
             <HeaderTitle></HeaderTitle>
-            <TopNav></TopNav>
+            <!-- <TopNav></TopNav> -->
           </template>
           <template v-if="layout == 'LRLayout' && size != 'small'">
             <Breadcrumb></Breadcrumb>

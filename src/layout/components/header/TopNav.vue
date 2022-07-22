@@ -36,13 +36,13 @@ export default {
 
     const methods = reactive({
       routerPush(e) {
-        if (layout.value == 'UDLayout') {
-          router.push({ path: e.key })
-        } else {
-          var routesData = lodash.cloneDeep(routes)
-          var headerRouters = routesData.filter(t => t.path == e.key)
-          store.dispatch('setSiderBarRoutes', headerRouters[0].children)
-        }
+        // if (layout.value == 'UDLayout') {
+        //   router.push({ path: e.key })
+        // } else {
+        //   var routesData = lodash.cloneDeep(routes)
+        //   var headerRouters = routesData.filter(t => t.path == e.key)
+        //   store.dispatch('setSiderBarRoutes', headerRouters[0].children)
+        // }
       }
     })
 
