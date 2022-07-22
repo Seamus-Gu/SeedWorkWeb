@@ -6,7 +6,7 @@
  * @Description: file content
 -->
 <template>
-  <div class="box-container">
+  <div class="box-container cursor-pointer">
     <template v-if="type == 'dark'">
       <div style="border: 1px solid #909399; width: 24px; height: 24px">
         <div
@@ -48,7 +48,6 @@ export default {
   padding: 2px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
-  cursor: pointer;
   .box-content {
     margin: auto;
     border: 1px solid #909399;

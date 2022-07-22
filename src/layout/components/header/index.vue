@@ -8,16 +8,16 @@
     <el-row align="middle" justify="space-between" style="height: 100%">
       <div class="header-main-left">
         <el-space>
-          <template v-if="layout == 'LRLayout' || size == 'small'">
-            <Hamburger
-              class="header-item"
-              :isActive="isActive"
-              @click="toggleSideBar"
-            ></Hamburger>
-          </template>
           <template v-if="layout != 'LRLayout' && size != 'small'">
             <HeaderTitle></HeaderTitle>
             <!-- <TopNav></TopNav> -->
+          </template>
+          <template v-if="layout != 'UDLayout' || size == 'small'">
+            <Hamburger
+              class="header-item cursor-pointer"
+              :isActive="isActive"
+              @click="toggleSideBar"
+            ></Hamburger>
           </template>
           <template v-if="layout == 'LRLayout' && size != 'small'">
             <Breadcrumb></Breadcrumb>
@@ -113,11 +113,18 @@ export default {
 .layout-header {
   height: 50px;
   overflow: hidden;
-  padding: 0 8px 0 16px;
+  padding: 0;
   box-shadow: var(--el-box-shadow-light);
   border-bottom: 1px solid var(--el-border-color);
+
   .header-item {
-    height: 8px;
+    display: flex;
+    height: 50px;
+    padding: 1px 10px 0;
+    align-items: center;
+  }
+  .header-item:hover {
+    background-color: var(--el-color-info-light-9);
   }
   .breadcrumb {
     padding-top: 8px;

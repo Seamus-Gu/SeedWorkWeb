@@ -4,7 +4,7 @@
       <el-col :span="24">
         <template v-for="item in colorList" :key="item">
           <el-space>
-            <div class="color-select-grid">
+            <div class="color-select-grid cursor-pointer">
               <div
                 class="color"
                 :style="{ background: item }"
@@ -54,7 +54,6 @@ export default {
     border: solid 1px #d0d0d0;
     width: 24px;
     height: 24px;
-    cursor: pointer;
     overflow: hidden;
   }
   .color {

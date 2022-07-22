@@ -7,7 +7,10 @@
 -->
 
 <template>
-  <div class="layout-title" :class="{ 'layout-title-collapse': collapse }">
+  <div
+    class="layout-title cursor-pointer"
+    :class="{ 'layout-title-collapse': collapse }"
+  >
     <transition name="el-zoom-in-top">
       <template v-if="!collapse">
         <el-row align="middle" justify="center" style="height: 100%">
@@ -52,7 +55,6 @@ export default {
 .layout-title {
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   .content {
     display: inline-block;
     font-weight: 600;

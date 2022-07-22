@@ -19,7 +19,7 @@
             <el-col :span="6">
               <el-tooltip content="侧边">
                 <div
-                  class="layout-select-content"
+                  class="layout-select-content cursor-pointer"
                   :style="{
                     boxShadow:
                       layout == 'LRLayout' ? '0px 0 6px 1px #2db7f5' : ''
@@ -35,7 +35,7 @@
             <el-col :span="6">
               <el-tooltip content="综合">
                 <div
-                  class="layout-select-content"
+                  class="layout-select-content cursor-pointer"
                   :style="{
                     boxShadow:
                       layout == 'TLayout' ? '0px 0 6px 1px #2db7f5' : ''
@@ -51,7 +51,7 @@
             <el-col :span="6">
               <el-tooltip content="顶栏">
                 <div
-                  class="layout-select-content"
+                  class="layout-select-content cursor-pointer"
                   :style="{
                     boxShadow:
                       layout == 'UDLayout' ? '0px 0 6px 1px #2db7f5' : ''
@@ -107,7 +107,7 @@
             </el-col>
             <el-col :offset="4" :span="2" id="theme-color-picker">
               <!-- <el-dropdown trigger="click">
-                <div class="theme-color-selsct" @click="showColorPicker">
+                <div class="theme-color-selsct cursor-pointer" @click="showColorPicker">
                   <div
                     class="theme-color-content"
                     :style="{ background: themeColor }"
@@ -378,7 +378,6 @@ export default {
 .layout-select-content {
   border: 2px solid var(--el-border-color-light);
   border-radius: 8px;
-  cursor: pointer;
   margin: auto;
   padding: 1px 1px 2px 1px;
   display: table-cell;
@@ -389,7 +388,6 @@ export default {
   padding: 2px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
-  cursor: pointer;
 }
 .theme-color-content {
   display: block;
