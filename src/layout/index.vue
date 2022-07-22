@@ -35,9 +35,11 @@
       <AppMain></AppMain>
     </el-container>
   </el-container>
+
+  <Setting></Setting>
 </template>
 <script>
-import { SideBar, Header, AppMain } from './components'
+import { SideBar, Header, AppMain, Setting } from './components'
 import { getSettings } from '@/utils/local-storage'
 import { setTheme, setThemeColor } from '@/utils/setting'
 
@@ -45,7 +47,8 @@ export default {
   components: {
     SideBar,
     Header,
-    AppMain
+    AppMain,
+    Setting
   },
   setup() {
     const route = useRoute()
@@ -61,7 +64,6 @@ export default {
         store.dispatch('app/setRoutePath', route.path)
 
         await store.dispatch('settings/initSetting', setting ? setting : {})
-        setLayout(setting.layout)
         // setTheme(theme.value, layout.value)
         // setThemeColor(theme.value, themeColor.value)
       }

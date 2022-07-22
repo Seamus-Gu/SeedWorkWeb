@@ -21,15 +21,13 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <Setting> </Setting>
   </div>
 </template>
 <script>
 import { Modal } from '@/components'
-import Setting from '@/layout/components/setting'
 
 export default {
-  components: { Modal, Setting },
+  components: { Modal },
   setup() {
     const store = useStore()
     const router = useRouter()

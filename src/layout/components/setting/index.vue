@@ -278,11 +278,8 @@ export default {
       closeSetting: () => {
         store.dispatch('settings/setVisible', false)
       },
-      setLayout: layout => {
-        store.dispatch('settings/setLayout', layout)
-        // setTheme(themeData.theme, themeData.layout)
-        // store.dispatch('settings/showSideBar')
-        // store.dispatch('setSiderBarRoutes', routes)
+      setLayout: async layout => {
+        await store.dispatch('settings/setLayout', layout)
       },
       // setLRLayout: () => {
       //   store.dispatch('settings/setLayout', 'LRLayout')
