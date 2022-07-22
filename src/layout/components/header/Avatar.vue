@@ -28,7 +28,7 @@
 import { Modal } from '@/components'
 import Setting from '@/layout/components/setting'
 
-export default defineComponent({
+export default {
   components: { Modal, Setting },
   setup() {
     const store = useStore()
@@ -67,5 +67,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

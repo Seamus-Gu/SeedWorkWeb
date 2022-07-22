@@ -59,7 +59,7 @@
 import SideBarLogo from './SideBarLogo.vue'
 import SubMenu from './SubMenu.vue'
 
-export default defineComponent({
+export default ({
   components: {
     SideBarLogo,
     SubMenu

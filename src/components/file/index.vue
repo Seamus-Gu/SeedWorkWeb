@@ -28,7 +28,7 @@
 <script>
 import { getToken } from '@/utils/session-storage'
 
-export default defineComponent({
+export default ({
   props: {
     action: {
       type: String

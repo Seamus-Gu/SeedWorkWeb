@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   setup() {
     const route = useRoute()
     const breadcrumbList = ref()
@@ -54,7 +54,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped></style>

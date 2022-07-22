@@ -43,7 +43,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   setup() {
     const store = useStore()
     const route = useRoute()
@@ -117,7 +117,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .tabs-container {

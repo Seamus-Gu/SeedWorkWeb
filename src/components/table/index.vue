@@ -86,7 +86,7 @@
   </el-table>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     bordered: {
       type: Boolean,
@@ -245,7 +245,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style scoped>
 .ant-table-striped :deep(.table-striped) td {

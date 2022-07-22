@@ -24,7 +24,7 @@ import { useDark, useToggle } from '@vueuse/core'
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
-export default defineComponent({
+export default {
   name: 'Index',
   components: {
     Panel
@@ -37,5 +37,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

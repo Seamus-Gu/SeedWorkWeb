@@ -31,7 +31,7 @@
 
 <script>
 import { Row, Col } from '@/components'
-export default defineComponent({
+export default {
   components: {
     Row,
     Col
@@ -39,7 +39,7 @@ export default defineComponent({
   setup() {
     return {}
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

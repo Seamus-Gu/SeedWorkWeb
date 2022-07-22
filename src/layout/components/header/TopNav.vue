@@ -23,7 +23,7 @@
 import SubMenu from '@/layout/components/sideBar/SubMenu.vue'
 import lodash from 'lodash'
 
-export default defineComponent({
+export default {
   components: { SubMenu },
   setup() {
     const store = useStore()
@@ -52,5 +52,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

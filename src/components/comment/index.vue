@@ -59,7 +59,7 @@ import {
   DislikeOutlined
 } from '@ant-design/icons-vue'
 
-export default defineComponent({
+export default {
   props: {
     likes: {
       type: Number
@@ -119,5 +119,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

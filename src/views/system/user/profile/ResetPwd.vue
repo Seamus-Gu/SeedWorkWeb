@@ -61,9 +61,9 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   setup() {
     return {}
   }
-})
+}
 </script>

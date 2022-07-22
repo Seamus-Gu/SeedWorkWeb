@@ -122,7 +122,7 @@ import UserAvatar from './UserAvatar'
 import UserInfo from './UserInfo'
 import ResetPwd from './ResetPwd'
 
-export default defineComponent({
+export default {
   components: { Panel, UserAvatar, UserInfo, ResetPwd },
   setup() {
     const userInfoData = reactive({
@@ -151,7 +151,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .user-info {

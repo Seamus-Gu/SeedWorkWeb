@@ -211,7 +211,7 @@ import { setSettings } from '@/utils/local-storage'
 import { setTheme, setThemeColor } from '@/utils/theme'
 import { onClickOutside, useDark } from '@vueuse/core'
 
-export default defineComponent({
+export default {
   components: {
     ColorSelect,
     ThemeSelect
@@ -374,7 +374,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .setting-title {

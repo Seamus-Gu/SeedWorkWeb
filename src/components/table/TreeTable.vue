@@ -51,7 +51,7 @@
   </el-table>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     bordered: {
       type: Boolean,
@@ -203,7 +203,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style scoped>
 .tree-table :deep(.table-striped) td {

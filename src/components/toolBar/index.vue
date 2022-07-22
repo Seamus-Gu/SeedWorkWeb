@@ -155,7 +155,7 @@
 <script>
 import { getToken } from '@/utils/session-storage'
 
-export default defineComponent({
+export default {
   components: {},
   props: {
     hasAdd: {
@@ -262,7 +262,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

@@ -227,7 +227,7 @@ const formRules = {
   ]
 }
 
-export default defineComponent({
+export default {
   components: { Panel, Table, QueryForm, ToolBar, Form, Tree },
   setup() {
     const { proxy } = getCurrentInstance()
@@ -367,6 +367,6 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped></style>

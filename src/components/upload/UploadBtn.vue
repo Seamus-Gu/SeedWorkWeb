@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     block: {
       type: Boolean
@@ -82,7 +82,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .upload-btn-container {

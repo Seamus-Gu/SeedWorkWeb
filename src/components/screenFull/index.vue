@@ -15,7 +15,7 @@
 <script>
 import { useFullscreen } from '@vueuse/core'
 
-export default defineComponent({
+export default {
   setup() {
     const { toggle } = useFullscreen()
 
@@ -23,5 +23,5 @@ export default defineComponent({
       toggle
     }
   }
-})
+}
 </script>

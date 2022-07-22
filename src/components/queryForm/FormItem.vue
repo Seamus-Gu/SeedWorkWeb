@@ -95,7 +95,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   props: {
     show: {
       type: Boolean
@@ -131,7 +131,7 @@ export default defineComponent({
       requestData
     }
   }
-})
+}
 </script>
 
 <style></style>

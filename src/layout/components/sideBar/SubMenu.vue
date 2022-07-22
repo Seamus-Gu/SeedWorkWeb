@@ -42,7 +42,7 @@
   </template>
 </template>
 <script>
-export default defineComponent({
+export default {
   name: 'SubMenu',
   props: {
     data: {
@@ -64,6 +64,6 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style scoped></style>

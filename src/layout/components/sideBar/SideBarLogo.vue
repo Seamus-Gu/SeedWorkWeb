@@ -27,7 +27,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   props: {
     collapse: {
       type: Boolean,
@@ -46,7 +46,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .layout-title {

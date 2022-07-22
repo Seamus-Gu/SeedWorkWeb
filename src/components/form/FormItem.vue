@@ -118,7 +118,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   props: {
     allDisabled: {
       type: Boolean
@@ -153,7 +153,7 @@ export default defineComponent({
       requestData
     }
   }
-})
+}
 </script>
 
 <style></style>

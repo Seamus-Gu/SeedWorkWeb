@@ -18,7 +18,7 @@
 
 <script>
 import TabsView from '../tabsView'
-export default defineComponent({
+export default {
   components: {
     TabsView
   },
@@ -34,7 +34,7 @@ export default defineComponent({
       showTabView
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .layout-content {

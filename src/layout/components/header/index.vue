@@ -65,7 +65,7 @@ import Avatar from './Avatar.vue'
 
 import { ScreenFull } from '@/components'
 
-export default defineComponent({
+export default {
   components: {
     HeaderTitle,
     ScreenFull,
@@ -107,7 +107,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .layout-header {

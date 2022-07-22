@@ -63,7 +63,7 @@
 <script>
 import iconList from '@/assets/json/icon-list.json'
 
-export default defineComponent({
+export default {
   props: {
     width: {
       type: String,
@@ -118,7 +118,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .icon-box {

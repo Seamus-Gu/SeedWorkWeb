@@ -75,7 +75,7 @@
 import { uploadAvatar } from '@/api/system/user'
 import { Modal, Panel, UploadBtn } from '@/components'
 
-export default defineComponent({
+export default {
   components: { Modal, Panel, UploadBtn },
   setup() {
     const store = useStore()
@@ -148,7 +148,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

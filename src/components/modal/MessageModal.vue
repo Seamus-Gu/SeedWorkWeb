@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     visible: {
       type: Boolean,
@@ -80,7 +80,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style scoped>
 .modal-title {

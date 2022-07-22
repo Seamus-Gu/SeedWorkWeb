@@ -50,7 +50,7 @@
 <script>
 import FormItem from './FormItem.vue'
 
-export default defineComponent({
+export default {
   components: { FormItem },
   props: {
     queryLoad: {
@@ -96,7 +96,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .submit-buttons {

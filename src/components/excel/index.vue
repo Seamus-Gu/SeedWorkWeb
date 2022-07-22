@@ -10,7 +10,7 @@ import LuckyExcel from 'luckyexcel'
 import { message } from 'ant-design-vue'
 import { exportExcel } from './export'
 
-export default defineComponent({
+export default {
   props: {
     initObject: {
       type: Object,
@@ -116,7 +116,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

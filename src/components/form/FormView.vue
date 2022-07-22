@@ -31,7 +31,7 @@
 </template>
 <script>
 import FormItem from './FormItem.vue'
-export default defineComponent({
+export default {
   props: {
     allDisabled: {
       type: Boolean,
@@ -67,6 +67,6 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped></style>

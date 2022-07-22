@@ -67,7 +67,7 @@ import 'tinymce/plugins/wordcount' //字数统计
 const defaultId = () =>
   'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
 
-export default defineComponent({
+export default {
   components: {
     Editor
   },
@@ -196,5 +196,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

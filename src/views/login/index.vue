@@ -53,7 +53,7 @@
 <script>
 import { Particle } from 'jparticles'
 
-export default defineComponent({
+export default {
   components: {},
   setup() {
     const loginFormRef = ref()
@@ -128,7 +128,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

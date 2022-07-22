@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   props: {
     centered: {
       type: Boolean,
@@ -88,6 +88,6 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style scoped></style>

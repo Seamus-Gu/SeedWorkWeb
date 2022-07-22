@@ -11,12 +11,12 @@
     <template v-if="layout == 'TLayout'">
       <Header></Header>
       <el-container class="layout-container">
-        <Sidebar></Sidebar>
+        <SideBar></SideBar>
         <AppMain></AppMain>
       </el-container>
     </template>
     <template v-else>
-      <Sidebar v-if="layout == 'LRLayout'"></Sidebar>
+      <SideBar v-if="layout == 'LRLayout'"></SideBar>
       <el-container direction="vertical" class="layout-container">
         <Header></Header>
         <AppMain></AppMain>
@@ -25,13 +25,13 @@
   </el-container>
 </template>
 <script>
-import { Sidebar, Header, AppMain } from './components'
+import { SideBar, Header, AppMain } from './components'
 import { getSettings } from '@/utils/local-storage'
 import { setTheme, setThemeColor } from '@/utils/theme'
 
-export default defineComponent({
+export default {
   components: {
-    Sidebar,
+    SideBar,
     Header,
     AppMain
   },
@@ -53,7 +53,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .layout-wrapper {

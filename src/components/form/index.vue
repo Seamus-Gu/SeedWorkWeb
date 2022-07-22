@@ -47,7 +47,7 @@
 </template>
 <script>
 import FormItem from './FormItem.vue'
-export default defineComponent({
+export default {
   props: {
     visible: {
       type: Boolean
@@ -127,6 +127,6 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped></style>

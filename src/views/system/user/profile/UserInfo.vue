@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-export default defineComponent({
+export default {
   setup() {
     const userInfoData = reactive({
       nickName: undefined,
@@ -80,5 +80,5 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>

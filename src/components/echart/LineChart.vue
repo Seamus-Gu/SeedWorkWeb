@@ -9,7 +9,7 @@
 <script>
 import resize from './resize'
 import * as echarts from 'echarts'
-export default defineComponent({
+export default {
   props: {
     id: {
       type: String,
@@ -151,7 +151,7 @@ export default defineComponent({
       ...toRefs(methods)
     }
   }
-})
+}
 </script>
 
 <style scoped></style>
