@@ -183,7 +183,7 @@ export default {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  box-shadow: 0 0 10px 1px $shadow;
+  box-shadow: $shadow_2;
   overflow: hidden;
 }
 
@@ -193,7 +193,7 @@ export default {
   transform: translate(25%, -50%);
   width: 180px;
   height: 180px;
-  box-shadow: 0 0 10px 1px $shadow;
+  box-shadow: $shadow_2;
   overflow: hidden;
 }
 </style>

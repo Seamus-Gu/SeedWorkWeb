@@ -97,7 +97,7 @@ export default {
   height: 100%;
   .layout-title {
     height: 80px;
-    box-shadow: 0 15px 10px -15px $shadow;
+    box-shadow: $shadow_1;
     transition: width 0.4s;
     width: 210px;
     &-collapse {
