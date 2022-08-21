@@ -41,7 +41,7 @@
 <script>
 import { SideBar, Header, AppMain, Setting } from './components'
 import { getSettings } from '@/utils/local-storage'
-import { setTheme, setThemeColor } from '@/utils/setting'
+import { initSetting, setThemeColor } from '@/utils/setting'
 
 export default {
   components: {
@@ -59,12 +59,12 @@ export default {
     const methods = reactive({
       init: async () => {
         let setting = JSON.parse(getSettings())
-        setting = Object.assign({ layout: 'LRLayout' }, setting)
+        setting = Object.assign({ layout: 'LRLayout', theme: 'light' }, setting)
 
         store.dispatch('app/setRoutePath', route.path)
 
         await store.dispatch('settings/initSetting', setting ? setting : {})
-        // setTheme(theme.value, layout.value)
+        initSetting(setting)
         // setThemeColor(theme.value, themeColor.value)
       }
     })

@@ -17,23 +17,36 @@
       <div class="login-title">登录</div>
       <el-form-item ref="username" name="username" class="username">
         <el-input
+          v-model="loginForm.username"
+          :clearable="true"
           size="large"
-          v-model:value="loginForm.username"
+          auto-complete="off"
           placeholder="请输入用户名"
           @pressEnter="pressEnter"
         >
-          <template #prefix></template>
+          <template #prefix>
+            <svg class="icon" ariel-hidden="true" font-size="16px">
+              <use xlink:href="#icon-yonghu" />
+            </svg>
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item ref="password" name="password" class="password">
         <el-input
-          size="large"
+          v-model="loginForm.password"
           type="password"
-          v-model:value="loginForm.password"
+          :clearable="true"
+          size="large"
+          auto-complete="off"
+          :show-password="true"
           placeholder="请输入密码"
-          @pressEnter="pressEnter"
+          @keyup.enter="pressEnter"
         >
-          <template #prefix> </template>
+          <template #prefix>
+            <svg class="icon" ariel-hidden="true" font-size="16px">
+              <use xlink:href="#icon-mima" />
+            </svg>
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item>

@@ -5,21 +5,8 @@
  * @LastEditTime: 2022-06-29 10:43:23
  * @Description: 主题配置
  */
-import {
-  presetPrimaryColors,
-  presetPalettes,
-  presetDarkPalettes,
-  grey,
-  yellow,
-  orange,
-  red,
-  magenta,
-  purple,
-  blue,
-  cyan,
-  green
-} from '@ant-design/colors'
-import { useDark } from '@vueuse/core'
+import { presetPrimaryColors, presetPalettes } from '@ant-design/colors'
+import { useCssVar } from '@vueuse/core'
 
 const themeStyle = {
   light: '#ffffff',
@@ -225,8 +212,33 @@ export function setTheme(theme, layout) {
   // root.style.setProperty('--theme-border-2', themeBorder2[theme])
 }
 
-export function setThemeColor(theme, color) {
-  // let root = document.querySelector(':root')
+export function setThemeColor(color) {
+  let root = document.querySelector(':root')
+  root.style.setProperty('--el-color-primary', color)
+  // root.style.setProperty('--theme-color-primary', color)
+  // root.style.setProperty('--theme-menu-selsct', themeMenuSelect[color][theme])
+  // root.style.setProperty('--theme-primary-hover', themePrimaryHover[color])
+  // root.style.setProperty('--theme-primary-active', themePrimaryActive[color])
+}
+
+export function initSetting(setting) {
+  let root = document.querySelector(':root')
+
+  if (setting.theme === 'deepBlack') {
+    document.querySelector('html').classList.add('dark')
+  } else {
+    document.querySelector('html').classList.remove('dark')
+  }
+  root.style.setProperty('--el-color-primary', setting.themeColor)
+
+  let themeColor = Object.keys(presetPrimaryColors).find(
+    t => presetPrimaryColors[t] == setting.themeColor
+  )
+
+  root.style.setProperty(
+    '--el-color-primary-light-9',
+    presetPalettes[themeColor][0]
+  )
   // root.style.setProperty('--theme-color-primary', color)
   // root.style.setProperty('--theme-menu-selsct', themeMenuSelect[color][theme])
   // root.style.setProperty('--theme-primary-hover', themePrimaryHover[color])

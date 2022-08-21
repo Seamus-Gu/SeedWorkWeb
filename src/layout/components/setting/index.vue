@@ -17,7 +17,7 @@
           </el-row>
           <el-row justify="space-between" style="margin-top: 8px">
             <el-col :span="6">
-              <el-tooltip content="侧边">
+              <el-tooltip content="侧边" placement="top">
                 <div
                   class="layout-select-content cursor-pointer"
                   :style="{
@@ -33,7 +33,7 @@
               </el-tooltip>
             </el-col>
             <el-col :span="6">
-              <el-tooltip content="综合">
+              <el-tooltip content="综合" placement="top">
                 <div
                   class="layout-select-content cursor-pointer"
                   :style="{
@@ -49,7 +49,7 @@
               </el-tooltip>
             </el-col>
             <el-col :span="6">
-              <el-tooltip content="顶栏">
+              <el-tooltip content="顶栏" placement="top">
                 <div
                   class="layout-select-content cursor-pointer"
                   :style="{
@@ -106,8 +106,11 @@
               </el-dropdown>
             </el-col>
             <el-col :offset="4" :span="2" id="theme-color-picker">
-              <!-- <el-dropdown trigger="click">
-                <div class="theme-color-selsct cursor-pointer" @click="showColorPicker">
+              <el-dropdown trigger="click">
+                <div
+                  class="theme-color-selsct cursor-pointer"
+                  @click="showColorPicker"
+                >
                   <div
                     class="theme-color-content"
                     :style="{ background: themeColor }"
@@ -116,12 +119,12 @@
                 <template #dropdown>
                   <ColorSelect @changeColor="changeThemeColor"> </ColorSelect>
                 </template>
-              </el-dropdown> -->
+              </el-dropdown>
             </el-col>
           </el-row>
         </div>
         <el-divider class="drawer-divider" />
-        <!-- <div>
+        <div>
           <el-row>
             <h3>系统布局设置</h3>
           </el-row>
@@ -198,7 +201,7 @@
               >重置配置</el-button
             >
           </el-col>
-        </el-row> -->
+        </el-row>
       </el-form>
     </el-drawer>
   </div>
@@ -209,6 +212,7 @@ import ThemeSelect from './ThemeSelect.vue'
 
 import { setSettings } from '@/utils/local-storage'
 import { onClickOutside, useDark } from '@vueuse/core'
+import { setTheme, setThemeColor } from '@/utils/setting'
 
 export default {
   components: {
@@ -224,9 +228,9 @@ export default {
     const visible = computed(() => store.state.settings.visible)
 
     const themeData = reactive({
-      layout: computed(() => store.state.settings.layout)
-      // theme: computed(() => store.state.settings.theme),
-      // themeColor: computed(() => store.state.settings.themeColor)
+      layout: computed(() => store.state.settings.layout),
+      theme: computed(() => store.state.settings.theme),
+      themeColor: computed(() => store.state.settings.themeColor)
     })
 
     const switchData = reactive({
@@ -313,52 +317,52 @@ export default {
             store.dispatch('settings/setTheme', val)
             break
         }
-      }
+      },
       // showColorPicker: () => {
       //   colorPicker.value = true
       // },
       // closeColorPicker: () => {
       //   colorPicker.value = false
       // },
-      // changeThemeColor: val => {
-      //   store.dispatch('settings/setThemeColor', val)
-      //   setThemeColor(themeData.theme, val)
-      // },
-      // savaSettings: async () => {
-      //   let setting = {
-      //     layout: themeData.layout,
-      //     theme: themeData.theme,
-      //     themeColor: themeData.themeColor,
-      //     showTabView: switchData.showTabView,
-      //     showSideBar: switchData.showSideBar,
-      //     affixHeader: switchData.affixHeader,
-      //     searchSwitch: switchData.searchSwitch,
-      //     themeSwitch: switchData.themeSwitch,
-      //     messageSwitch: switchData.messageSwitch,
-      //     screenFullSwitch: switchData.screenFullSwitch
-      //   }
-      //   let str = JSON.stringify(setting)
-      //   await setSettings(str)
-      //   store.dispatch('settings/setVisible', false)
-      // },
-      // resetSettings: () => {
-      //   let setting = {
-      //     layout: 'LRLayout',
-      //     theme: 'light',
-      //     themeColor: '#1890FF',
-      //     showTabView: true,
-      //     showSideBar: true,
-      //     affixHeader: true,
-      //     searchSwitch: true,
-      //     themeSwitch: true,
-      //     messageSwitch: true,
-      //     screenFullSwitch: true
-      //   }
-      //   methods.setLRLayout()
-      //   setTheme('light', 'LRLayout')
-      //   setThemeColor('light', '#1890FF')
-      //   store.dispatch('settings/initSetting', setting)
-      // }
+      changeThemeColor: val => {
+        store.dispatch('settings/setThemeColor', val)
+        setThemeColor(val)
+      },
+      savaSettings: async () => {
+        let setting = {
+          layout: themeData.layout,
+          theme: themeData.theme,
+          themeColor: themeData.themeColor,
+          showTabView: switchData.showTabView,
+          showSideBar: switchData.showSideBar,
+          affixHeader: switchData.affixHeader,
+          searchSwitch: switchData.searchSwitch,
+          themeSwitch: switchData.themeSwitch,
+          messageSwitch: switchData.messageSwitch,
+          screenFullSwitch: switchData.screenFullSwitch
+        }
+        let str = JSON.stringify(setting)
+        await setSettings(str)
+        store.dispatch('settings/setVisible', false)
+      },
+      resetSettings: () => {
+        let setting = {
+          layout: 'LRLayout',
+          theme: 'light',
+          themeColor: '#1890FF',
+          showTabView: true,
+          showSideBar: true,
+          affixHeader: true,
+          searchSwitch: true,
+          themeSwitch: true,
+          messageSwitch: true,
+          screenFullSwitch: true
+        }
+        //   methods.setLRLayout()
+        //   setTheme('light', 'LRLayout')
+        //   setThemeColor('light', '#1890FF')
+        //   store.dispatch('settings/initSetting', setting)
+      }
     })
 
     return {
