@@ -12,7 +12,7 @@
     >
       <SubMenu
         v-for="(route, index) in headerRouters"
-        :item="route"
+        :data="route"
         :key="index"
       >
       </SubMenu>
@@ -54,3 +54,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.top-nav {
+  width: calc(100% - 208px);
+}
+</style>

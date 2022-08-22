@@ -29,7 +29,7 @@ const userMockList = [
         code: 200,
         msg: 'success',
         data: {
-          permission: ['*:*:*'],
+          permissions: ['*:*:*'],
           roles: ['admin'],
           user: {
             avatar: '',

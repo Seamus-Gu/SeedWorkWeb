@@ -5,24 +5,23 @@
 -->
 <template>
   <el-header class="layout-header">
-    <el-row align="middle" justify="space-between" style="height: 100%">
+    <div class="header-container">
       <div class="header-main-left">
-        <el-space>
-          <template v-if="layout != 'LRLayout' && size != 'small'">
-            <HeaderTitle></HeaderTitle>
-            <!-- <TopNav></TopNav> -->
-          </template>
-          <template v-if="layout != 'UDLayout' || size == 'small'">
-            <Hamburger
-              class="header-item cursor-pointer"
-              :isActive="isActive"
-              @click="toggleSideBar"
-            ></Hamburger>
-          </template>
-          <template v-if="layout == 'LRLayout' && size != 'small'">
-            <Breadcrumb></Breadcrumb>
-          </template>
-        </el-space>
+        <el-row>
+          <HeaderTitle
+            v-if="size != 'small' && layout != 'LRLayout'"
+          ></HeaderTitle>
+          <Hamburger
+            v-if="layout != 'UDLayout' || size == 'small'"
+            class="header-item cursor-pointer"
+            :isActive="isActive"
+            @click="toggleSideBar"
+          ></Hamburger>
+          <TopNav v-if="size != 'small' && layout != 'LRLayout'"></TopNav>
+          <Breadcrumb
+            v-if="size != 'small' && layout == 'LRLayout'"
+          ></Breadcrumb>
+        </el-row>
       </div>
       <div class="header-main-right">
         <el-space>
@@ -52,7 +51,7 @@
           <Avatar></Avatar>
         </el-space>
       </div>
-    </el-row>
+    </div>
   </el-header>
 </template>
 
@@ -117,6 +116,16 @@ export default {
   box-shadow: var(--el-box-shadow-light);
   border-bottom: 1px solid var(--el-border-color);
 
+  .header-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    .header-main-left {
+      width: calc(100% - 224px);
+      padding-left: 16px;
+    }
+  }
   .header-item {
     display: flex;
     height: 50px;
