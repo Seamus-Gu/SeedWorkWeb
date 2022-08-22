@@ -22,7 +22,6 @@
           size="large"
           auto-complete="off"
           placeholder="请输入用户名"
-          @pressEnter="pressEnter"
         >
           <template #prefix>
             <svg class="icon" ariel-hidden="true" font-size="16px">
