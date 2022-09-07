@@ -1,6 +1,6 @@
 <template>
   <div class="tabs-container">
-    <a-dropdown class="tabs-dropdown" :trigger="['contextmenu']">
+    <el-dropdown class="tabs-dropdown" :trigger="['contextmenu']">
       <el-tabs
         type="card"
         v-model="tabActive"
@@ -38,7 +38,7 @@
           </el-menu-item>
         </el-menu>
       </template>
-    </a-dropdown>
+    </el-dropdown>
   </div>
 </template>
 

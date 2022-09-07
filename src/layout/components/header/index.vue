@@ -123,7 +123,7 @@ export default {
     align-items: center;
     .header-main-left {
       width: calc(100% - 224px);
-      padding-left: 16px;
+      padding-left: 8px;
     }
   }
   .header-item {

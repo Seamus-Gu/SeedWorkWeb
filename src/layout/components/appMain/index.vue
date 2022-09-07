@@ -5,7 +5,7 @@
 -->
 <template>
   <el-main class="layout-content">
-    <TabsView v-if="showTabView"></TabsView>
+    <!-- <TabsView v-if="showTabView"></TabsView> -->
     <router-view v-slot="{ Component }">
       <transition mode="out-in" name="fade-transform">
         <keep-alive :include="cachedViews">

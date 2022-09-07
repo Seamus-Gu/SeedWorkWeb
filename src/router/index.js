@@ -37,20 +37,20 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'home', affix: true }
       }
     ]
-  },
-  {
-    path: '/user',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/user/profile',
-        component: () => import('@/views/system/user/profile'),
-        name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
-      }
-    ]
   }
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: '/user/profile',
+  //       component: () => import('@/views/system/user/profile'),
+  //       name: 'Profile',
+  //       meta: { title: '个人中心', icon: 'user' }
+  //     }
+  //   ]
+  // }
 ]
 
 const router = createRouter({

@@ -7,15 +7,15 @@
 -->
 <template>
   <div class="user-container">
-    <Row>
-      <Col :span="6" class="dept-tree">
+    <el-row :gutter="8">
+      <el-col :span="6" class="dept-tree">
         <Panel :scrollX="true" class="tree-panel" height="calc(100% - 8px)">
-          <Tree :api="getOrganizationTreeSelect" @select="selectTree"> </Tree>
+          <!-- <Tree :api="getOrganizationTreeSelect" @select="selectTree"> </Tree> -->
         </Panel>
-      </Col>
-      <Col :span="18" class="user-table">
-        <Row>
-          <Col :span="24">
+      </el-col>
+      <el-col :span="18" class="user-table">
+        <el-row>
+          <el-col :span="24">
             <Panel>
               <QueryForm
                 :filters="filters"
@@ -27,10 +27,10 @@
               >
               </QueryForm>
             </Panel>
-          </Col>
-        </Row>
-        <Row>
-          <Col :span="24">
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
             <Panel>
               <ToolBar
                 :hasExport="true"
@@ -81,10 +81,10 @@
                 </template>
               </Table>
             </Panel>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
     <Form
       ref="formRef"
       :visible="formVisible"

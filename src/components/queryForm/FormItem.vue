@@ -2,7 +2,7 @@
   <el-form-item
     v-show="show"
     :label="formItem.title"
-    :labelCol="{ style: { width: '80px' } }"
+    label-width="80px"
     :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
     :name="formItem.dataIndex"
   >
