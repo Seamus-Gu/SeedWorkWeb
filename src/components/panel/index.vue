@@ -3,19 +3,13 @@
  * @Date: 2022-05-07 08:33:40
  * @LastEditors: Jianxin Gu
  * @LastEditTime: 2022-05-24 14:33:14
- * @Description: file content
+ * @Description: Panel板块 已完成
 -->
+
 <template>
   <el-card
-    :activeTabKey="activeTabKey"
     :bodyStyle="bodyStyle"
-    :bordered="bordered"
-    :defaultActiveTabKey="defaultActiveTabKey"
-    :headStyle="headStyle"
-    :hoverable="hoverable"
-    :loading="loading"
-    :tabList="tabList"
-    :title="title"
+    :shadow="shadow"
     :style="{
       width: width,
       height: height,
@@ -23,66 +17,34 @@
       minHeight: minHeight,
       marginBottom: marginBottom,
       overflowY: scrollY ? 'auto' : 'none',
-      overflowX: scrollX ? 'auto' : 'none',
-      boxShadow: boxShadow ? '4px 4px 16px 0px rgb(0 0 0 / 10%)' : 'none'
+      overflowX: scrollX ? 'auto' : 'none'
     }"
   >
-    <template v-if="$slots.extra" #extra>
-      <slot name="extra"></slot>
-    </template>
-    <template v-if="$slots.title" #title>
-      <slot name="title"></slot>
-    </template>
-    <template v-if="$slots.actions" #actions>
-      <slot name="actions"></slot>
-    </template>
-    <template v-if="$slots.cover" #cover>
-      <slot name="cover"></slot>
-    </template>
-    <template v-if="$slots.customTab" #customTab="customTabData">
-      <slot
-        name="customTab"
-        :key="customTabData.key"
-        :tab="customTabData.tab"
-      ></slot>
-    </template>
-    <template v-if="$slots.tabBarExtraContent" #tabBarExtraContent>
-      <slot name="tabBarExtraContent"></slot>
+    <template v-if="$slots.header" #header>
+      <slot name="header"></slot>
     </template>
     <slot></slot>
   </el-card>
 </template>
 
 <script>
+/**
+ * bodyStyle  //自定义body部分的样式 Object
+ * shadow //设置卡片阴影出现的时机 always||hover||never always
+ * width  //宽度 String
+ * height //高度 String
+ * minWidth //最小宽度 String
+ * minHeight  //最小高度 String
+ * marginBottom //下边距 String 8px
+ * scrollX  //横向滑动 Boolean false
+ * scrollY //纵向滑动 Boolean false
+ */
 export default {
   props: {
-    activeTabKey: {
-      type: String
-    },
     bodyStyle: {
       type: Object
     },
-    bordered: {
-      type: Boolean,
-      default: true
-    },
-    defaultActiveTabKey: {
-      type: String
-    },
-    headStyle: {
-      type: Object
-    },
-    hoverable: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean
-    },
-    tabList: {
-      type: Array
-    },
-    title: {
+    shadow: {
       type: String
     },
     width: {
@@ -108,10 +70,6 @@ export default {
     scrollY: {
       type: Boolean,
       default: false
-    },
-    boxShadow: {
-      type: Boolean,
-      default: true
     }
   },
   setup(props, context) {

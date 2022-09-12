@@ -284,6 +284,15 @@ export default {
       },
       setLayout: async layout => {
         await store.dispatch('settings/setLayout', layout)
+        switch (layout) {
+          case 'LRLayout':
+            break
+          case 'TLayout':
+            store.dispatch('setSiderBarRoutes', sideMenus)
+            break
+          case 'UDLayout':
+            break
+        }
       },
       // setLRLayout: () => {
       //   store.dispatch('settings/setLayout', 'LRLayout')

@@ -10,10 +10,16 @@
   border-bottom: 2px solid var(--el-color-info-light-7);
 }
 
+// breadcrumb
+.el-breadcrumb {
+  line-height: 36px !important;
+}
+
 :root {
   --el-menu-item-height: 48px !important;
 }
 
-.el-breadcrumb {
-  line-height: 36px !important;
+// card
+.el-card {
+  --el-card-padding: 12px 16px 16px 16px !important;
 }
