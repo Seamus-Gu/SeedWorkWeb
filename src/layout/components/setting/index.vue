@@ -286,6 +286,7 @@ export default {
         await store.dispatch('settings/setLayout', layout)
         switch (layout) {
           case 'LRLayout':
+            store.dispatch('setSiderBarRoutes', routes)
             break
           case 'TLayout':
             store.dispatch('setSiderBarRoutes', sideMenus)

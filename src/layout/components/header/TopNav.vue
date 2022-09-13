@@ -14,6 +14,7 @@
         v-for="(route, index) in headerRouters"
         :data="route"
         :key="index"
+        :isHeader="true"
       >
       </SubMenu>
     </el-menu>

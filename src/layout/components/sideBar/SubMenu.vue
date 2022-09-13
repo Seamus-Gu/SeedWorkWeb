@@ -19,7 +19,7 @@
       </template>
       <sub-menu v-for="item in data.children" :key="item.id" :data="item" />
     </el-sub-menu>
-    <el-menu-item v-else-if="data.meta" :index="data.path" @click="routerPush">
+    <el-menu-item v-else-if="data.meta" :index="data.path" @click="goTarget">
       <el-icon>
         <svg class="icon menu-icon" ariel-hidden="true">
           <use :xlink:href="'#icon-' + data.meta.icon" />
@@ -29,7 +29,7 @@
         <span>{{ data.meta.title }}</span>
       </template>
     </el-menu-item>
-    <el-menu-item v-else :index="data.children[0].path" @click="routerPush">
+    <el-menu-item v-else :index="data.children[0].path" @click="goTarget">
       <el-icon>
         <svg class="icon menu-icon" ariel-hidden="true">
           <use :xlink:href="'#icon-' + data.children[0].meta.icon" />
@@ -45,18 +45,31 @@
 export default {
   name: 'SubMenu',
   props: {
+    isHeader: {
+      type: Boolean,
+      default: false
+    },
     data: {
       type: Object,
       required: true
     }
   },
   components: {},
-  setup() {
+  setup(props) {
+    const store = useStore()
     const router = useRouter()
 
+    const layout = computed(() => store.state.settings.layout)
+    const routes = store.getters.routes
+
     const methods = reactive({
-      routerPush(e) {
-        router.push({ path: e.index })
+      goTarget(e) {
+        if (layout.value === 'TLayout' && props.isHeader) {
+          let sideBarRoutes = routes.filter(t => t.path == e.index)[0].children
+          store.dispatch('setSiderBarRoutes', sideBarRoutes)
+        } else {
+          router.push({ path: e.index })
+        }
       }
     })
 

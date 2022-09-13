@@ -55,7 +55,6 @@ export default {
     const store = useStore()
 
     const layout = computed(() => store.state.settings.layout)
-
     const methods = reactive({
       init: async () => {
         let setting = JSON.parse(getSettings())
