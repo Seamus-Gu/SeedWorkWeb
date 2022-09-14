@@ -8,15 +8,19 @@
   >
     <el-input
       v-if="formItem.component == 'input'"
+      v-model="formState[formItem.dataIndex]"
+      :maxlength="componentProps.maxlength"
+      :minlength="componentProps.minlength"
+      :showWordLimit="componentProps.showWordLimit"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
-      v-model:value="formState[formItem.dataIndex]"
+      :clearable="componentProps.clearable"
+      :formatter="componentProps.formatter"
       :defaultValue="componentProps.defaultValue"
-      :allowClear="componentProps.allowClear"
       :addonBefore="componentProps.addonBefore"
       :addonAfter="componentProps.addonAfter"
       :disabled="componentProps.disabled || allDisabled"
     />
-    <el-input-number
+    <!-- <el-input-number
       v-else-if="formItem.component == 'inputNumber'"
       v-model:value="formState[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
@@ -90,11 +94,16 @@
       :showTime="componentProps.showTime"
       :showToday="componentProps.showToday"
       :disabledTime="componentProps.disabledTime"
-    ></el-range-picker>
+    ></el-range-picker> -->
   </el-form-item>
 </template>
 
 <script>
+/**
+ * 1.input
+ * maxlength 最大输入长度 string / number
+ * minlength 最小输入长度  number
+ */
 export default {
   props: {
     show: {
