@@ -26,7 +26,7 @@
         <Panel>
           <ToolBar
             :hasExpent="true"
-            :addPer="['system:organization:add']"
+            :addPer="['system:dept:add']"
             :columns="columns"
             @add="handleAdd"
             @expend="toggleExpandAll"
@@ -34,11 +34,11 @@
           />
           <TreeTable
             ref="tableRef"
-            idName="organizationId"
+            idName="deptId"
             :columns="columns"
-            :api="getOrganizationTree"
+            :api="getdeptTree"
           >
-            <template #organizationStatus="{ text }">
+            <template #deptStatus="{ text }">
               <el-tag :color="text === '0' ? 'green' : 'red'">
                 {{ text === '0' ? '正常' : '停用' }}
               </el-tag>
@@ -46,21 +46,21 @@
             <template #action="{ record }">
               <span>
                 <a
-                  v-has="['system:organization:add']"
-                  @click="handleAdd(record.organizationId)"
+                  v-has="['system:dept:add']"
+                  @click="handleAdd(record.deptId)"
                 >
                   新增
                 </a>
                 <el-divider type="vertical" />
                 <a
-                  v-has="['system:organization:edit']"
-                  @click="handleEdit(record.organizationId)"
+                  v-has="['system:dept:edit']"
+                  @click="handleEdit(record.deptId)"
                   >修改</a
                 >
                 <el-divider type="vertical" />
                 <a
-                  v-has="['system:organization:remove']"
-                  @click="handleDelete(record.organizationId)"
+                  v-has="['system:dept:remove']"
+                  @click="handleDelete(record.deptId)"
                 >
                   删除
                 </a>
@@ -87,14 +87,14 @@
 import TreeTable from '@/components/table/TreeTable.vue'
 import { Panel, QueryForm, ToolBar, Form } from '@/components'
 import {
-  getOrganizationTree,
-  getOrganizationTreeSelect,
+  getdeptTree,
+  getdeptTreeSelect,
   getNextOrderNum,
-  getOrganization,
-  addOrganization,
-  editOrganization,
-  delOrganization
-} from '@/api/system/organization'
+  getdept,
+  adddept,
+  editdept,
+  deldept
+} from '@/api/system/dept'
 
 const querySchema = [
   {
@@ -104,7 +104,7 @@ const querySchema = [
   },
   {
     title: '状态',
-    dataIndex: 'organizationStatus',
+    dataIndex: 'deptStatus',
     component: 'select',
     componentProps: {
       options: [
@@ -129,8 +129,8 @@ const columns = [
   },
   {
     title: '状态',
-    dataIndex: 'organizationStatus',
-    slots: { customRender: 'organizationStatus' },
+    dataIndex: 'deptStatus',
+    slots: { customRender: 'deptStatus' },
     component: 'select',
     componentProps: {
       options: [
@@ -163,7 +163,7 @@ const formSchema = [
     span: 24,
     componentProps: {
       request: async () => {
-        const res = await getOrganizationTreeSelect()
+        const res = await getdeptTreeSelect()
         return res.data
       }
     }
@@ -176,7 +176,7 @@ const formSchema = [
   },
   {
     title: '组织状态',
-    dataIndex: 'organizationStatus',
+    dataIndex: 'deptStatus',
     component: 'select',
     span: 12,
     componentProps: {
@@ -215,7 +215,7 @@ const formRules = {
       trigger: 'blur'
     }
   ],
-  organizationStatus: [
+  deptStatus: [
     {
       required: true,
       message: '组织状态必须填写',
@@ -230,7 +230,7 @@ export default {
     const { proxy } = getCurrentInstance()
 
     const tableData = reactive({
-      getOrganizationTree,
+      getdeptTree,
       queryParams: {},
       querySchema: querySchema,
       queryLoad: false,
@@ -251,7 +251,7 @@ export default {
     const formState = reactive({
       title: undefined,
       parentId: undefined,
-      organizationStatus: '0'
+      deptStatus: '0'
     })
 
     const methods = reactive({
@@ -268,15 +268,15 @@ export default {
           tableData.resetLoad = false
         })
       },
-      handleAdd: organizationId => {
+      handleAdd: deptId => {
         getNextOrderNum().then(res => {
           formState.orderNum = res.data
           formData.formVisible = true
         })
 
         formData.formTitle = '新增组织'
-        if (organizationId) {
-          formState.parentId = organizationId
+        if (deptId) {
+          formState.parentId = deptId
         }
       },
       toggleExpandAll: () => {
@@ -288,10 +288,10 @@ export default {
       },
       resetForm: () => {
         Object.assign(formState, {
-          organizationId: undefined,
+          deptId: undefined,
           title: undefined,
           parentId: undefined,
-          organizationStatus: '0',
+          deptStatus: '0',
           orderNum: undefined
         })
 
@@ -303,9 +303,9 @@ export default {
         methods.resetForm()
         formData.formVisible = false
       },
-      handleEdit: organizationId => {
+      handleEdit: deptId => {
         formData.formTitle = '修改组织'
-        getOrganization(organizationId).then(res => {
+        getdept(deptId).then(res => {
           if (res.data.parentId == '0') {
             formData.formSchema[0].visible = false
           }
@@ -318,10 +318,10 @@ export default {
           formData.formVisible = true
         })
       },
-      handleDelete: organizationId => {
+      handleDelete: deptId => {
         proxy.$modal.del({
           onOk: resolve => {
-            delOrganization(organizationId)
+            deldept(deptId)
               .then(() => {
                 resolve()
                 tableData.tableRef.refresh()
@@ -334,13 +334,13 @@ export default {
       },
       submitForm: () => {
         formData.formRef.validate().then(() => {
-          if (formState.organizationId) {
-            editOrganization(formState).then(() => {
+          if (formState.deptId) {
+            editdept(formState).then(() => {
               tableData.tableRef.refresh()
               methods.cancel()
             })
           } else {
-            addOrganization(formState).then(() => {
+            adddept(formState).then(() => {
               tableData.tableRef.refresh()
               methods.cancel()
             })

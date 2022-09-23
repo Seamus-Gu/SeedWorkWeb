@@ -45,10 +45,10 @@ const menuRoutes = [
         }
       },
       {
-        name: 'organization',
-        path: '/system/organization',
+        name: 'dept',
+        path: '/system/dept',
         hidden: false,
-        component: 'system/organization/index',
+        component: 'system/dept/index',
         meta: {
           title: '组织管理',
           icon: 'zuzhi1'

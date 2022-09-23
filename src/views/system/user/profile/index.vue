@@ -62,7 +62,7 @@
               所属组织
             </el-col>
             <el-col span="12" style="text-align: end">
-              {{ userInfoData.organization }}
+              {{ userInfoData.dept }}
             </el-col>
           </el-row>
           <el-divider />
@@ -137,8 +137,8 @@ export default {
       getProfile: () => {
         getProfile().then(res => {
           Object.assign(userInfoData, res.data)
-          if (res.data.organization) {
-            userInfoData.organization = res.data.organization.title
+          if (res.data.dept) {
+            userInfoData.dept = res.data.dept.title
           }
         })
       }

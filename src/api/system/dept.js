@@ -6,10 +6,10 @@
  * @Description: file content
  */
 import request from '@/utils/request'
-const baseUrl = '/system/organization'
+const baseUrl = '/system/dept'
 
 // 获取组织树
-export function getOrganizationTree(query) {
+export function getdeptTree(query) {
   return request({
     url: baseUrl + '/tree',
     method: 'get',
@@ -18,7 +18,7 @@ export function getOrganizationTree(query) {
 }
 
 // 获取组织下拉
-export function getOrganizationTreeSelect(query) {
+export function getdeptTreeSelect(query) {
   return request({
     url: baseUrl + '/treeSelect',
     method: 'get',
@@ -27,9 +27,9 @@ export function getOrganizationTreeSelect(query) {
 }
 
 // 获取组织信息
-export function getOrganization(organizationId) {
+export function getdept(deptId) {
   return request({
-    url: baseUrl + '/' + organizationId,
+    url: baseUrl + '/' + deptId,
     method: 'get'
   })
 }
@@ -43,7 +43,7 @@ export function getNextOrderNum() {
 }
 
 // 添加组织
-export function addOrganization(data) {
+export function adddept(data) {
   return request({
     url: baseUrl,
     method: 'post',
@@ -51,7 +51,7 @@ export function addOrganization(data) {
   })
 }
 // 修改组织
-export function editOrganization(data) {
+export function editdept(data) {
   return request({
     url: baseUrl,
     method: 'put',
@@ -60,7 +60,7 @@ export function editOrganization(data) {
 }
 
 // 删除组织
-export function delOrganization(id) {
+export function deldept(id) {
   return request({
     url: baseUrl + '/' + id,
     method: 'delete'

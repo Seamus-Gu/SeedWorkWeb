@@ -10,7 +10,7 @@
     <el-row :gutter="8">
       <el-col :span="6" class="dept-tree">
         <Panel :scrollX="true" class="tree-panel" height="calc(100% - 8px)">
-          <!-- <Tree :api="getOrganizationTreeSelect" @select="selectTree"> </Tree> -->
+          <!-- <Tree :api="getDeptTreeSelect" @select="selectTree"> </Tree> -->
         </Panel>
       </el-col>
       <el-col :span="18" class="user-table">
@@ -121,6 +121,7 @@
   </div>
 </template>
 <script>
+import dayjs from 'dayjs'
 import {
   getUserList,
   getUser,
@@ -131,7 +132,7 @@ import {
   exportUserList
 } from '@/api/system/user'
 import { getRoleList } from '@/api/system/role'
-import { getOrganizationTreeSelect } from '@/api/system/organization'
+// import { getDeptTreeSelect } from '@/api/system/dept'
 import lodash from 'lodash'
 
 import {
@@ -214,7 +215,9 @@ const columns = [
     label: '创建时间',
     dataIndex: 'createTime',
     sorter: true,
-    formatter: row => {}
+    formatter: row => {
+      return dayjs(row.createTime).format('YYYY-MM-DD')
+    }
   },
   {
     label: '操作',
@@ -290,12 +293,12 @@ const schema = [
   },
   {
     title: '所属组织',
-    dataIndex: 'organizationId',
+    dataIndex: 'deptId',
     span: 24,
     component: 'treeSelect',
     componentProps: {
       request: async () => {
-        const res = await getOrganizationTreeSelect()
+        const res = await getDeptTreeSelect()
         return res.data
       }
     }
@@ -375,7 +378,7 @@ export default {
     const { proxy } = getCurrentInstance()
 
     const treeData = reactive({
-      getOrganizationTreeSelect,
+      // getDeptTreeSelect,
       selectedId: undefined
     })
 
@@ -408,7 +411,7 @@ export default {
       email: undefined,
       sex: undefined,
       userStatus: '0',
-      organizationId: undefined,
+      deptId: undefined,
       roleIds: undefined
     })
 
@@ -416,7 +419,7 @@ export default {
       selectTree: key => {
         treeData.selectedId = key[0]
         tableData.tableRef.reset(tableData.filters, {
-          organizationId: treeData.selectedId
+          deptId: treeData.selectedId
         })
       },
       getFilterData: filters => {
@@ -438,7 +441,7 @@ export default {
         tableData.queryLoad = true
         tableData.tableRef
           .reset(methods.getFilterData(tableData.filters), {
-            organizationId: treeData.selectedId
+            deptId: treeData.selectedId
           })
           .then(() => {
             tableData.queryLoad = false
@@ -449,7 +452,7 @@ export default {
         tableData.resetLoad = true
         tableData.tableRef
           .reset(tableData.filters, {
-            organizationId: treeData.selectedId
+            deptId: treeData.selectedId
           })
           .then(() => {
             tableData.resetLoad = false
@@ -470,7 +473,7 @@ export default {
       },
       refresh: () => {
         tableData.tableRef.refresh(tableData.filters, {
-          organizationId: treeData.selectedId
+          deptId: treeData.selectedId
         })
       },
       resetForm: () => {
@@ -479,7 +482,7 @@ export default {
           userName: undefined,
           password: undefined,
           nickName: undefined,
-          organizationId: undefined,
+          deptId: undefined,
           phoneNumber: undefined,
           email: undefined,
           sex: undefined,
@@ -508,7 +511,7 @@ export default {
               .then(() => {
                 resolve()
                 tableData.tableRef.reset(tableData.filters, {
-                  organizationId: treeData.selectedId
+                  deptId: treeData.selectedId
                 })
               })
               .catch(() => {

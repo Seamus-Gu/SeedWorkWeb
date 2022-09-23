@@ -18,12 +18,7 @@
             @click="batchDelete"
           >
             <template #icon>
-              <svg
-                class="icon"
-                ariel-hidden="true"
-                font-size="15px"
-                style="margin-right: 8px"
-              >
+              <svg class="icon" ariel-hidden="true" font-size="15px">
                 <use xlink:href="#icon-trash-alt" />
               </svg>
             </template>
@@ -40,12 +35,7 @@
             "
           >
             <template #icon>
-              <svg
-                class="icon"
-                ariel-hidden="true"
-                font-size="15px"
-                style="margin-right: 8px"
-              >
+              <svg class="icon" ariel-hidden="true" font-size="15px">
                 <use xlink:href="#icon-download" />
               </svg>
             </template>
@@ -57,12 +47,7 @@
             style="background-color: #dbdbe1; border-color: #d3d4d6"
           >
             <template #icon>
-              <svg
-                class="icon"
-                ariel-hidden="true"
-                font-size="15px"
-                style="margin-right: 8px; fill: var(--theme-text-1) !important"
-              >
+              <svg class="icon" ariel-hidden="true" font-size="15px">
                 <use xlink:href="#icon-folding" />
               </svg>
             </template>
@@ -90,8 +75,8 @@
               </svg>
               <template #dropdown>
                 <el-dropdown-menu>
+                  <el-dropdown-item command="large">宽松</el-dropdown-item>
                   <el-dropdown-item command="default">默认</el-dropdown-item>
-                  <el-dropdown-item command="middle">中等</el-dropdown-item>
                   <el-dropdown-item command="small">紧凑</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -248,11 +233,5 @@ export default {
 <style lang="scss" scoped>
 .tool-bar-container {
   margin-bottom: 8px;
-
-  .main-right {
-    .icon {
-      fill: #707070;
-    }
-  }
 }
 </style>

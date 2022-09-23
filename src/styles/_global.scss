@@ -11,3 +11,7 @@
   overflow: hidden;
   fill: currentColor;
 }
+
+.icon :hover {
+  color: var(--el-color-primary);
+}

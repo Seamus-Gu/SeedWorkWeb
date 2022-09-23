@@ -6,11 +6,6 @@
 import authModules from './modules/auth'
 import menuModules from './modules/menu'
 import userModules from './modules/user'
-import organizationModules from './modules/organization'
+import deptModules from './modules/dept'
 
-export default [
-  ...userModules,
-  ...menuModules,
-  ...authModules,
-  ...organizationModules
-]
+export default [...userModules, ...menuModules, ...authModules, ...deptModules]

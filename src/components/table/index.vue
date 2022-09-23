@@ -4,7 +4,12 @@
  * @Date: 2022-01-06 09:53:45
 -->
 <template>
-  <el-table :data="dataSource" :border="border">
+  <el-table
+    v-loading="loading"
+    :data="dataSource"
+    :border="border"
+    :size="tableSize"
+  >
     <template v-for="item in columns" :key="item.index">
       <el-table-column
         :prop="item.dataIndex"
