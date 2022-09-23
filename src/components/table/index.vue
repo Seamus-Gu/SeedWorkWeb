@@ -4,91 +4,29 @@
  * @Date: 2022-01-06 09:53:45
 -->
 <template>
-  <el-table
-    :bordered="bordered"
-    :columns="columns.filter(t => t.visible != false)"
-    :customHeaderRow="customHeaderRow"
-    :customRow="customRow"
-    :loading="loading"
-    :locale="locale"
-    :pagination="pagination"
-    :rowClassName="
-      stripe == true
-        ? (record, index) => (index % 2 === 1 ? 'table-striped' : null)
-        : index => index
-    "
-    :rowKey="record => record[idName]"
-    :rowSelection="rowSelection"
-    :scroll="scroll"
-    :showHeader="showHeader"
-    :showSorterTooltip="showSorterTooltip"
-    :sticky="sticky"
-    class="ant-table-striped"
-    :tableLayout="tableLayout"
-    :dataSource="dataSource"
-    :size="tableSize"
-    @change="handleTableChange"
-  >
-    <template v-if="$slots.bodyCellData" #bodyCell="bodyCellData">
-      <slot
-        name="bodyCell"
-        :text="bodyCellData.text"
-        :record="bodyCellData.record"
-        :index="bodyCellData.index"
-        :column="bodyCellData.column"
-      />
-    </template>
-    <template
-      v-if="$slots.FilterDropdownProps"
-      #customFilterDropdown="FilterDropdownProps"
-    >
-      <slot
-        name="customFilterDropdown"
-        :prefixCls="FilterDropdownProps.prefixCls"
-        :setSelectedKeys="FilterDropdownProps.setSelectedKeys"
-        :selectedKeys="FilterDropdownProps.selectedKeys"
-        :confirm="FilterDropdownProps.confirm"
-        :clearFilters="FilterDropdownProps.clearFilters"
-        :filters="FilterDropdownProps.filters"
-        :visible="FilterDropdownProps.visible"
-        :column="FilterDropdownProps.column"
-      />
-    </template>
-    <template
-      v-if="$slots.customFilterIcon"
-      #customFilterIcon="customFilterIcon"
-    >
-      <slot
-        name="customFilterIcon"
-        :filtered="customFilterIcon.filtered"
-        :column="customFilterIcon.column"
-      ></slot>
-    </template>
-    <template v-if="$slots.emptyText" #emptyText>
-      <slot name="emptyText"></slot>
-    </template>
-    <template v-if="$slots.footer" #footer="currentPageData">
-      <slot name="footer" :currentPageData="currentPageData"></slot>
-    </template>
-    <template v-if="$slots.headerCell" #headerCell="headerCellData">
-      <slot
-        name="headerCell"
-        :title="headerCellData.title"
-        :column="headerCellData.column"
-      />
-    </template>
-    <template v-if="$slots.summary" #summary>
-      <slot name="summary"></slot>
-    </template>
-    <template v-if="$slots.title" #title>
-      <slot name="title"></slot>
+  <el-table :data="dataSource" :border="border">
+    <template v-for="item in columns" :key="item.index">
+      <el-table-column
+        :prop="item.dataIndex"
+        :label="item.label"
+        :formatter="item.formatter"
+      >
+        <template v-if="$slots[item.dataIndex]" #default="slotData">
+          <slot
+            :name="item.dataIndex"
+            :row="slotData.row"
+            :column="slotData.column"
+            :$index="slotData.$index"
+          ></slot>
+        </template>
+      </el-table-column>
     </template>
   </el-table>
 </template>
 <script>
 export default {
   props: {
-    bordered: {
+    border: {
       type: Boolean,
       default: true
     },

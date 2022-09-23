@@ -1,136 +1,116 @@
 <template>
   <div class="tool-bar-container">
-    <el-row justify="space-between" align="bottom">
-      <el-col>
-        <div class="main-left">
-          <el-space>
-            <el-button v-has="addPer" v-if="hasAdd" type="primary" @click="add">
-              <template #icon>
-                <svg
-                  class="icon"
-                  ariel-hidden="true"
-                  font-size="15px"
-                  style="margin-right: 8px; fill: #fff"
-                >
-                  <use xlink:href="#icon-plus" />
-                </svg>
-              </template>
-              新增
-            </el-button>
-            <el-button
-              v-has="batchDeletePer"
-              v-if="hasBatchDelete"
-              danger="true"
-              @click="batchDelete"
+    <el-row justify="space-between" align="middle">
+      <div class="main-left">
+        <el-space>
+          <el-button v-has="addPer" v-if="hasAdd" type="primary" @click="add">
+            <template #icon>
+              <svg class="icon" ariel-hidden="true" font-size="15px">
+                <use xlink:href="#icon-plus" />
+              </svg>
+            </template>
+            新增
+          </el-button>
+          <el-button
+            v-has="batchDeletePer"
+            v-if="hasBatchDelete"
+            danger="true"
+            @click="batchDelete"
+          >
+            <template #icon>
+              <svg
+                class="icon"
+                ariel-hidden="true"
+                font-size="15px"
+                style="margin-right: 8px"
+              >
+                <use xlink:href="#icon-trash-alt" />
+              </svg>
+            </template>
+            批量删除
+          </el-button>
+          <el-button
+            v-if="hasExport"
+            v-has="exportPer"
+            @click="exportExcel"
+            style="
+              background-color: #fff39f !important;
+              border-color: #ffba00 !important;
+              color: #e5a700 !important;
+            "
+          >
+            <template #icon>
+              <svg
+                class="icon"
+                ariel-hidden="true"
+                font-size="15px"
+                style="margin-right: 8px"
+              >
+                <use xlink:href="#icon-download" />
+              </svg>
+            </template>
+            导出
+          </el-button>
+          <el-button
+            v-if="hasExpent"
+            @click="expend"
+            style="background-color: #dbdbe1; border-color: #d3d4d6"
+          >
+            <template #icon>
+              <svg
+                class="icon"
+                ariel-hidden="true"
+                font-size="15px"
+                style="margin-right: 8px; fill: var(--theme-text-1) !important"
+              >
+                <use xlink:href="#icon-folding" />
+              </svg>
+            </template>
+            展开/折叠
+          </el-button>
+          <slot></slot>
+        </el-space>
+      </div>
+      <div class="main-right">
+        <el-space>
+          <el-tooltip content="刷新" placement="top">
+            <svg
+              class="icon"
+              ariel-hidden="true"
+              font-size="18px"
+              @click="refresh"
             >
-              <template #icon>
-                <svg
-                  class="icon"
-                  ariel-hidden="true"
-                  font-size="15px"
-                  style="margin-right: 8px"
-                >
-                  <use xlink:href="#icon-trash-alt" />
-                </svg>
+              <use xlink:href="#icon-refresh" />
+            </svg>
+          </el-tooltip>
+          <el-tooltip content="密度" placement="top">
+            <el-dropdown :trigger="['click']" @command="changeSize">
+              <svg class="icon" ariel-hidden="true" font-size="18px">
+                <use xlink:href="#icon-column-height" />
+              </svg>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item command="default">默认</el-dropdown-item>
+                  <el-dropdown-item command="middle">中等</el-dropdown-item>
+                  <el-dropdown-item command="small">紧凑</el-dropdown-item>
+                </el-dropdown-menu>
               </template>
-              批量删除
-            </el-button>
-            <el-button
-              v-if="hasExport"
-              v-has="exportPer"
-              @click="exportExcel"
-              style="
-                background-color: #fff39f !important;
-                border-color: #ffba00 !important;
-                color: #e5a700 !important;
-              "
+            </el-dropdown>
+          </el-tooltip>
+          <el-tooltip content="列设置" placement="top">
+            <svg
+              class="icon"
+              ariel-hidden="true"
+              font-size="20px"
+              @click="showColumnsModal"
             >
-              <template #icon>
-                <svg
-                  class="icon"
-                  ariel-hidden="true"
-                  font-size="15px"
-                  style="margin-right: 8px"
-                >
-                  <use xlink:href="#icon-download" />
-                </svg>
-              </template>
-              导出
-            </el-button>
-            <el-button
-              v-if="hasExpent"
-              @click="expend"
-              style="background-color: #dbdbe1; border-color: #d3d4d6"
-            >
-              <template #icon>
-                <svg
-                  class="icon"
-                  ariel-hidden="true"
-                  font-size="15px"
-                  style="
-                    margin-right: 8px;
-                    fill: var(--theme-text-1) !important;
-                  "
-                >
-                  <use xlink:href="#icon-folding" />
-                </svg>
-              </template>
-              展开/折叠
-            </el-button>
-            <slot></slot>
-          </el-space>
-        </div>
-      </el-col>
-      <el-col>
-        <div class="main-right">
-          <el-space>
-            <el-tooltip title="刷新">
-              <Icon @click="refresh">
-                <template #component>
-                  <svg class="icon" ariel-hidden="true" font-size="18px">
-                    <use xlink:href="#icon-refresh" />
-                  </svg>
-                </template>
-              </Icon>
-            </el-tooltip>
-            <el-tooltip title="密度">
-              <el-dropdown :trigger="['click']">
-                <Icon>
-                  <template #component>
-                    <svg class="icon" ariel-hidden="true" font-size="18px">
-                      <use xlink:href="#icon-column-height" />
-                    </svg>
-                  </template>
-                </Icon>
-                <template #overlay>
-                  <el-menu @click="changeSize">
-                    <el-menu-item key="default">
-                      <span>默认</span>
-                    </el-menu-item>
-                    <el-menu-item key="middle">
-                      <span>中等</span>
-                    </el-menu-item>
-                    <el-menu-item key="small">
-                      <span>紧凑</span>
-                    </el-menu-item>
-                  </el-menu>
-                </template>
-              </el-dropdown>
-            </el-tooltip>
-            <el-tooltip title="列设置">
-              <Icon @click="showColumnsModal">
-                <template #component>
-                  <svg class="icon" ariel-hidden="true" font-size="20px">
-                    <use xlink:href="#icon-column-setting" />
-                  </svg>
-                </template>
-              </Icon>
-            </el-tooltip>
-          </el-space>
-        </div>
-      </el-col>
+              <use xlink:href="#icon-column-setting" />
+            </svg>
+          </el-tooltip>
+        </el-space>
+      </div>
     </el-row>
-    <el-modal
+    <!-- <el-modal
       title="显示/隐藏"
       :width="498"
       :visible="columnsVisible"
@@ -149,7 +129,7 @@
           @selectChange="handleColumnsSelectChange"
         />
       </el-card>
-    </el-modal>
+    </el-modal> -->
   </div>
 </template>
 <script>
@@ -229,8 +209,8 @@ export default {
       refresh: () => {
         context.emit('refresh')
       },
-      changeSize: keys => {
-        store.dispatch('settings/setTableSize', keys.key)
+      changeSize: key => {
+        store.dispatch('settings/setTableSize', key)
       },
       showColumnsModal: () => {
         columnsData.columnsVisible = true

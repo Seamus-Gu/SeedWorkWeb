@@ -48,36 +48,41 @@
                 :api="getUserList"
                 ref="tableRef"
               >
-                <template #bodyCell="{ column, record }">
-                  <template v-if="column.dataIndex === 'userStatus'">
-                    <el-tag
-                      :color="record.userStatus === '0' ? 'green' : 'red'"
-                    >
-                      {{ record.userStatus === '0' ? '正常' : '停用' }}
-                    </el-tag>
-                  </template>
-                  <template v-else-if="column.dataIndex === 'action'">
-                    <a
-                      v-has="['system:user:edit']"
-                      @click="handleEdit(record.userId)"
-                    >
-                      修改
-                    </a>
-                    <el-divider type="vertical" />
-                    <a
-                      v-has="['system:user:remove']"
-                      @click="handleDelete(record.userId)"
-                    >
-                      删除
-                    </a>
-                    <el-divider type="vertical" />
-                    <a
-                      v-has="['system:user:resetPwd']"
-                      @click="resetPwd(record)"
-                    >
-                      重置密码
-                    </a>
-                  </template>
+                <template #userStatus="{ row }">
+                  <el-tag :type="row.userStatus === '0' ? 'success' : 'danger'">
+                    {{ row.userStatus === '0' ? '正常' : '停用' }}
+                  </el-tag>
+                </template>
+                <template #action>
+                  <el-button
+                    v-has="['system:user:edit']"
+                    link
+                    type="primary"
+                    size="small"
+                    @click="handleEdit(record.userId)"
+                  >
+                    修改
+                  </el-button>
+                  <el-divider direction="vertical" />
+                  <el-button
+                    v-has="['system:user:remove']"
+                    link
+                    type="primary"
+                    size="small"
+                    @click="handleDelete(record.userId)"
+                  >
+                    删除
+                  </el-button>
+                  <el-divider direction="vertical" />
+                  <el-button
+                    v-has="['system:user:resetPwd']"
+                    link
+                    type="primary"
+                    size="small"
+                    @click="resetPwd(record)"
+                  >
+                    重置密码
+                  </el-button>
                 </template>
               </Table>
             </Panel>
@@ -85,7 +90,7 @@
         </el-row>
       </el-col>
     </el-row>
-    <Form
+    <!-- <Form
       ref="formRef"
       :visible="formVisible"
       :schema="schema"
@@ -112,7 +117,7 @@
           </el-form-item>
         </el-col>
       </template>
-    </Form>
+    </Form> -->
   </div>
 </template>
 <script>
@@ -143,7 +148,7 @@ import {
 const querySchema = [
   {
     title: '用户名',
-    dataIndex: 'username',
+    dataIndex: 'userName',
     component: 'input'
   },
   {
@@ -176,39 +181,43 @@ const querySchema = [
   {
     title: '创建时间',
     dataIndex: 'createTime',
-    component: 'rangePicker'
+    component: 'datePicker',
+    componentProps: {
+      type: 'daterange'
+    }
   }
 ]
 
 const columns = [
   {
-    title: '用户名',
-    dataIndex: 'username',
+    label: '用户名',
+    dataIndex: 'userName',
     sorter: true
   },
   {
-    title: '用户昵称',
+    label: '用户昵称',
     dataIndex: 'nickName',
     sorter: true
   },
   {
-    title: '电话号码',
+    label: '电话号码',
     width: 150,
     dataIndex: 'phoneNumber',
     sorter: true
   },
   {
-    title: '状态',
+    label: '状态',
     dataIndex: 'userStatus',
     sorter: true
   },
   {
-    title: '创建时间',
+    label: '创建时间',
     dataIndex: 'createTime',
-    sorter: true
+    sorter: true,
+    formatter: row => {}
   },
   {
-    title: '操作',
+    label: '操作',
     dataIndex: 'action',
     width: 200
   }
@@ -217,7 +226,7 @@ const columns = [
 const schema = [
   {
     title: '用户账号',
-    dataIndex: 'username',
+    dataIndex: 'userName',
     component: 'input'
   },
   {
@@ -311,7 +320,7 @@ const schema = [
 ]
 
 const formRules = {
-  username: [
+  userName: [
     {
       required: true,
       message: '用户名必须填写',
@@ -391,7 +400,7 @@ export default {
     })
 
     const formState = reactive({
-      username: undefined,
+      userName: undefined,
       password: undefined,
       nickName: undefined,
       code: undefined,
@@ -467,7 +476,7 @@ export default {
       resetForm: () => {
         Object.assign(formState, {
           userId: undefined,
-          username: undefined,
+          userName: undefined,
           password: undefined,
           nickName: undefined,
           organizationId: undefined,
