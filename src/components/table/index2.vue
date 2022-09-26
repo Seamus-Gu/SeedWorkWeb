@@ -7,13 +7,8 @@
   <el-table
     v-loading="loading"
     :data="dataSource"
-    :height="height"
-    :maxHeight="maxHeight"
     :border="border"
     :size="tableSize"
-    :fit="fit"
-    :showHeader="showHeader"
-    highlight-current-row
   >
     <template
       v-for="item in columns.filter(t => t.visible != false)"
@@ -38,8 +33,8 @@
   <div class="table-pagination">
     <el-pagination
       layout="prev, pager, next"
-      :total="total"
-      :pageSize="pageSize"
+      :total="pagination.total"
+      :pageSize="pagination.pageSize"
       :background="true"
     />
   </div>
@@ -47,52 +42,86 @@
 <script>
 export default {
   props: {
-    height: {
-      type: Number || String
-    },
-    maxHeight: {
-      type: Number || String
-    },
-    stripe: {
-      type: Boolean,
-      default: false
-    },
     border: {
       type: Boolean,
       default: true
-    },
-    fit: {
-      type: Boolean,
-      default: true
-    },
-    showHeader: {
-      type: Boolean,
-      default: true
-    },
-    api: {
-      type: Function,
-      required: true
     },
     columns: {
       type: Object,
       required: true
     },
+    customHeaderRow: {
+      type: Function
+    },
+    customRow: {
+      type: Function
+    },
+    locale: {
+      type: Object,
+      default: {
+        filterConfirm: `确定`,
+        filterReset: `重置`,
+        emptyText: `暂无数据`
+      }
+    },
+    rowSelection: {
+      type: Object
+    },
+    scroll: {
+      type: Object
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    showSorterTooltip: {
+      type: Boolean,
+      default: true
+    },
+    sticky: {
+      type: Boolean,
+      default: true
+    },
+    tableLayout: {
+      type: String,
+      default: 'fixed'
+    },
+    api: {
+      type: Function,
+      required: true
+    },
+    defaultValue: {
+      type: Object
+    },
+    idName: {
+      type: String,
+      default: 'id'
+    },
     pageSize: {
       type: Number,
       default: 10
+    },
+    stripe: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
     const store = useStore()
 
+    //数据源
     const dataSource = ref()
 
     const tableData = reactive({
-      loading: false
-    })
-
-    const paginationData = reactive({
-      pageSize: props.pageSize
+      loading: false,
+      pagination: {
+        pageSize: props.pageSize,
+        showTotal: function (total) {
+          return `共 ${total} 条`
+        }
+      },
+      tableSize: computed(() => store.state.settings.tableSize),
+      selectedRowKeys: []
     })
 
     const queryParams = reactive({
@@ -121,11 +150,41 @@ export default {
         )
 
         await props.api(queryData, props.defaultValue).then(res => {
-          // tableData.pagination.total = res.data.total
+          tableData.pagination.total = res.data.total
           dataSource.value = res.data.items
           tableData.loading = false
         })
 
+        return true
+      },
+      handleTableChange: (pagination, filters, sorter) => {
+        tableData.pagination.current = queryParams.current = pagination.current
+
+        delete sorter.column && delete sorter.columnKey
+        !sorter.order && delete sorter.field
+        queryParams.sorter = sorter
+
+        for (let item in filters) {
+          filters[item] = filters[item].toString()
+        }
+        queryParams.filters = filters
+
+        methods.getData()
+      },
+      onSelectChange: selectedRowKeys => {
+        tableData.selectedRowKeys = selectedRowKeys
+      },
+      refresh: async (query, other) => {
+        queryParams.query = query
+        queryParams.other = other
+        await methods.getData()
+        return true
+      },
+      reset: async (query, other) => {
+        tableData.pagination.current = queryParams.current = 1
+        queryParams.query = query
+        queryParams.other = other
+        await methods.getData()
         return true
       }
     })
@@ -135,7 +194,6 @@ export default {
     return {
       dataSource,
       ...toRefs(tableData),
-      ...toRefs(paginationData),
       ...toRefs(methods)
     }
   }

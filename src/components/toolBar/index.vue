@@ -28,11 +28,7 @@
             v-if="hasExport"
             v-has="exportPer"
             @click="exportExcel"
-            style="
-              background-color: #fff39f !important;
-              border-color: #ffba00 !important;
-              color: #e5a700 !important;
-            "
+            type="info"
           >
             <template #icon>
               <svg class="icon" ariel-hidden="true" font-size="15px">
@@ -87,7 +83,7 @@
               class="icon"
               ariel-hidden="true"
               font-size="20px"
-              @click="showColumnsModal"
+              @click="columnsVisible = true"
             >
               <use xlink:href="#icon-column-setting" />
             </svg>
@@ -95,26 +91,27 @@
         </el-space>
       </div>
     </el-row>
-    <!-- <el-modal
-      title="显示/隐藏"
-      :width="498"
-      :visible="columnsVisible"
-      :centered="true"
-      @ok="changeColumns"
-      @cancel="closeColumnsModal"
+    <el-dialog
+      v-model="columnsVisible"
+      :width="700"
+      title="列设置"
+      align-center
     >
-      <el-card :bordered="false">
+      <div style="text-align: center">
         <el-transfer
-          :dataSource="transferData"
+          v-model="targetKeys"
+          :data="transferData"
+          :filterable="true"
           :titles="['显示', '隐藏']"
-          :targetKeys="targetKeys"
-          :selectedKeys="selectedKeys"
-          :render="item => item.title"
-          @change="handleColumnsChange"
-          @selectChange="handleColumnsSelectChange"
         />
-      </el-card>
-    </el-modal> -->
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="columnsVisible = false">取消</el-button>
+          <el-button type="primary" @click="changeColumns"> 确认 </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -196,12 +193,6 @@ export default {
       },
       changeSize: key => {
         store.dispatch('settings/setTableSize', key)
-      },
-      showColumnsModal: () => {
-        columnsData.columnsVisible = true
-      },
-      closeColumnsModal: () => {
-        columnsData.columnsVisible = false
       },
       handleColumnsChange: (nextTargetKeys, direction, moveKeys) => {
         columnsData.targetKeys = nextTargetKeys

@@ -149,7 +149,7 @@ export default {
       line-height: 32px;
     }
     .is-active {
-      background: var(--el-color-primary-light-9);
+      // background: var(--el-color-primary-light-9);
       border: 1px solid var(--el-color-primary) !important;
     }
   }

@@ -235,10 +235,10 @@ export function initSetting(setting) {
     t => presetPrimaryColors[t] == setting.themeColor
   )
 
-  root.style.setProperty(
-    '--el-color-primary-light-9',
-    presetPalettes[themeColor][0]
-  )
+  // root.style.setProperty(
+  //   '--el-color-primary-light-9',
+  //   presetPalettes[themeColor][0]
+  // )
   // root.style.setProperty('--theme-color-primary', color)
   // root.style.setProperty('--theme-menu-selsct', themeMenuSelect[color][theme])
   // root.style.setProperty('--theme-primary-hover', themePrimaryHover[color])
