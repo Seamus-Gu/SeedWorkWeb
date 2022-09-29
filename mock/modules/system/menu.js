@@ -5,7 +5,7 @@
  */
 const menuRoutes = [
   {
-    name: 'system',
+    name: 'System',
     path: '/system',
     hidden: false,
     component: 'Layout',
@@ -21,7 +21,7 @@ const menuRoutes = [
         component: 'system/user/index',
         meta: {
           title: '用户管理',
-          icon: 'yonghuguanli'
+          icon: 'user-manage'
         }
       },
       {
@@ -31,7 +31,7 @@ const menuRoutes = [
         component: 'system/role/index',
         meta: {
           title: '角色管理',
-          icon: 'jiaoseguanli'
+          icon: 'role-manage'
         }
       },
       {
@@ -41,7 +41,7 @@ const menuRoutes = [
         component: 'system/menu/index',
         meta: {
           title: '菜单管理',
-          icon: 'caidanguanli'
+          icon: 'menu-manage'
         }
       },
       {
@@ -50,8 +50,8 @@ const menuRoutes = [
         hidden: false,
         component: 'system/dept/index',
         meta: {
-          title: '组织管理',
-          icon: 'zuzhi1'
+          title: '部门管理',
+          icon: 'org-manage'
         }
       },
       {
@@ -59,13 +59,13 @@ const menuRoutes = [
         path: '/system/dictionary',
         hidden: false,
         component: 'system/dictionary/index',
-        meta: { title: '字典管理', icon: 'zidianguanli' }
+        meta: { title: '字典管理', icon: 'dic-manage' }
       },
       {
         name: 'log',
         path: '/system/log',
         hidden: false,
-        meta: { title: '日志管理', icon: 'rizhiguanli' },
+        meta: { title: '日志管理', icon: 'log' },
         component: 'ParentView',
         children: [
           {
@@ -87,6 +87,65 @@ const menuRoutes = [
               title: '登录日志',
               icon: 'denglurizhi'
             }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Components',
+    path: '//components',
+    hidden: false,
+    redirect: 'noRedirect',
+    component: 'Layout',
+    alwaysShow: true,
+    meta: {
+      title: '组件',
+      icon: 'guide',
+      noCache: false,
+      link: null
+    },
+    children: [
+      {
+        path: '/',
+        hidden: false,
+        redirect: 'noRedirect',
+        component: 'ParentView',
+        alwaysShow: true,
+        meta: {
+          title: '数据展示',
+          icon: 'user-manage',
+          noCache: false,
+          link: null
+        },
+        children: [
+          {
+            name: 'DataShow',
+            path: '/dataShow',
+            hidden: false,
+            redirect: 'noRedirect',
+            component: 'ParentView',
+            alwaysShow: true,
+            meta: {
+              title: 'Table',
+              icon: 'user-manage',
+              noCache: false,
+              link: null
+            },
+            children: [
+              {
+                name: 'Table',
+                path: '/table',
+                hidden: false,
+                component: 'components/dataShow/table/index',
+                meta: {
+                  title: '默认table',
+                  icon: 'user-manage',
+                  noCache: false,
+                  link: null
+                }
+              }
+            ]
           }
         ]
       }
