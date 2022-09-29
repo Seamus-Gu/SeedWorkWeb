@@ -4,106 +4,80 @@
  * @Date: 2022-01-06 09:53:45
 -->
 <template>
-  <el-table
-    v-loading="loading"
-    :data="dataSource"
-    :border="border"
+  <a-table
+    :tableLayout="tableLayout"
+    class="ant-table-striped"
+    :columns="columns.filter(t => t.visible != false)"
+    :dataSource="dataSource"
+    :pagination="pagination"
+    :loading="loading"
+    @change="handleTableChange"
+    :rowKey="record => record[idName]"
+    :scroll="scroll"
+    :row-selection="rowSelection"
+    :rowClassName="
+      stripe == true
+        ? (record, index) => (index % 2 === 1 ? 'table-striped' : null)
+        : index => index
+    "
     :size="tableSize"
+    :bordered="bordered"
   >
     <template
-      v-for="item in columns.filter(t => t.visible != false)"
-      :key="item.index"
+      v-for="slot in columns.filter(t => t.slots).map(t => t.slots)"
+      #[slot.customRender]="slotData"
     >
-      <el-table-column
-        :prop="item.dataIndex"
-        :label="item.label"
-        :formatter="item.formatter"
-      >
-        <template v-if="$slots[item.dataIndex]" #default="slotData">
-          <slot
-            :name="item.dataIndex"
-            :row="slotData.row"
-            :column="slotData.column"
-            :$index="slotData.$index"
-          ></slot>
-        </template>
-      </el-table-column>
+      <slot
+        :name="slot.customRender"
+        :record="slotData.record"
+        :text="slotData.text"
+      />
     </template>
-  </el-table>
-  <div class="table-pagination">
-    <el-pagination
-      layout="prev, pager, next"
-      :total="pagination.total"
-      :pageSize="pagination.pageSize"
-      :background="true"
-    />
-  </div>
+  </a-table>
 </template>
 <script>
-export default {
+export default defineComponent({
   props: {
-    border: {
+    bordered: {
       type: Boolean,
       default: true
     },
-    columns: {
-      type: Object,
-      required: true
-    },
-    customHeaderRow: {
-      type: Function
-    },
-    customRow: {
-      type: Function
-    },
-    locale: {
-      type: Object,
-      default: {
-        filterConfirm: `确定`,
-        filterReset: `重置`,
-        emptyText: `暂无数据`
-      }
-    },
-    rowSelection: {
-      type: Object
-    },
-    scroll: {
-      type: Object
-    },
-    showHeader: {
+    stripe: {
       type: Boolean,
-      default: true
+      default: false
     },
-    showSorterTooltip: {
+    selection: {
       type: Boolean,
-      default: true
-    },
-    sticky: {
-      type: Boolean,
-      default: true
-    },
-    tableLayout: {
-      type: String,
-      default: 'fixed'
-    },
-    api: {
-      type: Function,
-      required: true
-    },
-    defaultValue: {
-      type: Object
-    },
-    idName: {
-      type: String,
-      default: 'id'
+      default: false
     },
     pageSize: {
       type: Number,
       default: 10
     },
-    stripe: {
-      type: Boolean,
-      default: false
+    idName: {
+      type: String,
+      default: 'id'
+    },
+    tableLayout: {
+      type: String,
+      default: 'fixed'
+    },
+    columns: {
+      type: Object,
+      required: true
+    },
+    scroll: {
+      type: Object
+    },
+    defaultValue: {
+      type: Object
+    },
+    rowSelection: {
+      type: Object
+    },
+    api: {
+      type: Function,
+      required: true
     }
   },
   setup(props) {
@@ -197,13 +171,10 @@ export default {
       ...toRefs(methods)
     }
   }
-}
+})
 </script>
 <style scoped>
 .ant-table-striped :deep(.table-striped) td {
   background-color: #fafafa;
-}
-.table-pagination {
-  padding: 32px 16px;
 }
 </style>

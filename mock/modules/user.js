@@ -6,7 +6,7 @@
 
 const mockjs = require('mockjs')
 const userList = mockjs.mock({
-  'items|30': [
+  'items|10': [
     {
       userName: '@first()',
       nickName: '@cname()',

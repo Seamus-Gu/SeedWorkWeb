@@ -193,28 +193,27 @@ const columns = [
   {
     label: '用户名',
     dataIndex: 'userName',
-    sorter: true
+    sortable: true
   },
   {
     label: '用户昵称',
     dataIndex: 'nickName',
-    sorter: true
+    sortable: true
   },
   {
     label: '电话号码',
-    width: 150,
     dataIndex: 'phoneNumber',
-    sorter: true
+    sortable: true
   },
   {
     label: '状态',
     dataIndex: 'userStatus',
-    sorter: true
+    sortable: true
   },
   {
     label: '创建时间',
     dataIndex: 'createTime',
-    sorter: true,
+    sortable: true,
     formatter: row => {
       return dayjs(row.createTime).format('YYYY-MM-DD')
     }

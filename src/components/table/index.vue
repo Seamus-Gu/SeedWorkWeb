@@ -13,15 +13,21 @@
     :size="tableSize"
     :fit="fit"
     :showHeader="showHeader"
-    highlight-current-row
+    :highlightCurrentRow="highlightCurrentRow"
+    @sortChange="sortChange"
   >
     <template
       v-for="item in columns.filter(t => t.visible != false)"
       :key="item.index"
     >
       <el-table-column
-        :prop="item.dataIndex"
+        :type="item.type"
         :label="item.label"
+        :prop="item.dataIndex"
+        :width="item.width"
+        :minWidth="item.minWidth"
+        :fixed="item.fixed"
+        :sortable="item.sortable ? 'custom' : false"
         :formatter="item.formatter"
       >
         <template v-if="$slots[item.dataIndex]" #default="slotData">
@@ -41,6 +47,7 @@
       :total="total"
       :pageSize="pageSize"
       :background="true"
+      @currentChange="currentChange"
     />
   </div>
 </template>
@@ -69,6 +76,10 @@ export default {
       type: Boolean,
       default: true
     },
+    highlightCurrentRow: {
+      type: Boolean,
+      default: false
+    },
     api: {
       type: Function,
       required: true
@@ -92,14 +103,14 @@ export default {
     })
 
     const paginationData = reactive({
-      pageSize: props.pageSize
+      current: undefined,
+      total: undefined
     })
 
     const queryParams = reactive({
       pageSize: props.pageSize,
       current: 1,
       sorter: {},
-      filters: {},
       query: {},
       other: {}
     })
@@ -108,7 +119,7 @@ export default {
       getData: async () => {
         tableData.loading = true
 
-        var queryData = {}
+        const queryData = {}
         queryData.current = queryParams.current
         queryData.pageSize = queryParams.pageSize
 
@@ -121,12 +132,23 @@ export default {
         )
 
         await props.api(queryData, props.defaultValue).then(res => {
-          // tableData.pagination.total = res.data.total
+          paginationData.total = res.data.total
           dataSource.value = res.data.items
           tableData.loading = false
         })
 
         return true
+      },
+      currentChange: current => {
+        queryParams.current = current
+
+        methods.getData()
+      },
+      sortChange: sortData => {
+        queryParams.sorter = sorter
+
+        methods.getData()
+        debugger
       }
     })
 
@@ -145,7 +167,8 @@ export default {
 .ant-table-striped :deep(.table-striped) td {
   background-color: #fafafa;
 }
-.table-pagination {
-  padding: 32px 16px;
+.table-pagination .el-pagination {
+  margin: 8px 0 8px 0;
+  float: right;
 }
 </style>
