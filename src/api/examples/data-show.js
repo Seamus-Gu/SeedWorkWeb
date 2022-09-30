@@ -6,10 +6,10 @@
  */
 
 import request from '@/utils/request'
-const baseUrl = '/example/dataShow/table'
+const baseUrl = '/example/dataShow'
 
 // 获取列表
-export function getUserList(query) {
+export function getList(query) {
   return request({
     url: baseUrl + '/list',
     method: 'get',

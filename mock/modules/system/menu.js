@@ -137,7 +137,7 @@ const menuRoutes = [
                 name: 'Table',
                 path: '/table',
                 hidden: false,
-                component: 'components/dataShow/table/index',
+                component: 'examples/dataShow/table/index',
                 meta: {
                   title: '默认table',
                   icon: 'user-manage',

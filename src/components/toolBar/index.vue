@@ -55,14 +55,11 @@
       <div class="main-right">
         <el-space>
           <el-tooltip content="刷新" placement="top">
-            <svg
-              class="icon"
-              ariel-hidden="true"
-              font-size="18px"
-              @click="refresh"
-            >
-              <use xlink:href="#icon-refresh" />
-            </svg>
+            <div class="refresh-svg" @click="refresh">
+              <svg class="icon" ariel-hidden="true" font-size="18px">
+                <use xlink:href="#icon-refresh" />
+              </svg>
+            </div>
           </el-tooltip>
           <el-tooltip content="密度" placement="top">
             <el-dropdown :trigger="['click']" @command="changeSize">
@@ -79,14 +76,11 @@
             </el-dropdown>
           </el-tooltip>
           <el-tooltip content="列设置" placement="top">
-            <svg
-              class="icon"
-              ariel-hidden="true"
-              font-size="20px"
-              @click="columnsVisible = true"
-            >
-              <use xlink:href="#icon-column-setting" />
-            </svg>
+            <div class="columns-svg" @click="columnsVisible = true">
+              <svg class="icon" ariel-hidden="true" font-size="20px">
+                <use xlink:href="#icon-column-setting" />
+              </svg>
+            </div>
           </el-tooltip>
         </el-space>
       </div>

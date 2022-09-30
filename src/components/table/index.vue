@@ -28,6 +28,7 @@
         :minWidth="item.minWidth"
         :fixed="item.fixed"
         :sortable="item.sortable ? 'custom' : false"
+        :resizable="item.resizable"
         :formatter="item.formatter"
       >
         <template v-if="$slots[item.dataIndex]" #default="slotData">
@@ -52,6 +53,23 @@
   </div>
 </template>
 <script>
+/*
+ */
+
+/* Columns
+  dataIndex string 字段名称
+  type selection / index / expand 对应列的类型。selection 多选框 index 索引（从 1 开始） expand 可展开按钮
+  label string 列名
+  width string / number 对应列的宽度
+  minWidth string / number 对应列的最小宽度
+  fixed 'left' / 'right' 列是否固定在左侧或者右侧
+  sortable boolean 对应列是否可以排序(远程)
+  resizable boolean 对应列是否可以通过拖动改变宽度（table border为true）
+  formatter function(row, column, cellValue, index) 用来格式化内容
+  showOverflowTooltip boolean 当内容过长被隐藏时显示 tooltip
+  align 	left / center / right 对齐方式
+  headerAlign 	left / center / right 表头对齐方式
+ */
 export default {
   props: {
     height: {
