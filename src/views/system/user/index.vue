@@ -42,7 +42,7 @@
                 @exportExcel="exportExcel"
               >
               </ToolBar>
-              <Table
+              <!-- <Table
                 idName="userId"
                 :columns="columns"
                 :api="getUserList"
@@ -84,39 +84,18 @@
                     重置密码
                   </el-button>
                 </template>
-              </Table>
+              </Table> -->
             </Panel>
           </el-col>
         </el-row>
       </el-col>
     </el-row>
     <!-- <Form
-      ref="formRef"
-      :visible="formVisible"
       :schema="schema"
-      :formState="formState"
-      :rules="formRules"
+      :visible="formVisible"
       :title="formTitle"
-      :confirmLoading="confirmLoading"
-      @ok="submitForm"
-      @cancel="cancel"
+      :formState="formState"
     >
-      <template v-if="showPassword" #password>
-        <el-col :span="12">
-          <el-form-item
-            label="用户密码"
-            :labelCol="{ style: { width: '80px' } }"
-            :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
-            name="password"
-          >
-            <el-input-password
-              v-model:value="formState.password"
-              placeholder="请输入密码"
-              autocomplete="off"
-            ></el-input-password>
-          </el-form-item>
-        </el-col>
-      </template>
     </Form> -->
   </div>
 </template>
@@ -131,8 +110,7 @@ import {
   resetPwd,
   exportUserList
 } from '@/api/system/user'
-import { getRoleList } from '@/api/system/role'
-// import { getDeptTreeSelect } from '@/api/system/dept'
+import { getDeptTree } from '@/api/system/dept'
 import lodash from 'lodash'
 
 import {
@@ -377,7 +355,6 @@ export default {
     const { proxy } = getCurrentInstance()
 
     const treeData = reactive({
-      // getDeptTreeSelect,
       selectedId: undefined
     })
 

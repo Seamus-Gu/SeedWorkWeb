@@ -9,9 +9,9 @@ import request from '@/utils/request'
 const baseUrl = '/system/dept'
 
 // 获取组织树
-export function getdeptTree(query) {
+export function getDeptTree(query) {
   return request({
-    url: baseUrl + '/tree',
+    url: baseUrl + '/deptTree',
     method: 'get',
     params: query
   })

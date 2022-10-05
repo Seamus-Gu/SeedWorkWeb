@@ -89,7 +89,8 @@
       v-model="columnsVisible"
       :width="700"
       title="列设置"
-      align-center
+      style="display: flex"
+      customClass="align-center-dialog"
     >
       <div style="text-align: center">
         <el-transfer
@@ -110,7 +111,6 @@
 </template>
 <script>
 import { getToken } from '@/utils/session-storage'
-
 export default {
   components: {},
   props: {
@@ -219,4 +219,5 @@ export default {
 .tool-bar-container {
   margin-bottom: 8px;
 }
+// 垂直居中
 </style>

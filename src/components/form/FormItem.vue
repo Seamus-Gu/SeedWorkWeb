@@ -15,7 +15,7 @@
       :bordered="componentProps.bordered"
       :disabled="componentProps.disabled || allDisabled"
     />
-    <el-input-number
+    <!-- <el-input-number
       v-else-if="formItem.component == 'inputNumber'"
       style="width: 100%"
       v-model:value="formState[formItem.dataIndex]"
@@ -113,7 +113,7 @@
       :placeholder="formItem.placeholder || '请选择日期'"
       :disabled="componentProps.disabled || allDisabled"
       valueFormat="YYYY-MM-DD"
-    ></el-week-picker>
+    ></el-week-picker> -->
   </el-form-item>
 </template>
 

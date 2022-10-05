@@ -5,6 +5,7 @@
  */
 
 // export { default as Comment } from './comment'
+export { default as Dialog } from './dialog'
 export { default as EChart } from './echart'
 export { default as PieChart } from './echart/PieChart'
 export { default as BarChart } from './echart/BarChart'
