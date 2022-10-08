@@ -40,12 +40,12 @@
           </div>
         </el-row>
         <el-row align="center">
-          <el-pagination
+          <!-- <el-pagination
             :total="listTotal"
             :pageSize="pageSize"
             size="small"
             @change="changeCurrent"
-          />
+          /> -->
         </el-row>
       </template>
       <template v-else>

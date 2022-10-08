@@ -89,7 +89,6 @@
       v-model="columnsVisible"
       :width="700"
       title="列设置"
-      style="display: flex"
       customClass="align-center-dialog"
     >
       <div style="text-align: center">

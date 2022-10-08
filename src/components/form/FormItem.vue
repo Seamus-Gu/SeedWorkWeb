@@ -1,24 +1,39 @@
 <template>
-  <el-form-item
-    :label="formItem.title"
-    :labelCol="{ style: { width: '80px' } }"
-    :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
-    :name="formItem.dataIndex"
-  >
+  <el-form-item :label="formItem.title" label-width="80px">
     <el-input
       v-if="formItem.component == 'input'"
+      v-model="model[formItem.dataIndex]"
+      :maxlength="componentProps.maxlength"
+      :minlength="componentProps.minlength"
+      :showWordLimit="componentProps.showWordLimit"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
-      v-model:value="formState[formItem.dataIndex]"
-      :allowClear="componentProps.allowClear"
-      :addonBefore="componentProps.addonBefore"
-      :addonAfter="componentProps.addonAfter"
-      :bordered="componentProps.bordered"
+      :clearable="componentProps.clearable"
+      :formatter="componentProps.formatter"
+      :parser="componentProps.parser"
       :disabled="componentProps.disabled || allDisabled"
+      :autocomplete="componentProps.autocomplete"
+      :name="componentProps.name"
+      :readonly="componentProps.readonly"
     />
+    <el-select
+      v-else-if="formItem.component == 'select'"
+      v-model="model[formItem.dataIndex]"
+      style="width: 100%"
+      :disabled="componentProps.disabled || allDisabled"
+      :placeholder="formItem.placeholder || '请选择' + formItem.title"
+    >
+      <el-option
+        v-for="item in componentProps.options || requestData"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
     <!-- <el-input-number
       v-else-if="formItem.component == 'inputNumber'"
       style="width: 100%"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
       :formatter="componentProps.formatter"
       :max="componentProps.max || 9999999999"
@@ -30,7 +45,7 @@
     <el-textarea
       v-if="formItem.component == 'textarea'"
       :placeholder="formItem.placeholder || '请输入' + formItem.title"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :disabled="componentProps.disabled || allDisabled"
       :autosize="componentProps.autosize"
       :allowClear="componentProps.allowClear"
@@ -38,7 +53,7 @@
     />
     <el-select
       v-else-if="formItem.component == 'select'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
       :options="componentProps.options || requestData"
       :disabled="componentProps.disabled || allDisabled"
@@ -46,7 +61,7 @@
     </el-select>
     <el-select
       v-else-if="formItem.component == 'multiple'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       mode="multiple"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
       :options="componentProps.options || requestData"
@@ -55,19 +70,19 @@
     </el-select>
     <el-tree-select
       v-else-if="formItem.component == 'treeSelect'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
       :treeData="requestData"
       :disabled="componentProps.disabled || allDisabled"
     ></el-tree-select>
     <el-checkbox
       v-else-if="formItem.component == 'checkbox'"
-      v-model:checked="formState[formItem.dataIndex]"
+      v-model:checked="model[formItem.dataIndex]"
       :disabled="componentProps.disabled || allDisabled"
     ></el-checkbox>
     <el-radio-group
       v-else-if="formItem.component == 'radio'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :disabled="componentProps.disabled || allDisabled"
     >
       <el-radio
@@ -80,7 +95,7 @@
     </el-radio-group>
     <el-date-picker
       v-else-if="formItem.component == 'datePicker'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择日期'"
       :valueFormat="
         componentProps.showTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'
@@ -92,14 +107,14 @@
     ></el-date-picker>
     <el-month-picker
       v-else-if="formItem.component == 'monthPicker'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择日期'"
       :disabled="componentProps.disabled || allDisabled"
       valueFormat="YYYY-MM-DD"
     ></el-month-picker>
     <el-range-picker
       v-else-if="formItem.component == 'rangePicker'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :defaultPickerValue="componentProps.defaultPickerValue"
       :disabledTime="componentProps.disabledTime"
       :disabled="componentProps.disabled || allDisabled"
@@ -109,7 +124,7 @@
     ></el-range-picker>
     <el-week-picker
       v-else-if="formItem.component == 'weekPicker'"
-      v-model:value="formState[formItem.dataIndex]"
+      v-model:value="model[formItem.dataIndex]"
       :placeholder="formItem.placeholder || '请选择日期'"
       :disabled="componentProps.disabled || allDisabled"
       valueFormat="YYYY-MM-DD"
@@ -123,7 +138,7 @@ export default {
     allDisabled: {
       type: Boolean
     },
-    formState: {
+    model: {
       type: Object
     },
     formItem: {
@@ -139,12 +154,12 @@ export default {
 
     onBeforeMount(async () => {
       if (props.componentProps.request) {
-        let value = props.formState[props.formItem.dataIndex]
-        props.formState[props.formItem.dataIndex] = null
+        let value = props.model[props.formItem.dataIndex]
+        props.model[props.formItem.dataIndex] = null
 
         await props.componentProps.request().then(res => {
           requestData.value = res
-          props.formState[props.formItem.dataIndex] = value
+          props.model[props.formItem.dataIndex] = value
         })
       }
     })

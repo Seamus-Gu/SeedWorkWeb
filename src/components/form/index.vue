@@ -11,28 +11,26 @@
       :showClose="showClose"
       :draggable="draggable"
       :center="center"
-      :alignCenter="alignCenter"
       :destroyOnClose="destroyOnClose"
       @open="open"
       @opened="opened"
       @close="close"
       @closed="closed"
     >
-      <el-form ref="aFormRef" :rules="rules" :model="formState">
-        <el-row :gutter="16" style="margin-top: 16px">
+      <el-form ref="elFormRef" :rules="rules" :model="model">
+        <el-row :gutter="16">
           <template
             v-for="item in schema.filter(t => t.visible != false)"
             :key="item.dataIndex"
           >
             <el-col v-if="item.component" :span="item.span || 12">
-              {{ formState }}
-              <!-- <FormItem
-                :formState="formState"
+              <FormItem
+                :model="model"
                 :formItem="item"
                 :allDisabled="allDisabled"
                 :componentProps="item.componentProps"
               >
-              </FormItem> -->
+              </FormItem>
             </el-col>
             <slot v-else :name="item.dataIndex"></slot>
           </template>
@@ -55,7 +53,7 @@ import FormItem from './FormItem.vue'
 
 /** Form 弹出表单
  * schema object 生成表单属性
- *
+ * allDisabled 是否全部禁用
  * el-dialog
  * visible boolean 是否显示表单
  * title string 对话框标题
@@ -71,17 +69,25 @@ import FormItem from './FormItem.vue'
  * destroyOnClose 当关闭时，销毁Form中的元素
  * el-form
  * model 表单数据对象
+ * rules 验证规则
  *
  *
  *
- *
- *
+ * 事件
+ * open
+ * opened
+ * close
+ * closed
  */
 export default {
   props: {
     schema: {
       type: Object,
       required: true
+    },
+    allDisabled: {
+      type: Boolean,
+      default: false
     },
     visible: {
       type: Boolean
@@ -126,15 +132,22 @@ export default {
     destroyOnClose: {
       type: Boolean,
       default: true
+    },
+    model: {
+      type: Object
+    },
+    rules: {
+      type: Object
     }
   },
   components: { FormItem },
   setup(props, context) {
+    const elFormRef = ref()
     const methods = reactive({
       open: () => {
         context.emit('open')
       },
-      opend: () => {
+      opened: () => {
         context.emit('opend')
       },
       close: () => {
@@ -142,16 +155,23 @@ export default {
       },
       closed: () => {
         context.emit('closed')
+      },
+      validate: (isValid, invalidFields) => {
+        return elFormRef.value.validate(isValid, invalidFields)
+      },
+      validateField: (isValid, invalidFields) => {
+        return elFormRef.value.validateField(isValid, invalidFields)
+      },
+      resetFields: () => {
+        return elFormRef.value.resetFields()
+      },
+      clearValidate: () => {
+        return elFormRef.value.clearValidate()
       }
-      // validate: () => {
-      //   return aFormRef.value.validate()
-      // },
-      // resetFields: () => {
-      //   return aFormRef.value.resetFields()
-      // }
     })
 
     return {
+      elFormRef,
       ...toRefs(methods)
     }
   }

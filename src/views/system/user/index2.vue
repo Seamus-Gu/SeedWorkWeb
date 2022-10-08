@@ -7,15 +7,15 @@
 -->
 <template>
   <div class="user-container">
-    <el-row :gutter="8">
-      <el-col :span="6" class="dept-tree">
+    <Row>
+      <Col :span="6" class="dept-tree">
         <Panel :scrollX="true" class="tree-panel" height="calc(100% - 8px)">
-          <!-- <Tree :api="getDeptTreeSelect" @select="selectTree"> </Tree> -->
+          <Tree :api="getOrganizationTreeSelect" @select="selectTree"> </Tree>
         </Panel>
-      </el-col>
-      <el-col :span="18" class="user-table">
-        <el-row>
-          <el-col :span="24">
+      </Col>
+      <Col :span="18" class="user-table">
+        <Row>
+          <Col :span="24">
             <Panel>
               <QueryForm
                 :filters="filters"
@@ -23,14 +23,14 @@
                 :queryLoad="queryLoad"
                 :resetLoad="resetLoad"
                 @query="handleQuery"
-                @reset="handleReset"
+                @reset="resetQuery"
               >
               </QueryForm>
             </Panel>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
+          </Col>
+        </Row>
+        <Row>
+          <Col :span="24">
             <Panel>
               <ToolBar
                 :hasExport="true"
@@ -38,67 +38,82 @@
                 :exportPer="['system:user:export']"
                 :columns="columns"
                 @add="handleAdd"
-                @refresh="handleRefresh"
-                @exportExcel="handleExport"
+                @refresh="refresh"
+                @exportExcel="exportExcel"
               >
               </ToolBar>
-              <Table ref="tableRef" :columns="columns" :api="getUserList">
-                <template #userStatus="{ row }">
-                  <el-tag :type="row.userStatus === '0' ? 'success' : 'danger'">
-                    {{ row.userStatus === '0' ? '正常' : '停用' }}
-                  </el-tag>
-                </template>
-                <template #action>
-                  <el-button
-                    v-has="['system:user:edit']"
-                    link
-                    type="primary"
-                    size="small"
-                    @click="handleEdit(record.userId)"
-                  >
-                    修改
-                  </el-button>
-                  <el-divider direction="vertical" />
-                  <el-button
-                    v-has="['system:user:remove']"
-                    link
-                    type="primary"
-                    size="small"
-                    @click="handleDelete(record.userId)"
-                  >
-                    删除
-                  </el-button>
-                  <el-divider direction="vertical" />
-                  <el-button
-                    v-has="['system:user:resetPwd']"
-                    link
-                    type="primary"
-                    size="small"
-                    @click="resetPwd(record)"
-                  >
-                    重置密码
-                  </el-button>
+              <Table
+                idName="userId"
+                :columns="columns"
+                :api="getUserList"
+                ref="tableRef"
+              >
+                <template #bodyCell="{ column, record }">
+                  <template v-if="column.dataIndex === 'userStatus'">
+                    <a-tag :color="record.userStatus === '0' ? 'green' : 'red'">
+                      {{ record.userStatus === '0' ? '正常' : '停用' }}
+                    </a-tag>
+                  </template>
+                  <template v-else-if="column.dataIndex === 'action'">
+                    <a
+                      v-has="['system:user:edit']"
+                      @click="handleEdit(record.userId)"
+                    >
+                      修改
+                    </a>
+                    <a-divider type="vertical" />
+                    <a
+                      v-has="['system:user:remove']"
+                      @click="handleDelete(record.userId)"
+                    >
+                      删除
+                    </a>
+                    <a-divider type="vertical" />
+                    <a
+                      v-has="['system:user:resetPwd']"
+                      @click="resetPwd(record)"
+                    >
+                      重置密码
+                    </a>
+                  </template>
                 </template>
               </Table>
             </Panel>
-          </el-col>
-        </el-row>
-      </el-col>
-    </el-row>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
     <Form
       ref="formRef"
-      :schema="schema"
       :visible="formVisible"
-      :title="formTitle"
-      :model="formState"
+      :schema="schema"
+      :formState="formState"
       :rules="formRules"
-      @close="close"
+      :title="formTitle"
+      :confirmLoading="confirmLoading"
+      @ok="submitForm"
+      @cancel="cancel"
     >
+      <template v-if="showPassword" #password>
+        <a-col :span="12">
+          <a-form-item
+            label="用户密码"
+            :labelCol="{ style: { width: '80px' } }"
+            :wrapper-col="{ style: { width: 'calc(100% - 80px)' } }"
+            name="password"
+          >
+            <a-input-password
+              v-model:value="formState.password"
+              placeholder="请输入密码"
+              autocomplete="off"
+            ></a-input-password>
+          </a-form-item>
+        </a-col>
+      </template>
     </Form>
   </div>
 </template>
 <script>
-import dayjs from 'dayjs'
 import {
   getUserList,
   getUser,
@@ -108,7 +123,8 @@ import {
   resetPwd,
   exportUserList
 } from '@/api/system/user'
-import { getDeptTree } from '@/api/system/dept'
+import { getRoleList } from '@/api/system/role'
+import { getOrganizationTreeSelect } from '@/api/system/organization'
 import lodash from 'lodash'
 
 import {
@@ -125,7 +141,7 @@ import {
 const querySchema = [
   {
     title: '用户名',
-    dataIndex: 'userName',
+    dataIndex: 'username',
     component: 'input'
   },
   {
@@ -158,44 +174,39 @@ const querySchema = [
   {
     title: '创建时间',
     dataIndex: 'createTime',
-    component: 'datePicker',
-    componentProps: {
-      type: 'daterange'
-    }
+    component: 'rangePicker'
   }
 ]
 
 const columns = [
   {
-    label: '用户名',
-    dataIndex: 'userName',
-    sortable: true
+    title: '用户名',
+    dataIndex: 'username',
+    sorter: true
   },
   {
-    label: '用户昵称',
+    title: '用户昵称',
     dataIndex: 'nickName',
-    sortable: true
+    sorter: true
   },
   {
-    label: '电话号码',
+    title: '电话号码',
+    width: 150,
     dataIndex: 'phoneNumber',
-    sortable: true
+    sorter: true
   },
   {
-    label: '状态',
+    title: '状态',
     dataIndex: 'userStatus',
-    sortable: true
+    sorter: true
   },
   {
-    label: '创建时间',
+    title: '创建时间',
     dataIndex: 'createTime',
-    sortable: true,
-    formatter: row => {
-      return dayjs(row.createTime).format('YYYY-MM-DD')
-    }
+    sorter: true
   },
   {
-    label: '操作',
+    title: '操作',
     dataIndex: 'action',
     width: 200
   }
@@ -204,7 +215,7 @@ const columns = [
 const schema = [
   {
     title: '用户账号',
-    dataIndex: 'userName',
+    dataIndex: 'username',
     component: 'input'
   },
   {
@@ -268,12 +279,12 @@ const schema = [
   },
   {
     title: '所属组织',
-    dataIndex: 'deptId',
+    dataIndex: 'organizationId',
     span: 24,
     component: 'treeSelect',
     componentProps: {
       request: async () => {
-        const res = await getDeptTreeSelect()
+        const res = await getOrganizationTreeSelect()
         return res.data
       }
     }
@@ -298,7 +309,7 @@ const schema = [
 ]
 
 const formRules = {
-  userName: [
+  username: [
     {
       required: true,
       message: '用户名必须填写',
@@ -347,12 +358,13 @@ const formRules = {
   ]
 }
 
-export default {
+export default defineComponent({
   components: { Panel, Tree, Table, QueryForm, ToolBar, Form, Row, Col },
   setup() {
     const { proxy } = getCurrentInstance()
 
     const treeData = reactive({
+      getOrganizationTreeSelect,
       selectedId: undefined
     })
 
@@ -377,7 +389,7 @@ export default {
     })
 
     const formState = reactive({
-      userName: undefined,
+      username: undefined,
       password: undefined,
       nickName: undefined,
       code: undefined,
@@ -385,11 +397,17 @@ export default {
       email: undefined,
       sex: undefined,
       userStatus: '0',
-      deptId: undefined,
+      organizationId: undefined,
       roleIds: undefined
     })
 
     const methods = reactive({
+      selectTree: key => {
+        treeData.selectedId = key[0]
+        tableData.tableRef.reset(tableData.filters, {
+          organizationId: treeData.selectedId
+        })
+      },
       getFilterData: filters => {
         let data = {}
         if (!filters.createTime) {
@@ -402,24 +420,25 @@ export default {
           delete data.createTime
           data.params = params
         }
+
         return data
       },
       handleQuery: () => {
         tableData.queryLoad = true
         tableData.tableRef
           .reset(methods.getFilterData(tableData.filters), {
-            deptId: treeData.selectedId
+            organizationId: treeData.selectedId
           })
           .then(() => {
             tableData.queryLoad = false
           })
       },
-      handleReset: () => {
+      resetQuery: () => {
         tableData.filters = {}
         tableData.resetLoad = true
         tableData.tableRef
           .reset(tableData.filters, {
-            deptId: treeData.selectedId
+            organizationId: treeData.selectedId
           })
           .then(() => {
             tableData.resetLoad = false
@@ -430,7 +449,7 @@ export default {
         formData.showPassword = true
         formData.formVisible = true
       },
-      handleExport: () => {
+      exportExcel: () => {
         exportUserList().then(res => {
           let blob = new Blob([res], {
             type: 'application/vnd.ms-excel,charset=utf-8'
@@ -438,18 +457,18 @@ export default {
           saveAs(blob, '用户列表.xlsx')
         })
       },
-      handleRefresh: () => {
+      refresh: () => {
         tableData.tableRef.refresh(tableData.filters, {
-          deptId: treeData.selectedId
+          organizationId: treeData.selectedId
         })
       },
       resetForm: () => {
         Object.assign(formState, {
           userId: undefined,
-          userName: undefined,
+          username: undefined,
           password: undefined,
           nickName: undefined,
-          deptId: undefined,
+          organizationId: undefined,
           phoneNumber: undefined,
           email: undefined,
           sex: undefined,
@@ -457,77 +476,69 @@ export default {
           roleIds: undefined
         })
       },
-      close: () => {
+      cancel: () => {
         formData.formRef.resetFields()
         methods.resetForm()
         formData.formVisible = false
+      },
+      handleEdit: userId => {
+        formData.formTitle = '修改用户'
+        getUser(userId).then(res => {
+          formData.showPassword = false
+          Object.assign(formState, res.data.user)
+          formState.roleIds = res.data.roleIds
+          formData.formVisible = true
+        })
+      },
+      handleDelete: userId => {
+        proxy.$modal.del({
+          onOk: resolve => {
+            delUser(userId)
+              .then(() => {
+                resolve()
+                tableData.tableRef.reset(tableData.filters, {
+                  organizationId: treeData.selectedId
+                })
+              })
+              .catch(() => {
+                resolve()
+              })
+          }
+        })
+      },
+      resetPwd: entity => {
+        Object.assign(formState, entity)
+        proxy.$modal.confirm({
+          content: '确认要重置密码吗？',
+          onOk: resolve => {
+            resetPwd(formState)
+              .then(() => {
+                resolve()
+              })
+              .catch(() => {
+                resolve()
+              })
+          }
+        })
+      },
+      submitForm: () => {
+        formData.formRef.validate().then(() => {
+          formData.confirmLoading = true
+          if (formState.userId) {
+            editUser(formState).then(() => {
+              formData.confirmLoading = false
+              tableData.tableRef.reset()
+              methods.cancel()
+            })
+          } else {
+            addUser(formState).then(() => {
+              formData.confirmLoading = false
+              tableData.tableRef.reset()
+              methods.cancel()
+            })
+          }
+        })
       }
-
-      // selectTree: key => {
-      //   treeData.selectedId = key[0]
-      //   tableData.tableRef.reset(tableData.filters, {
-      //     deptId: treeData.selectedId
-      //   })
-      // },
-
-      // handleEdit: userId => {
-      //   formData.formTitle = '修改用户'
-      //   getUser(userId).then(res => {
-      //     formData.showPassword = false
-      //     Object.assign(formState, res.data.user)
-      //     formState.roleIds = res.data.roleIds
-      //     formData.formVisible = true
-      //   })
-      // },
-      // handleDelete: userId => {
-      //   proxy.$modal.del({
-      //     onOk: resolve => {
-      //       delUser(userId)
-      //         .then(() => {
-      //           resolve()
-      //           tableData.tableRef.reset(tableData.filters, {
-      //             deptId: treeData.selectedId
-      //           })
-      //         })
-      //         .catch(() => {
-      //           resolve()
-      //         })
-      //     }
-      //   })
-      // },
-      // resetPwd: entity => {
-      //   Object.assign(formState, entity)
-      //   proxy.$modal.confirm({
-      //     content: '确认要重置密码吗？',
-      //     onOk: resolve => {
-      //       resetPwd(formState)
-      //         .then(() => {
-      //           resolve()
-      //         })
-      //         .catch(() => {
-      //           resolve()
-      //         })
-      //     }
-      //   })
-      // },
-      // submitForm: () => {
-      //   formData.formRef.validate().then(() => {
-      //     formData.confirmLoading = true
-      //     if (formState.userId) {
-      //       editUser(formState).then(() => {
-      //         formData.confirmLoading = false
-      //         tableData.tableRef.reset()
-      //         methods.cancel()
-      //       })
-      //     } else {
-      //       addUser(formState).then(() => {
-      //         formData.confirmLoading = false
-      //         tableData.tableRef.reset()
-      //         methods.cancel()
-      //       })
-      //     }
-      //   })
-      // }
     })
 
     return {
@@ -538,6 +549,7 @@ export default {
       ...toRefs(methods)
     }
   }
-}
+})
 </script>
 <style lang="scss" scoped></style>
+s

@@ -115,21 +115,23 @@ export default {
     const dataSource = ref()
 
     const tableData = reactive({
-      loading: false
+      loading: false,
+      tableSize: computed(() => store.state.settings.tableSize)
     })
 
     const paginationData = reactive({
-      current: undefined,
-      total: undefined
+      current: 1,
+      total: 0,
+      size: 10
     })
 
-    const queryParams = reactive({
+    const queryParams = {
       pageSize: props.pageSize,
       current: 1,
       sorter: {},
       query: {},
       other: {}
-    })
+    }
 
     const methods = reactive({
       getData: async () => {
@@ -166,6 +168,19 @@ export default {
           field: sortData.prop
         }
         methods.getData()
+      },
+      refresh: async (query, other) => {
+        queryParams.query = query
+        queryParams.other = other
+        await methods.getData()
+        return true
+      },
+      reset: async (query, other) => {
+        paginationData.current = queryParams.current = 1
+        queryParams.query = query
+        queryParams.other = other
+        await methods.getData()
+        return true
       }
     })
 
