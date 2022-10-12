@@ -3,7 +3,7 @@
     <el-row justify="space-between" align="middle">
       <div class="main-left">
         <el-space>
-          <el-button v-has="addPer" v-if="hasAdd" type="primary" @click="add">
+          <el-button v-if="hasAdd" v-has="addPer" type="primary" @click="add">
             <template #icon>
               <svg class="icon" ariel-hidden="true" font-size="15px">
                 <use xlink:href="#icon-plus" />
@@ -12,8 +12,8 @@
             新增
           </el-button>
           <el-button
-            v-has="batchDeletePer"
             v-if="hasBatchDelete"
+            v-has="batchDeletePer"
             danger="true"
             @click="batchDelete"
           >
@@ -49,7 +49,7 @@
             </template>
             展开/折叠
           </el-button>
-          <slot></slot>
+          <slot name="mainLeft"></slot>
         </el-space>
       </div>
       <div class="main-right">
@@ -82,6 +82,7 @@
               </svg>
             </div>
           </el-tooltip>
+          <slot name="mainRight"></slot>
         </el-space>
       </div>
     </el-row>
@@ -108,8 +109,18 @@
     </el-dialog>
   </div>
 </template>
+
 <script>
-import { getToken } from '@/utils/session-storage'
+/**
+ * hasAdd boolean 是否有增加按钮(默认true)
+ * hasBatchDelete boolean 是否有批量删除(默认false)
+ * hasExport boolean 是否有导出(默认false)
+ * hasExpent boolean 是否有展开/折叠(默认false)
+ * addPer array 新增按钮权限数组
+ * batchDeletePer array 批量删除按钮权限数组
+ * exportPer array 导出按钮权限数组
+ * columns array table表格列设置数组
+ */
 export default {
   components: {},
   props: {
@@ -129,9 +140,6 @@ export default {
       type: Boolean,
       default: false
     },
-    sqlId: {
-      type: String
-    },
     addPer: {
       type: Array
     },
@@ -148,15 +156,6 @@ export default {
   },
   setup(props, context) {
     const store = useStore()
-
-    const uploadData = reactive({
-      uploadVisible: false,
-      headers: props.headers || { Authorization: getToken() },
-      url:
-        props.url ||
-        import.meta.env.VITE_APP_BASE_API + '/file/uploadLocalFile',
-      fileList: undefined
-    })
 
     const columnsData = reactive({
       transferData: props.columns.filter(t => {
@@ -206,7 +205,6 @@ export default {
     })
 
     return {
-      ...toRefs(uploadData),
       ...toRefs(columnsData),
       ...toRefs(methods)
     }

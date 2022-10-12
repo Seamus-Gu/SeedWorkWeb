@@ -3,6 +3,7 @@
     <el-input
       v-if="formItem.component == 'input'"
       v-model="model[formItem.dataIndex]"
+      style="width: 100%"
       :maxlength="componentProps.maxlength"
       :minlength="componentProps.minlength"
       :showWordLimit="componentProps.showWordLimit"
@@ -10,6 +11,7 @@
       :clearable="componentProps.clearable"
       :formatter="componentProps.formatter"
       :parser="componentProps.parser"
+      :showPassword="componentProps.showPassword"
       :disabled="componentProps.disabled || allDisabled"
       :autocomplete="componentProps.autocomplete"
       :name="componentProps.name"
@@ -20,7 +22,17 @@
       v-model="model[formItem.dataIndex]"
       style="width: 100%"
       :disabled="componentProps.disabled || allDisabled"
+      :clearable="componentProps.clearable"
+      :name="componentProps.name"
+      :autocomplete="componentProps.autocomplete"
       :placeholder="formItem.placeholder || '请选择' + formItem.title"
+      :filterable="componentProps.filterable"
+      :remote="componentProps.remote"
+      :remoteMethod="componentProps.remoteMethod"
+      :loading="componentProps.loading"
+      :loadingText="componentProps.loadingText"
+      :noMatchText="componentProps.noMatchText"
+      :noDataText="componentProps.noDataText"
     >
       <el-option
         v-for="item in componentProps.options || requestData"
@@ -30,6 +42,30 @@
       >
       </el-option>
     </el-select>
+    <el-select
+      v-else-if="formItem.component == 'multiple'"
+      v-model="model[formItem.dataIndex]"
+      style="width: 100%"
+      :multiple="true"
+      :disabled="componentProps.disabled || allDisabled"
+      :clearable="componentProps.clearable"
+      :collapseTags="componentProps.collapseTags"
+      :collapseTagsTooltip="componentProps.collapseTagsTooltip"
+      :multipleLimit="componentProps.multipleLimit"
+      :placeholder="formItem.placeholder || '请选择' + formItem.title"
+      :options="componentProps.options || requestData"
+    >
+    </el-select>
+    <el-tree-select
+      v-else-if="formItem.component == 'treeSelect'"
+      v-model="model[formItem.dataIndex]"
+      style="width: 100%"
+      :data="requestData"
+      :remote="componentProps.requestData"
+      :disabled="componentProps.disabled || allDisabled"
+      :placeholder="formItem.placeholder || '请选择' + formItem.title"
+      :checkStrictly="componentProps.checkStrictly"
+    ></el-tree-select>
     <!-- <el-input-number
       v-else-if="formItem.component == 'inputNumber'"
       style="width: 100%"
@@ -51,30 +87,8 @@
       :allowClear="componentProps.allowClear"
       :showCount="componentProps.showCount"
     />
-    <el-select
-      v-else-if="formItem.component == 'select'"
-      v-model:value="model[formItem.dataIndex]"
-      :placeholder="formItem.placeholder || '请选择' + formItem.title"
-      :options="componentProps.options || requestData"
-      :disabled="componentProps.disabled || allDisabled"
-    >
-    </el-select>
-    <el-select
-      v-else-if="formItem.component == 'multiple'"
-      v-model:value="model[formItem.dataIndex]"
-      mode="multiple"
-      :placeholder="formItem.placeholder || '请选择' + formItem.title"
-      :options="componentProps.options || requestData"
-      :disabled="componentProps.disabled || allDisabled"
-    >
-    </el-select>
-    <el-tree-select
-      v-else-if="formItem.component == 'treeSelect'"
-      v-model:value="model[formItem.dataIndex]"
-      :placeholder="formItem.placeholder || '请选择' + formItem.title"
-      :treeData="requestData"
-      :disabled="componentProps.disabled || allDisabled"
-    ></el-tree-select>
+ 
+  
     <el-checkbox
       v-else-if="formItem.component == 'checkbox'"
       v-model:checked="model[formItem.dataIndex]"
@@ -133,11 +147,51 @@
 </template>
 
 <script>
+/**
+ * 全局
+ * model 绑定值 object
+ * formItem 生成表单项对象 object
+ * componentProps 表单项设置参数 object
+ * allDisabled 是否全体禁用 boolean
+ *
+ * formItem对象
+ * component 组价种类
+ * dataIndex 绑定属性名
+ * placeholder 占位文字
+ *
+ * 1.input 输入框
+ * maxlength 最大输入长度 string / number
+ * minlength 最小输入长度  number
+ * showWordLimit 是否显示输入字数统计 boolean
+ * placeholder 输入框占位文本 string
+ * clearable 是否可清空 boolean
+ * formatter 指定输入值的格式 function(value: string / number): string
+ * parser 指定从格式化器输入中提取的值 function(string): string
+ * showPassword 是否显示切换密码图标 boolean
+ * disabled 	是否禁用 boolean allDisabled为true时也会禁用
+ * autocomplete 原生 autocomplete 属性 string
+ * name 原生 input name 属性 string
+ * readonly 原生 readonly 属性，是否只读 boolean
+ *
+ * 2. select 单选框
+ * disabled 是否禁用 boolean
+ * clearable 	是否可以清空选项 boolean
+ * name 原生name属性 string
+ * autocomplete 原生 autocomplete属性 string
+ * filterable 是否可筛选 boolean
+ * remote 是否从服务器远程加载 boolean
+ * remoteMethod 自定义远程搜索方法 function
+ * loading 是否正在从远程获取数据 boolean
+ * loadingText 从服务器加载内容时显示的文本 string
+ * noMatchText 搜索条件无匹配时显示的文字 string
+ * noDataText 无选项时显示的文字 string
+ * validateEvent 是否触发表单验证 boolean
+ * placement 下拉框出现的位置 top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end
+ *
+ */
+
 export default {
   props: {
-    allDisabled: {
-      type: Boolean
-    },
     model: {
       type: Object
     },
@@ -147,6 +201,10 @@ export default {
     componentProps: {
       type: Object,
       default: {}
+    },
+    allDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
@@ -154,12 +212,8 @@ export default {
 
     onBeforeMount(async () => {
       if (props.componentProps.request) {
-        let value = props.model[props.formItem.dataIndex]
-        props.model[props.formItem.dataIndex] = null
-
-        await props.componentProps.request().then(res => {
-          requestData.value = res
-          props.model[props.formItem.dataIndex] = value
+        await props.componentProps.request().then(result => {
+          requestData.value = result
         })
       }
     })

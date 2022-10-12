@@ -11,7 +11,7 @@ const baseUrl = '/system/dept'
 // 获取组织树
 export function getDeptTree(query) {
   return request({
-    url: baseUrl + '/deptTree',
+    url: baseUrl + '/tree',
     method: 'get',
     params: query
   })

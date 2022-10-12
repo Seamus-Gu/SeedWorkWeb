@@ -27,8 +27,8 @@
               <FormItem
                 :model="model"
                 :formItem="item"
-                :allDisabled="allDisabled"
                 :componentProps="item.componentProps"
+                :allDisabled="allDisabled"
               >
               </FormItem>
             </el-col>

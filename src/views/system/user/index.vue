@@ -87,7 +87,7 @@
     </el-row>
     <Form
       ref="formRef"
-      :schema="schema"
+      :schema="formSchema"
       :visible="formVisible"
       :title="formTitle"
       :model="formState"
@@ -201,7 +201,7 @@ const columns = [
   }
 ]
 
-const schema = [
+const formSchema = [
   {
     title: '用户账号',
     dataIndex: 'userName',
@@ -209,7 +209,11 @@ const schema = [
   },
   {
     title: '用户密码',
-    dataIndex: 'password'
+    dataIndex: 'password',
+    component: 'input',
+    componentProps: {
+      showPassword: true
+    }
   },
   {
     title: '用户名称',
@@ -272,8 +276,9 @@ const schema = [
     span: 24,
     component: 'treeSelect',
     componentProps: {
+      checkStrictly: true,
       request: async () => {
-        const res = await getDeptTreeSelect()
+        const res = await getDeptTree()
         return res.data
       }
     }
@@ -285,13 +290,13 @@ const schema = [
     component: 'multiple',
     componentProps: {
       request: async () => {
-        const res = await getRoleList()
-        res.data.items.filter(t => {
-          t.value = t.roleId
-          t.label = t.roleName
-          return true
-        })
-        return res.data.items
+        // const res = await getRoleList()
+        // res.data.items.filter(t => {
+        //   t.value = t.roleId
+        //   t.label = t.roleName
+        //   return true
+        // })
+        // return res.data.items
       }
     }
   }
@@ -370,7 +375,7 @@ export default {
       formRef: undefined,
       formVisible: false,
       formTitle: '新增用户',
-      schema: schema,
+      formSchema: formSchema,
       formRules: formRules,
       showPassword: true,
       confirmLoading: false
@@ -378,7 +383,7 @@ export default {
 
     const formState = reactive({
       userName: undefined,
-      password: undefined,
+      password: '000000',
       nickName: undefined,
       code: undefined,
       phoneNumber: undefined,

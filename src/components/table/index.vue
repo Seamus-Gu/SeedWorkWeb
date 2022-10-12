@@ -54,18 +54,18 @@
 </template>
 <script>
 /** Columns
- * dataIndex string 字段名称
- * type selection / index / expand 对应列的类型。selection 多选框 index 索引（从 1 开始） expand 可展开按钮
- * label string 列名
- * width string / number 对应列的宽度
- * minWidth string / number 对应列的最小宽度
- * fixed 'left' / 'right' 列是否固定在左侧或者右侧
- * sortable boolean 对应列是否可以排序(远程)
- * resizable boolean 对应列是否可以通过拖动改变宽度（table border为true）
- * formatter function(row, column, cellValue, index) 用来格式化内容
- * showOverflowTooltip boolean 当内容过长被隐藏时显示 tooltip
- * align left / center / right 对齐方式
- * headerAlign 	left / center / right 表头对齐方式
+ * dataIndex 字段名称 string
+ * type 对应列的类型。selection 多选框 index 索引（从 1 开始） expand 可展开按钮  selection / index / expand
+ * label 列名 string
+ * width 对应列的宽度 string/number
+ * minWidth 对应列的最小宽度 string / number
+ * fixed 列是否固定在左侧或者右侧 'left' / 'right'
+ * sortable 对应列是否可以排序(远程) boolean
+ * resizable 对应列是否可以通过拖动改变宽度(table border为true) boolean
+ * formatter 用来格式化内容 function(row, column, cellValue, index)
+ * showOverflowTooltip 当内容过长被隐藏时显示tooltip boolean
+ * align 对齐方式 'left' / 'center' / 'right'
+ * headerAlign 表头对齐方式 'left' / 'center' / 'right'
  */
 
 export default {
